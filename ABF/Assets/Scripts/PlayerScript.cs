@@ -13,7 +13,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private Camera _cam;
     [SerializeField] private float WALK_SPEED = 4f;
     [SerializeField] private float RUN_SPEED = 10f;
-    private static float JUMP_FORCE = 5f;
+    //private static float JUMP_FORCE = 5f;
     private float horizontalInput;
     private float verticalInput;
 
