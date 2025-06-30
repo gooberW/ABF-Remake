@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.UIElements;
 // cor da fog 29081E
 public class PlayerScript : MonoBehaviour
 {
@@ -32,7 +33,12 @@ public class PlayerScript : MonoBehaviour
     private float crouchHeight;
     private Vector3 crouchCenter;
     private Vector3 crouchHolderPos;
-
+    private static float MAX_STAMINA = 100f;
+    private float _staminaRegenRate = 10f;
+    [Header("References")]
+    //[SerializeField] private NotebookScript _notebook;
+    [SerializeField] private CanvasGroup _staminaBar;
+    [SerializeField] private UnityEngine.UI.Image _slider;
 
     void Start()
     {
@@ -46,6 +52,8 @@ public class PlayerScript : MonoBehaviour
         crouchHeight = originalHeight / 2f;
         crouchCenter = originalCenter - new Vector3(0, (originalHeight - crouchHeight) / 2f, 0);
         crouchHolderPos = originalHolderPos + new Vector3(0, -0.5f, 0);
+
+        _currentStamina = MAX_STAMINA;
     }
 
 
@@ -100,6 +108,44 @@ public class PlayerScript : MonoBehaviour
         }
 
         Crouch();
+        CheckStamina();
+        Debug.Log(_currentStamina);
+    }
+
+    void CheckStamina()
+    {
+        if (_currentStamina < MAX_STAMINA && playerSpeed <= WALK_SPEED + 0.1f)
+        {
+            _currentStamina += _staminaRegenRate * Time.deltaTime;
+        }
+        else if (_currentStamina > MAX_STAMINA)
+        {
+            _currentStamina = MAX_STAMINA;
+        }
+        else if (_currentStamina <= 0)
+        {
+            playerSpeed = WALK_SPEED;
+        }
+        else if ((_currentStamina > 0 && horizontalInput > WALK_SPEED + 0.1f) || verticalInput > WALK_SPEED + 0.11f)
+        {
+            _currentStamina -= _staminaRegenRate * 1.3f * Time.deltaTime;
+        }
+
+
+        if (_staminaBar != null && _slider != null)
+        {
+            _slider.fillAmount = _currentStamina / MAX_STAMINA;
+
+            if (_currentStamina >= MAX_STAMINA)
+            {
+                _staminaBar.alpha = Mathf.Lerp(_staminaBar.alpha, 0, Time.deltaTime * 4f);
+            }
+            else
+            {
+                _staminaBar.alpha = Mathf.Lerp(_staminaBar.alpha, 1, Time.deltaTime * 2f);
+            }
+        }
+
     }
 
 
