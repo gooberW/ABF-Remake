@@ -9,7 +9,7 @@ public class PlayerInteraction : MonoBehaviour, IInteractionHandler
     [SerializeField] private float interactionDistance = 3f;
     [SerializeField] private LayerMask interactionLayer;
     [SerializeField] private CrosshairController crosshair;
-
+    public static KeyCode interactButton = KeyCode.E;
     private Camera playerCamera;
     private IInteractable currentInteractable;
 
@@ -60,7 +60,7 @@ public class PlayerInteraction : MonoBehaviour, IInteractionHandler
 
     private void HandleInteractionInput()
     {
-        if (Input.GetMouseButtonDown(0) && currentInteractable != null)
+        if (Input.GetKeyDown(interactButton) && currentInteractable != null)
         {
             currentInteractable.OnInteract();
             HandleInteraction(currentInteractable);

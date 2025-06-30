@@ -10,8 +10,9 @@ public class GrabbableItem : MonoBehaviour, IInteractable
     //Default Settings
     [SerializeField] private string itemName = "Item"; //Nome alteravel no inspector
     [SerializeField] private Transform grabPosition; //Assign Point no inspector
-
-    public string InteractionPrompt => $"Press to grab the {itemName}";
+    //--------
+    public string InteractionPrompt => $"Press {PlayerInteraction.interactButton} to grab the {itemName}";
+    //------
     public bool IsInteractable => true;
     private Outline outline;
 
