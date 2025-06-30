@@ -164,7 +164,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -321,7 +321,6 @@ GameObject:
   - component: {fileID: 322151510}
   - component: {fileID: 322151512}
   - component: {fileID: 322151511}
-  - component: {fileID: 322151514}
   - component: {fileID: 322151513}
   m_Layer: 0
   m_Name: Camera
@@ -462,21 +461,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &322151514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 322151507}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62ce9fefad9d2b948b654981efd87fd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _source: {fileID: 0}
-  _step: {fileID: 0}
-  _player: {fileID: 57133893}
 --- !u!1 &332554939
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,11 +612,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7090385537247955595, guid: d577f5b06c551b143852fa734089bc2d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0.000018298626
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7090385537247955595, guid: d577f5b06c551b143852fa734089bc2d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 590.62006
+      value: -186.61993
+      objectReference: {fileID: 0}
+    - target: {fileID: 7090385537247955595, guid: d577f5b06c551b143852fa734089bc2d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7090385537247955595, guid: d577f5b06c551b143852fa734089bc2d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7090385537247955595, guid: d577f5b06c551b143852fa734089bc2d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7090385537247955595, guid: d577f5b06c551b143852fa734089bc2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -668,7 +664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7090385537247955595, guid: d577f5b06c551b143852fa734089bc2d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -317.63998
+      value: -93.31003
       objectReference: {fileID: 0}
     - target: {fileID: 7090385537247955595, guid: d577f5b06c551b143852fa734089bc2d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
