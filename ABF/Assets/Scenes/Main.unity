@@ -134,6 +134,10 @@ GameObject:
   - component: {fileID: 57133895}
   - component: {fileID: 57133894}
   - component: {fileID: 57133893}
+  - component: {fileID: 57133899}
+  - component: {fileID: 57133898}
+  - component: {fileID: 57133897}
+  - component: {fileID: 57133900}
   - component: {fileID: 57133892}
   m_Layer: 0
   m_Name: Player
@@ -234,6 +238,75 @@ Transform:
   - {fileID: 438646273}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &57133897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57133891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45969b0ac2f8664988f15b5740a28f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sanitySystem: {fileID: 57133899}
+  monsterLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  maxViewDistance: 10
+--- !u!114 &57133898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57133891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53ad2fd7b0b032c44a62949e0ac4f911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sanitySystem: {fileID: 57133899}
+  checkRadius: 10
+  lightLayer:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!114 &57133899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57133891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a730615e259c7348aebe5285f99a9f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSanity: 100
+  currentSanity: 100
+  darknessDrainRate: 5
+  monsterViewDrainRate: 10
+  loudNoiseDrainAmount: 15
+  playerCamera: {fileID: 1479438880}
+  maxShakeIntensity: 1.5
+  maxVignetteIntensity: 2
+  maxDesaturation: 1
+--- !u!114 &57133900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57133891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f7adb4a41a68c4d960c541c50cf3ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sanitySystem: {fileID: 57133899}
+  loudNoiseThreshold: 0.8
 --- !u!1 &103387031
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,7 +904,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1063231553}
   - component: {fileID: 1063231554}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1592,6 +1665,7 @@ GameObject:
   - component: {fileID: 1479438884}
   - component: {fileID: 1479438886}
   - component: {fileID: 1479438887}
+  - component: {fileID: 1479438888}
   m_Layer: 0
   m_Name: POV
   m_TagString: MainCamera
@@ -1727,6 +1801,22 @@ MonoBehaviour:
   _source: {fileID: 0}
   _step: {fileID: 0}
   _player: {fileID: 57133893}
+--- !u!114 &1479438888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479438877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020b7ac880a83c943b3f84cfea10701a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectShader: {fileID: 4800000, guid: b8a224167843745409ae254be52b50b0, type: 3}
+  vignetteIntensity: 0
+  vignetteRoundness: 2
+  desaturation: 0
 --- !u!1 &1479760077
 GameObject:
   m_ObjectHideFlags: 0
@@ -1911,7 +2001,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1589111551}
   - component: {fileID: 1589111550}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

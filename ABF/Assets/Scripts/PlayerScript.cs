@@ -109,7 +109,7 @@ public class PlayerScript : MonoBehaviour
 
         Crouch();
         CheckStamina();
-        Debug.Log(_currentStamina);
+        //Debug.Log(_currentStamina);
     }
 
     void CheckStamina()
