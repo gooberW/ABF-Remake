@@ -7,8 +7,6 @@ using UnityEngine.UIElements;
 // cor da fog 29081E
 public class PlayerScript : MonoBehaviour
 {
-    
-
     [SerializeField] private float _currentHealth;
     private float _currentStamina;
     private Rigidbody _rb;
@@ -35,10 +33,12 @@ public class PlayerScript : MonoBehaviour
     private Vector3 crouchHolderPos;
     private static float MAX_STAMINA = 100f;
     private float _staminaRegenRate = 10f;
+    private bool hasCeiling;
     [Header("References")]
     //[SerializeField] private NotebookScript _notebook;
     [SerializeField] private CanvasGroup _staminaBar;
     [SerializeField] private UnityEngine.UI.Image _slider;
+
 
     void Start()
     {
@@ -79,6 +79,9 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
+        hasCeiling = CheckCeiling();
+        Debug.Log(hasCeiling);
+
         if (Input.GetKey(KeyCode.LeftControl))
         {
             if (!isCrouching)
@@ -88,7 +91,7 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            if (isCrouching)
+            if (isCrouching && !hasCeiling)
             {
                 isCrouching = false;
             }
@@ -155,6 +158,33 @@ public class PlayerScript : MonoBehaviour
         return Physics.Raycast(transform.position + Vector3.up * 0.85f, Vector3.down, out hit, 1.1f);
     }
 
+    /**
+     * Esta func vai projetar um capsule para ver se tem algum objeto a 
+     * bloquear a parte de cima do player. Assim quando o player estiver crouched, 
+     * ele fica até ter um espaço vazio acima da "cabeça".
+     */
+    public bool CheckCeiling()
+    {
+
+        RaycastHit hit;
+
+        float r = _capsule.radius * 0.95f; //raio
+        float height = _capsule.height;
+        Vector3 center = transform.position + _capsule.center;
+
+        
+        Vector3 p1 = center + Vector3.up * ((height / 2f) - r);
+        Vector3 p2 = center + Vector3.down * ((height / 2f) - r);
+
+        float checkDistance = 0.2f;
+
+        bool hitSomething = Physics.CapsuleCast(p1, p2, r, Vector3.up, out hit, checkDistance);
+
+        Debug.DrawLine(p1, p1 + Vector3.up * checkDistance, Color.red);
+        Debug.DrawLine(p2, p2 + Vector3.up * checkDistance, Color.red);
+
+        return hitSomething;
+    }
 
     private void Crouch()
     {
