@@ -6,9 +6,10 @@ public class SanitySystem : MonoBehaviour
     [Header("Sanity Settings")]
     [SerializeField] private float maxSanity = 100f;
     [SerializeField] private float currentSanity = 100f;
-    [SerializeField] private float darknessDrainRate = 5f; 
-    [SerializeField] private float monsterViewDrainRate = 10f; 
-    [SerializeField] private float loudNoiseDrainAmount = 15f; 
+    [SerializeField] private float darknessDrainRate = 5f;
+    [SerializeField] private float lightRecoveryRate = 3f;
+    [SerializeField] private float monsterViewDrainRate = 10f;
+    [SerializeField] private float loudNoiseDrainAmount = 15f;
 
     [Header("Visual Effects")]
     [SerializeField] private Camera playerCamera;
@@ -17,7 +18,7 @@ public class SanitySystem : MonoBehaviour
     [SerializeField] private float maxDesaturation = 0.8f;
 
     private Vector3 originalCameraPos;
-    private bool isInDarkness = false;
+    public bool isInDarkness = false;
     private bool isLookingAtMonster = false;
     private float shakePower = 0f;
 
@@ -28,27 +29,36 @@ public class SanitySystem : MonoBehaviour
             playerCamera = Camera.main;
         }
         originalCameraPos = playerCamera.transform.localPosition;
+
+        if (GetComponent<LightSanitySystem>() == null)
+        {
+            gameObject.AddComponent<LightSanitySystem>();
+        }
     }
 
     private void Update()
     {
         if (isInDarkness)
+        {
             currentSanity -= darknessDrainRate * Time.deltaTime;
+        }
+        else
+        {
+            currentSanity += lightRecoveryRate * Time.deltaTime;
+        }
 
         if (isLookingAtMonster)
+        {
             currentSanity -= monsterViewDrainRate * Time.deltaTime;
+        }
 
         currentSanity = Mathf.Clamp(currentSanity, 0f, maxSanity);
-
-        Debug.Log($"Current Sanity -> {currentSanity}");
-
         UpdateVisualEffects();
     }
 
     public void SetInDarkness(bool inDarkness)
     {
         isInDarkness = inDarkness;
-        Debug.Log("Not on light source");
     }
 
     public void SetLookingAtMonster(bool lookingAtMonster)
@@ -59,6 +69,13 @@ public class SanitySystem : MonoBehaviour
     public void ApplyLoudNoiseEffect()
     {
         currentSanity -= loudNoiseDrainAmount;
+        currentSanity = Mathf.Max(currentSanity, 0f); 
+    }
+
+    public void ChangeSanity(float amount)
+    {
+        currentSanity += amount;
+        currentSanity = Mathf.Clamp(currentSanity, 0f, maxSanity);
     }
 
     private void UpdateVisualEffects()
@@ -87,7 +104,6 @@ public class SanitySystem : MonoBehaviour
     {
         if (shakePower > 0)
         {
-
             float xShake = (Mathf.PerlinNoise(Time.time * 3f, 0f) - 0.5f);
             float yShake = (Mathf.PerlinNoise(0f, Time.time * 3f) - 0.5f);
 
