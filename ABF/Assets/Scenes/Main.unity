@@ -277,8 +277,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSanity: 100
   currentSanity: 100
-  darknessDrainRate: 5
-  lightRecoveryRate: 3
+  darknessDrainRate: 2.5
+  lightRecoveryRate: 3.5
   monsterViewDrainRate: 10
   loudNoiseDrainAmount: 15
   playerCamera: {fileID: 322151510}
