@@ -173,7 +173,7 @@ public class PlayerScript : MonoBehaviour
         Vector3 center = transform.position + _capsule.center;
 
         
-        Vector3 p1 = center + Vector3.up * ((height / 2f) - r);
+        Vector3 p1 = center + Vector3.up * ((height / 2f));
         Vector3 p2 = center + Vector3.down * ((height / 2f) - r);
 
         float checkDistance = 0.2f;
