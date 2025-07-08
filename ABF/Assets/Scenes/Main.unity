@@ -1579,7 +1579,7 @@ GameObject:
   - component: {fileID: 1067337543}
   - component: {fileID: 1067337544}
   m_Layer: 13
-  m_Name: Hall
+  m_Name: Entrance Hall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
