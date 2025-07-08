@@ -37,7 +37,7 @@ public class CameraMotion : MonoBehaviour
     void PlayFootstep()
     {
         _source.pitch = Random.Range(0.8f, 1.2f);
-        if (_player.playerSpeed == PlayerScript.RUN_SPEED)
+        if (_player.playerSpeed == _player.RUN_SPEED)
         {
             _source.volume = 0.8f;
         }

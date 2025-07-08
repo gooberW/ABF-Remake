@@ -1,21 +1,23 @@
 using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEngine.UIElements;
-// cor da fog 29081E
+
 public class PlayerScript : MonoBehaviour
 {
+    [Header("Parameters")]
+    public float WALK_SPEED = 1.5f;
+    public float RUN_SPEED = 4f;
+    public float CROUCH_SPEED = 1f;
+    [SerializeField] private static float MAX_STAMINA = 100f;
+    [SerializeField] private float _staminaRegenRate = 10f;
+    [SerializeField] private LayerMask ceilingLayerMask;
+    //-----------
+
     [SerializeField] private float _currentHealth;
     private float _currentStamina;
     private Rigidbody _rb;
     private CapsuleCollider _capsule;
     [SerializeField] private GameObject _holder;
     [SerializeField] private Camera _cam;
-    [SerializeField] public static float WALK_SPEED = 1.5f;
-    [SerializeField] public static float RUN_SPEED = 4f;
-    [SerializeField] public static float CROUCH_SPEED = 1f;
+
     //private static float JUMP_FORCE = 5f;
     private float horizontalInput;
     private float verticalInput;
@@ -23,6 +25,7 @@ public class PlayerScript : MonoBehaviour
 
     [HideInInspector] public float playerSpeed;
 
+    
 
     private float originalHeight;
     private Vector3 originalCenter;
@@ -31,8 +34,7 @@ public class PlayerScript : MonoBehaviour
     private float crouchHeight;
     private Vector3 crouchCenter;
     private Vector3 crouchHolderPos;
-    private static float MAX_STAMINA = 100f;
-    private float _staminaRegenRate = 10f;
+
     private bool hasCeiling;
     [Header("References")]
     //[SerializeField] private NotebookScript _notebook;
@@ -79,8 +81,8 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
-        hasCeiling = CheckCeiling();
-        Debug.Log(hasCeiling);
+        //hasCeiling = CheckCeiling();
+        //Debug.Log(hasCeiling);
 
         if (Input.GetKey(KeyCode.LeftControl))
         {
@@ -91,6 +93,7 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
+            hasCeiling = CheckCeiling();
             if (isCrouching && !hasCeiling)
             {
                 isCrouching = false;
@@ -165,26 +168,20 @@ public class PlayerScript : MonoBehaviour
      */
     public bool CheckCeiling()
     {
+        float radius = _capsule.radius * 0.95f;
+        float height = originalHeight;
+        Vector3 center = transform.position + originalCenter;
 
-        RaycastHit hit;
+        Vector3 point1 = center + Vector3.up * (height / 2f);
+        Vector3 point2 = center + Vector3.down * ((height / 2f) - radius);
 
-        float r = _capsule.radius * 0.95f; //raio
-        float height = _capsule.height;
-        Vector3 center = transform.position + _capsule.center;
+        bool blocked = Physics.CheckCapsule(point1, point2, radius, ceilingLayerMask);
 
-        
-        Vector3 p1 = center + Vector3.up * ((height / 2f));
-        Vector3 p2 = center + Vector3.down * ((height / 2f) - r);
+        Debug.DrawLine(point1, point1 + Vector3.up * 0.2f, Color.red, 1f);
 
-        float checkDistance = 0.2f;
-
-        bool hitSomething = Physics.CapsuleCast(p1, p2, r, Vector3.up, out hit, checkDistance);
-
-        Debug.DrawLine(p1, p1 + Vector3.up * checkDistance, Color.red);
-        Debug.DrawLine(p2, p2 + Vector3.up * checkDistance, Color.red);
-
-        return hitSomething;
+        return blocked;
     }
+
 
     private void Crouch()
     {
