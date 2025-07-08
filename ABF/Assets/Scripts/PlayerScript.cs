@@ -64,7 +64,6 @@ public class PlayerScript : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal") * playerSpeed;
         verticalInput = Input.GetAxis("Vertical") * playerSpeed;
 
-
         Vector3 camForward = _cam.transform.forward;
         camForward.y = 0;
         camForward.Normalize();
@@ -93,8 +92,8 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            hasCeiling = CheckCeiling();
-            if (isCrouching && !hasCeiling)
+            
+            if (isCrouching && !CheckCeiling())
             {
                 isCrouching = false;
             }
@@ -168,19 +167,30 @@ public class PlayerScript : MonoBehaviour
      */
     public bool CheckCeiling()
     {
+        RaycastHit hit;
+
         float radius = _capsule.radius * 0.95f;
-        float height = originalHeight;
-        Vector3 center = transform.position + originalCenter;
+        float height = _capsule.height;
+        Vector3 center = transform.position + _capsule.center;
 
-        Vector3 point1 = center + Vector3.up * (height / 2f);
-        Vector3 point2 = center + Vector3.down * ((height / 2f) - radius);
+        // We'll cast upward from the top of the capsule
+        Vector3 origin = center + Vector3.up * (height / 2f - radius);
+        Vector3 direction = Vector3.up;
+        float checkDistance = 0.2f;
 
-        bool blocked = Physics.CheckCapsule(point1, point2, radius, ceilingLayerMask);
+        bool hitSomething = Physics.SphereCast(origin, radius, direction, out hit, checkDistance, ceilingLayerMask, QueryTriggerInteraction.Ignore);
 
-        Debug.DrawLine(point1, point1 + Vector3.up * 0.2f, Color.red, 1f);
+        Debug.DrawLine(origin, origin + direction * checkDistance, hitSomething ? Color.red : Color.green);
 
-        return blocked;
+        if (hitSomething)
+        {
+            Debug.Log("Ceiling hit: " + hit.collider.gameObject.name);
+        }
+
+        return hitSomething;
     }
+
+
 
 
     private void Crouch()
