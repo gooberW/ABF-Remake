@@ -10,18 +10,21 @@ public class GrabbableItem : MonoBehaviour, IInteractable
     //Default Settings
     [SerializeField] private string itemName = "Item"; //Nome alteravel no inspector
     [SerializeField] private Transform grabPosition; //Assign Point no inspector
+    [SerializeField] private Sprite itemSprite;
     //--------
     public string InteractionPrompt => $"[{PlayerInteraction.interactButton}] Grab the {itemName}";
     //------
     public bool IsInteractable => true;
     private Outline outline;
     private InventoryScript inventory;
+    private Rigidbody rb;
 
     private void Start()
     {
         inventory = FindAnyObjectByType<InventoryScript>();    
         outline = GetComponent<Outline>();
         outline.enabled = false;
+        rb = GetComponent<Rigidbody>();
     }
 
     public void OnHover()
@@ -53,7 +56,10 @@ public class GrabbableItem : MonoBehaviour, IInteractable
         transform.localRotation = Quaternion.Euler(-90f, -90f, 0f); //Corrigir direção do objeto
         transform.localPosition = Vector3.zero;
         GetComponent<Collider>().isTrigger = true; //Tirar Colisão para não ficar preso nas paredes e etc
+        rb.useGravity = false;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+
         gameObject.layer = LayerMask.NameToLayer("ItemInHand"); //Mudar layer para fazer a camera stack
-        inventory.AddItem(gameObject);
+        inventory.AddItem(gameObject, itemSprite, itemName);
     }
 }

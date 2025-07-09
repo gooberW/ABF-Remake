@@ -34,7 +34,7 @@ public class DivisionChecker : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Division"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Division") && gameObject.CompareTag("Player"))
         {
             if (textCoroutine != null)
             {
@@ -46,7 +46,7 @@ public class DivisionChecker : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Division"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Division") && gameObject.CompareTag("Player"))
         {
             Debug.Log("Exited Trigger");
             StartCoroutine(StartDisappearingAfterDelay());

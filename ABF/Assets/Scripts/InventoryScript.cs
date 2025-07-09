@@ -11,19 +11,22 @@ public class InventoryScript : MonoBehaviour
     [SerializeField] private AudioSource source;
 
     private float SLOT_HEIGHT = 60f;
-    private float SEL_SLOT_HEIGHT = 100f;
+    private float SEL_SLOT_HEIGHT = 80f;
     private float INIT_OPACITY = 80f / 255f;
     private float SEL_OPACITY = 128f / 255f;
     private int NUM_SLOTS = 3;
 
     private List<Image> slotImages = new List<Image>();
+    private List<Image> slotIcons = new List<Image>();
+    private List<TextMeshProUGUI> itemNameTexts = new List<TextMeshProUGUI>();
+    private List<string> itemNames = new List<string>();
     [SerializeField] private List<GameObject> ItemsInHand = new List<GameObject>();
+
     private CanvasGroup hotbarGroup;
     private Coroutine hideCoroutine;
     private int currentSelectedSlot = -1;
 
-
-    [SerializeField] private float visibleDuration = 2f; // quanto tempo demora ate a hotbar desaparecer depois de escolher
+    [SerializeField] private float visibleDuration = 2f;
 
     void Start()
     {
@@ -40,19 +43,74 @@ public class InventoryScript : MonoBehaviour
             GameObject slotObj = GameObject.FindWithTag("Slot" + i);
             if (slotObj != null)
             {
-                Image img = slotObj.GetComponent<Image>();
-                if (img != null)
+                Image slotImg = slotObj.GetComponent<Image>();
+                if (slotImg != null)
+                    slotImages.Add(slotImg);
+
+                // Get second child (icon)
+                if (slotObj.transform.childCount >= 2)
                 {
-                    slotImages.Add(img);
+                    Image icon = slotObj.transform.GetChild(1).GetComponent<Image>();
+                    slotIcons.Add(icon);
+                }
+                else
+                {
+                    slotIcons.Add(null);
+                }
+
+                // Get third child (item name)
+                if (slotObj.transform.childCount >= 3)
+                {
+                    TextMeshProUGUI nameText = slotObj.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+                    itemNameTexts.Add(nameText);
+                }
+                else
+                {
+                    itemNameTexts.Add(null);
                 }
             }
         }
+
+        // Initialize all icons and names as hidden
+        for (int i = 0; i < slotIcons.Count; i++)
+        {
+            if (slotIcons[i] != null)
+            {
+                slotIcons[i].sprite = null;
+                slotIcons[i].enabled = false;
+            }
+
+            if (itemNameTexts[i] != null)
+            {
+                itemNameTexts[i].text = "";
+            }
+
+            itemNames.Add(""); // Fill itemNames with empty entries
+        }
     }
 
-    public void AddItem(GameObject item)
+    public void AddItem(GameObject item, Sprite sprite, string itemName)
     {
+        if (ItemsInHand.Count >= slotIcons.Count)
+            return;
+
         ItemsInHand.Add(item);
         item.SetActive(ItemsInHand.Count == 1);
+
+        int index = ItemsInHand.Count - 1;
+
+        if (slotIcons[index] != null)
+        {
+            slotIcons[index].sprite = sprite;
+            slotIcons[index].enabled = true;
+        }
+
+        itemNames[index] = itemName;
+
+        if (itemNameTexts[index] != null)
+        {
+            itemNameTexts[index].text = "";
+        }
     }
 
     void Update()
@@ -90,7 +148,6 @@ public class InventoryScript : MonoBehaviour
         currentSelectedSlot = index;
     }
 
-
     void SelectSlotWithTag(string tag)
     {
         GameObject selectedObj = GameObject.FindWithTag(tag);
@@ -104,14 +161,12 @@ public class InventoryScript : MonoBehaviour
                 SelectSlot(selectedImage);
 
                 if (hideCoroutine != null)
-                {
                     StopCoroutine(hideCoroutine);
-                }
+
                 hideCoroutine = StartCoroutine(HideHotbarAfterDelay(visibleDuration));
             }
         }
     }
-
 
     void ShowHotbar()
     {
@@ -137,24 +192,16 @@ public class InventoryScript : MonoBehaviour
 
     void SelectSlot(Image selected)
     {
-        foreach (Image slot in slotImages)
+        for (int i = 0; i < slotImages.Count; i++)
         {
+            Image slot = slotImages[i];
             RectTransform rt = slot.GetComponent<RectTransform>();
             bool isSelected = (slot == selected);
 
             rt.sizeDelta = new Vector2(rt.sizeDelta.x, isSelected ? SEL_SLOT_HEIGHT : SLOT_HEIGHT);
 
             Color slotColor = slot.color;
-
-            if (isSelected)
-            {
-                slotColor.a = SEL_OPACITY;
-            }
-            else
-            {
-                slotColor.a = INIT_OPACITY;
-            }
-
+            slotColor.a = isSelected ? SEL_OPACITY : INIT_OPACITY;
             slot.color = slotColor;
 
             TextMeshProUGUI number = slot.GetComponentInChildren<TextMeshProUGUI>();
@@ -163,6 +210,30 @@ public class InventoryScript : MonoBehaviour
                 Color textColor = number.color;
                 textColor.a = slotColor.a;
                 number.color = textColor;
+            }
+
+            // Fade icon
+            if (slotIcons[i] != null)
+            {
+                Color iconColor = slotIcons[i].color;
+                iconColor.a = slotColor.a;
+                slotIcons[i].color = iconColor;
+            }
+
+            // Set item name
+            if (itemNameTexts[i] != null)
+            {
+                if (isSelected && i < itemNames.Count)
+                {
+                    itemNameTexts[i].text = itemNames[i];
+                    Color nameColor = itemNameTexts[i].color;
+                    nameColor.a = 1f;
+                    itemNameTexts[i].color = nameColor;
+                }
+                else
+                {
+                    itemNameTexts[i].text = "";
+                }
             }
         }
     }
