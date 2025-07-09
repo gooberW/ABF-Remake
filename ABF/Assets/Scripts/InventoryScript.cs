@@ -52,7 +52,6 @@ public class InventoryScript : MonoBehaviour
     public void AddItem(GameObject item)
     {
         ItemsInHand.Add(item);
-        // Desativa o novo item por padrão, exceto se for o primeiro
         item.SetActive(ItemsInHand.Count == 1);
     }
 
@@ -77,30 +76,20 @@ public class InventoryScript : MonoBehaviour
 
     void SetActiveItem(int index)
     {
-        // Se não há itens ou o índice é inválido, não faz nada
-        if (ItemsInHand.Count == 0 || index < 0 || index >= ItemsInHand.Count)
-            return;
-
-        // Desativa todos os itens primeiro
         foreach (var item in ItemsInHand)
         {
             if (item != null)
                 item.SetActive(false);
         }
 
-        // Ativa apenas o item selecionado
-        if (ItemsInHand[index] != null)
+        if (index >= 0 && index < ItemsInHand.Count && ItemsInHand[index] != null)
         {
             ItemsInHand[index].SetActive(true);
         }
-        else
-        {
-            ItemsInHand[index].SetActive(false);
-        }
-            
 
         currentSelectedSlot = index;
     }
+
 
     void SelectSlotWithTag(string tag)
     {
