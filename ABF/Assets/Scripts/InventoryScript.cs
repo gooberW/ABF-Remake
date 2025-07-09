@@ -17,8 +17,10 @@ public class InventoryScript : MonoBehaviour
     private int NUM_SLOTS = 3;
 
     private List<Image> slotImages = new List<Image>();
+    [SerializeField] private List<GameObject> ItemsInHand = new List<GameObject>();
     private CanvasGroup hotbarGroup;
     private Coroutine hideCoroutine;
+    private int currentSelectedSlot = -1;
 
 
     [SerializeField] private float visibleDuration = 2f; // quanto tempo demora ate a hotbar desaparecer depois de escolher
@@ -47,20 +49,57 @@ public class InventoryScript : MonoBehaviour
         }
     }
 
+    public void AddItem(GameObject item)
+    {
+        ItemsInHand.Add(item);
+        // Desativa o novo item por padrão, exceto se for o primeiro
+        item.SetActive(ItemsInHand.Count == 1);
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SelectSlotWithTag("Slot1");
+            SetActiveItem(0);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             SelectSlotWithTag("Slot2");
+            SetActiveItem(1);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             SelectSlotWithTag("Slot3");
+            SetActiveItem(2);
         }
+    }
+
+    void SetActiveItem(int index)
+    {
+        // Se não há itens ou o índice é inválido, não faz nada
+        if (ItemsInHand.Count == 0 || index < 0 || index >= ItemsInHand.Count)
+            return;
+
+        // Desativa todos os itens primeiro
+        foreach (var item in ItemsInHand)
+        {
+            if (item != null)
+                item.SetActive(false);
+        }
+
+        // Ativa apenas o item selecionado
+        if (ItemsInHand[index] != null)
+        {
+            ItemsInHand[index].SetActive(true);
+        }
+        else
+        {
+            ItemsInHand[index].SetActive(false);
+        }
+            
+
+        currentSelectedSlot = index;
     }
 
     void SelectSlotWithTag(string tag)

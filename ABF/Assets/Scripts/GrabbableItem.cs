@@ -15,9 +15,11 @@ public class GrabbableItem : MonoBehaviour, IInteractable
     //------
     public bool IsInteractable => true;
     private Outline outline;
+    private InventoryScript inventory;
 
     private void Start()
     {
+        inventory = FindAnyObjectByType<InventoryScript>();    
         outline = GetComponent<Outline>();
         outline.enabled = false;
     }
@@ -52,5 +54,6 @@ public class GrabbableItem : MonoBehaviour, IInteractable
         transform.localPosition = Vector3.zero;
         GetComponent<Collider>().isTrigger = true; //Tirar Colisão para não ficar preso nas paredes e etc
         gameObject.layer = LayerMask.NameToLayer("ItemInHand"); //Mudar layer para fazer a camera stack
+        inventory.AddItem(gameObject);
     }
 }

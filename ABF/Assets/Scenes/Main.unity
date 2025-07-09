@@ -250,7 +250,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.2
   m_Height: 1.2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57133891}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a730615e259c7348aebe5285f99a9f2, type: 3}
   m_Name: 
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57133891}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82c443a3c5f22f44b9b2153e3f99cb99, type: 3}
   m_Name: 
@@ -330,7 +330,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eed4ea1a66e13049abb7835fcdb616a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  divisionName: {fileID: 1870906391}
+  textSpeed: 0.05
+  disappearSpeed: 0.03
+  textComponent: {fileID: 1870906391}
+  displayDurationAfterExit: 5
+  disableAfterTrigger: 0
 --- !u!114 &57133902
 MonoBehaviour:
   m_ObjectHideFlags: 0
