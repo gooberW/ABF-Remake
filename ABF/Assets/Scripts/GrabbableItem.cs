@@ -60,6 +60,8 @@ public class GrabbableItem : MonoBehaviour, IInteractable
 
         gameObject.layer = LayerMask.NameToLayer("ItemInHand");
         inventory.AddItem(gameObject, itemSprite, itemName);
+
+        TaskManager.Instance.CheckItemTaskCompletion(gameObject);
     }
 
     public void ReleaseItem()

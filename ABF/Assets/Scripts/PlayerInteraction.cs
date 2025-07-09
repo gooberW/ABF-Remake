@@ -36,6 +36,14 @@ public class PlayerInteraction : MonoBehaviour, IInteractionHandler
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance, interactionLayer))
         {
+            // Check for task triggers first
+            TaskTrigger taskTrigger = hit.collider.GetComponent<TaskTrigger>();
+            if (taskTrigger != null)
+            {
+                taskTrigger.CheckTaskCompletion();
+                return;
+            }
+
             IInteractable interactable = hit.collider.GetComponent<IInteractable>();
             if (interactable != null && interactable.IsInteractable)
             {

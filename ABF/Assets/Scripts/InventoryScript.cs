@@ -32,6 +32,7 @@ public class InventoryScript : MonoBehaviour
     {
         hotbarGroup = hotbar.GetComponent<CanvasGroup>();
         InitializeUI();
+        inventoryData.Clear();
     }
 
     private void InitializeUI()
