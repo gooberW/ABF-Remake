@@ -6,31 +6,36 @@ using UnityEngine.UI;
 
 public class InventoryScript : MonoBehaviour
 {
+    [Header("Settings")]
+    [SerializeField] private InventoryData inventoryData;
+    [SerializeField] private float visibleDuration = 2f;
+
+    [Header("UI References")]
     [SerializeField] private GameObject hotbar;
+    [SerializeField] private Image[] slotImages = new Image[3];
+    [SerializeField] private Image[] slotIcons = new Image[3];
+    [SerializeField] private TextMeshProUGUI[] itemNameTexts = new TextMeshProUGUI[3];
+
+    [Header("Audio")]
     [SerializeField] private AudioClip sound;
     [SerializeField] private AudioSource source;
 
-    private float SLOT_HEIGHT = 60f;
-    private float SEL_SLOT_HEIGHT = 80f;
-    private float INIT_OPACITY = 80f / 255f;
-    private float SEL_OPACITY = 128f / 255f;
-    private int NUM_SLOTS = 3;
-
-    private List<Image> slotImages = new List<Image>();
-    private List<Image> slotIcons = new List<Image>();
-    private List<TextMeshProUGUI> itemNameTexts = new List<TextMeshProUGUI>();
-    private List<string> itemNames = new List<string>();
-    [SerializeField] private List<GameObject> ItemsInHand = new List<GameObject>();
+    private const float SLOT_HEIGHT = 60f;
+    private const float SEL_SLOT_HEIGHT = 80f;
+    private const float INIT_OPACITY = 80f / 255f;
+    private const float SEL_OPACITY = 128f / 255f;
 
     private CanvasGroup hotbarGroup;
     private Coroutine hideCoroutine;
-    private int currentSelectedSlot = -1;
 
-    [SerializeField] private float visibleDuration = 2f;
-
-    void Start()
+    private void Awake()
     {
         hotbarGroup = hotbar.GetComponent<CanvasGroup>();
+        InitializeUI();
+    }
+
+    private void InitializeUI()
+    {
         if (hotbarGroup != null)
         {
             hotbarGroup.alpha = 0;
@@ -38,137 +43,164 @@ public class InventoryScript : MonoBehaviour
             hotbarGroup.blocksRaycasts = false;
         }
 
-        for (int i = 1; i <= NUM_SLOTS; i++)
+        for (int i = 0; i < 3; i++)
         {
-            GameObject slotObj = GameObject.FindWithTag("Slot" + i);
-            if (slotObj != null)
-            {
-                Image slotImg = slotObj.GetComponent<Image>();
-                if (slotImg != null)
-                    slotImages.Add(slotImg);
-
-                // Get second child (icon)
-                if (slotObj.transform.childCount >= 2)
-                {
-                    Image icon = slotObj.transform.GetChild(1).GetComponent<Image>();
-                    slotIcons.Add(icon);
-                }
-                else
-                {
-                    slotIcons.Add(null);
-                }
-
-                // Get third child (item name)
-                if (slotObj.transform.childCount >= 3)
-                {
-                    TextMeshProUGUI nameText = slotObj.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-                    itemNameTexts.Add(nameText);
-                }
-                else
-                {
-                    itemNameTexts.Add(null);
-                }
-            }
-        }
-
-        // Initialize all icons and names as hidden
-        for (int i = 0; i < slotIcons.Count; i++)
-        {
-            if (slotIcons[i] != null)
-            {
-                slotIcons[i].sprite = null;
-                slotIcons[i].enabled = false;
-            }
-
-            if (itemNameTexts[i] != null)
-            {
-                itemNameTexts[i].text = "";
-            }
-
-            itemNames.Add(""); // Fill itemNames with empty entries
+            UpdateSlotUI(i);
         }
     }
 
     public void AddItem(GameObject item, Sprite sprite, string itemName)
     {
-        if (ItemsInHand.Count >= slotIcons.Count)
-            return;
-
-        ItemsInHand.Add(item);
-        item.SetActive(ItemsInHand.Count == 1);
-
-        int index = ItemsInHand.Count - 1;
-
-        if (slotIcons[index] != null)
+        for (int i = 0; i < inventoryData.slots.Length; i++)
         {
-            slotIcons[index].sprite = sprite;
-            slotIcons[index].enabled = true;
-        }
-
-        itemNames[index] = itemName;
-
-        if (itemNameTexts[index] != null)
-        {
-            itemNameTexts[index].text = "";
-        }
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SelectSlotWithTag("Slot1");
-            SetActiveItem(0);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SelectSlotWithTag("Slot2");
-            SetActiveItem(1);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SelectSlotWithTag("Slot3");
-            SetActiveItem(2);
-        }
-    }
-
-    void SetActiveItem(int index)
-    {
-        foreach (var item in ItemsInHand)
-        {
-            if (item != null)
-                item.SetActive(false);
-        }
-
-        if (index >= 0 && index < ItemsInHand.Count && ItemsInHand[index] != null)
-        {
-            ItemsInHand[index].SetActive(true);
-        }
-
-        currentSelectedSlot = index;
-    }
-
-    void SelectSlotWithTag(string tag)
-    {
-        GameObject selectedObj = GameObject.FindWithTag(tag);
-        if (selectedObj != null)
-        {
-            Image selectedImage = selectedObj.GetComponent<Image>();
-            if (selectedImage != null)
+            if (inventoryData.slots[i].IsEmpty)
             {
-                source.PlayOneShot(sound);
-                ShowHotbar();
-                SelectSlot(selectedImage);
+                inventoryData.slots[i] = new InventoryData.InventorySlot
+                {
+                    itemObject = item,
+                    itemSprite = sprite,
+                    itemName = itemName
+                };
 
-                if (hideCoroutine != null)
-                    StopCoroutine(hideCoroutine);
+                item.SetActive(i == inventoryData.currentSelectedSlot);
+                UpdateSlotUI(i);
 
-                hideCoroutine = StartCoroutine(HideHotbarAfterDelay(visibleDuration));
+                if (inventoryData.currentSelectedSlot == -1)
+                {
+                    SelectSlot(i);
+                }
+
+                return;
+            }
+        }
+        Debug.LogWarning("Inventory is full!");
+    }
+
+    public GameObject GetCurrentItem()
+    {
+        if (inventoryData.currentSelectedSlot >= 0 &&
+            !inventoryData.slots[inventoryData.currentSelectedSlot].IsEmpty)
+        {
+            return inventoryData.slots[inventoryData.currentSelectedSlot].itemObject;
+        }
+        return null;
+    }
+
+    public void RemoveItem(GameObject itemToRemove)
+    {
+        for (int i = 0; i < inventoryData.slots.Length; i++)
+        {
+            if (!inventoryData.slots[i].IsEmpty &&
+                inventoryData.slots[i].itemObject == itemToRemove)
+            {
+                inventoryData.slots[i] = new InventoryData.InventorySlot();
+                UpdateSlotUI(i);
+
+                if (inventoryData.currentSelectedSlot == i)
+                {
+                    inventoryData.currentSelectedSlot = -1;
+                    DeactivateAllItems();
+                }
+                return;
             }
         }
     }
 
-    void ShowHotbar()
+    private void Update()
+    {
+        HandleHotkeyInput();
+    }
+
+    private void HandleHotkeyInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) SelectSlot(0);
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) SelectSlot(1);
+        else if (Input.GetKeyDown(KeyCode.Alpha3)) SelectSlot(2);
+    }
+
+    private void SelectSlot(int index)
+    {
+        if (index < 0 || index >= inventoryData.slots.Length) return;
+
+        inventoryData.currentSelectedSlot = index;
+        UpdateAllSlotsUI();
+
+        for (int i = 0; i < inventoryData.slots.Length; i++)
+        {
+            if (!inventoryData.slots[i].IsEmpty)
+            {
+                inventoryData.slots[i].itemObject.SetActive(i == index);
+            }
+        }
+
+        ShowHotbarWithFeedback();
+    }
+
+    private void ShowHotbarWithFeedback()
+    {
+        source.PlayOneShot(sound);
+        ShowHotbar();
+
+        if (hideCoroutine != null)
+            StopCoroutine(hideCoroutine);
+        hideCoroutine = StartCoroutine(HideHotbarAfterDelay(visibleDuration));
+    }
+
+    private void UpdateSlotUI(int index)
+    {
+        bool hasItem = !inventoryData.slots[index].IsEmpty;
+        bool isSelected = inventoryData.currentSelectedSlot == index;
+
+        // Update slot appearance
+        if (slotImages[index] != null)
+        {
+            RectTransform rt = slotImages[index].GetComponent<RectTransform>();
+            rt.sizeDelta = new Vector2(rt.sizeDelta.x, isSelected ? SEL_SLOT_HEIGHT : SLOT_HEIGHT);
+
+            Color slotColor = slotImages[index].color;
+            slotColor.a = isSelected ? SEL_OPACITY : INIT_OPACITY;
+            slotImages[index].color = slotColor;
+        }
+
+        // Update icon
+        if (slotIcons[index] != null)
+        {
+            slotIcons[index].enabled = hasItem;
+            if (hasItem)
+            {
+                slotIcons[index].sprite = inventoryData.slots[index].itemSprite;
+                slotIcons[index].color = new Color(1, 1, 1, slotImages[index].color.a);
+            }
+        }
+
+        // Update name
+        if (itemNameTexts[index] != null)
+        {
+            itemNameTexts[index].text = hasItem && isSelected ? inventoryData.slots[index].itemName : "";
+            itemNameTexts[index].color = new Color(1, 1, 1, isSelected ? 1f : 0f);
+        }
+    }
+
+    private void UpdateAllSlotsUI()
+    {
+        for (int i = 0; i < inventoryData.slots.Length; i++)
+        {
+            UpdateSlotUI(i);
+        }
+    }
+
+    private void DeactivateAllItems()
+    {
+        foreach (var slot in inventoryData.slots)
+        {
+            if (!slot.IsEmpty)
+            {
+                slot.itemObject.SetActive(false);
+            }
+        }
+    }
+
+    private void ShowHotbar()
     {
         if (hotbarGroup != null)
         {
@@ -178,7 +210,7 @@ public class InventoryScript : MonoBehaviour
         }
     }
 
-    IEnumerator HideHotbarAfterDelay(float delay)
+    private IEnumerator HideHotbarAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
 
@@ -187,54 +219,6 @@ public class InventoryScript : MonoBehaviour
             hotbarGroup.alpha = 0;
             hotbarGroup.interactable = false;
             hotbarGroup.blocksRaycasts = false;
-        }
-    }
-
-    void SelectSlot(Image selected)
-    {
-        for (int i = 0; i < slotImages.Count; i++)
-        {
-            Image slot = slotImages[i];
-            RectTransform rt = slot.GetComponent<RectTransform>();
-            bool isSelected = (slot == selected);
-
-            rt.sizeDelta = new Vector2(rt.sizeDelta.x, isSelected ? SEL_SLOT_HEIGHT : SLOT_HEIGHT);
-
-            Color slotColor = slot.color;
-            slotColor.a = isSelected ? SEL_OPACITY : INIT_OPACITY;
-            slot.color = slotColor;
-
-            TextMeshProUGUI number = slot.GetComponentInChildren<TextMeshProUGUI>();
-            if (number != null)
-            {
-                Color textColor = number.color;
-                textColor.a = slotColor.a;
-                number.color = textColor;
-            }
-
-            // Fade icon
-            if (slotIcons[i] != null)
-            {
-                Color iconColor = slotIcons[i].color;
-                iconColor.a = slotColor.a;
-                slotIcons[i].color = iconColor;
-            }
-
-            // Set item name
-            if (itemNameTexts[i] != null)
-            {
-                if (isSelected && i < itemNames.Count)
-                {
-                    itemNameTexts[i].text = itemNames[i];
-                    Color nameColor = itemNameTexts[i].color;
-                    nameColor.a = 1f;
-                    itemNameTexts[i].color = nameColor;
-                }
-                else
-                {
-                    itemNameTexts[i].text = "";
-                }
-            }
         }
     }
 }

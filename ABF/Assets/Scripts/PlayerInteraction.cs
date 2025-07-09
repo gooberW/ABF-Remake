@@ -5,17 +5,24 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class PlayerInteraction : MonoBehaviour, IInteractionHandler
 {
-    [Header("Interaction")]
+    [Header("Settings")]
     [SerializeField] private float interactionDistance = 3f;
     [SerializeField] private LayerMask interactionLayer;
+
+    [Header("References")]
     [SerializeField] private CrosshairController crosshair;
+
     public static KeyCode interactButton = KeyCode.E;
+    public static KeyCode releaseButton = KeyCode.Q;
+
     private Camera playerCamera;
     private IInteractable currentInteractable;
+    private InventoryScript inventory;
 
     private void Awake()
     {
         playerCamera = GetComponent<Camera>();
+        inventory = FindObjectOfType<InventoryScript>();
     }
 
     private void Update()
@@ -27,21 +34,14 @@ public class PlayerInteraction : MonoBehaviour, IInteractionHandler
     private void CheckForInteractables()
     {
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, interactionDistance, interactionLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance, interactionLayer))
         {
             IInteractable interactable = hit.collider.GetComponent<IInteractable>();
-
             if (interactable != null && interactable.IsInteractable)
             {
                 if (interactable != currentInteractable)
                 {
-                    if (currentInteractable != null)
-                    {
-                        currentInteractable.OnUnhover();
-                    }
-
+                    currentInteractable?.OnUnhover();
                     currentInteractable = interactable;
                     interactable.OnHover();
                     HandleHover(interactable);
@@ -60,10 +60,18 @@ public class PlayerInteraction : MonoBehaviour, IInteractionHandler
 
     private void HandleInteractionInput()
     {
-        if (Input.GetKeyDown(interactButton) && currentInteractable != null)
+        if (Input.GetKeyDown(interactButton)) currentInteractable?.OnInteract();
+        if (Input.GetKeyDown(releaseButton)) ReleaseHeldItem();
+    }
+
+    private void ReleaseHeldItem()
+    {
+        GameObject heldItem = inventory.GetCurrentItem();
+        if (heldItem == null) return;
+
+        if (heldItem.TryGetComponent(out GrabbableItem grabbableItem))
         {
-            currentInteractable.OnInteract();
-            HandleInteraction(currentInteractable);
+            grabbableItem.ReleaseItem();
         }
     }
 
