@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Test Sequence
   m_EditorClassIdentifier: 
   steps:
+  - {fileID: 11400000, guid: 3b02657e95ec02d419a08795e93c0c66, type: 2}
   - {fileID: 11400000, guid: d273d2ed8d30cdd47b7ce53b645ed555, type: 2}
   - {fileID: 11400000, guid: 6ced4212154d4984c87d13dcf04ada95, type: 2}
   - {fileID: 11400000, guid: 4cc465376807566419d74c0f4822300c, type: 2}
