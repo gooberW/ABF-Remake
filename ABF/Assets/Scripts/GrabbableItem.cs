@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 //O codigo é reutilizavel para tudos os interactables, só meteres a layer "Interactables", adicionas este script ao object e já ta.
@@ -18,6 +19,8 @@ public class GrabbableItem : MonoBehaviour, IInteractable
     private Rigidbody rb;
     private Camera cam;
     private bool isGrabbed = false;
+    [SerializeField] private TMP_Text warningTextComponent;
+    [SerializeField] private string warningText;
 
     public string InteractionPrompt => $"[{PlayerInteraction.interactButton}] Grab the {itemName}";
     public bool IsInteractable => true;
@@ -49,22 +52,60 @@ public class GrabbableItem : MonoBehaviour, IInteractable
 
     private void GrabItem()
     {
-        isGrabbed = true;
-        transform.SetParent(grabPosition);
-        transform.localRotation = Quaternion.Euler(-90f, -90f, 0f);
-        transform.localPosition = Vector3.zero;
+        if (!inventory.IsInventoryFull())
+        {
+            isGrabbed = true;
+            transform.SetParent(grabPosition);
+            transform.localRotation = Quaternion.Euler(-90f, -90f, 0f);
+            transform.localPosition = Vector3.zero;
 
-        GetComponent<Collider>().isTrigger = true;
-        rb.useGravity = false;
-        rb.constraints = RigidbodyConstraints.FreezeAll;
+            GetComponent<Collider>().isTrigger = true;
+            rb.useGravity = false;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
 
-        gameObject.layer = LayerMask.NameToLayer("ItemInHand");
-        inventory.AddItem(gameObject, itemSprite, itemName);
+            gameObject.layer = LayerMask.NameToLayer("ItemInHand");
+            inventory.AddItem(gameObject, itemSprite, itemName);
 
-        TaskManager.Instance.CheckItemTaskCompletion(gameObject);
+            TaskManager.Instance.CheckItemTaskCompletion(gameObject);
+        }else
+        {
+            StartCoroutine(Warning());
+        }
+        
     }
 
-    public void ReleaseItem()
+    IEnumerator Warning()
+    {
+        Color color = warningTextComponent.color;
+        warningTextComponent.color = new Color(color.r, color.g, color.b, 1f);
+        warningTextComponent.text = "";
+        foreach (char c in warningText)
+        {
+            warningTextComponent.text += c;
+            yield return new WaitForSeconds(0.05f);
+        }
+        yield return new WaitForSeconds(2f);
+
+        StartCoroutine(FadeOutText());
+    }
+
+    IEnumerator FadeOutText()
+    {
+        float elapsed = 0f;
+        Color originalColor = warningTextComponent.color;
+
+        while (elapsed < 1f)
+        {
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / 1f);
+            warningTextComponent.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        warningTextComponent.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f); // Ensure fully transparent
+    }
+
+public void ReleaseItem()
     {
         isGrabbed = false;
         GetComponent<Collider>().isTrigger = false;

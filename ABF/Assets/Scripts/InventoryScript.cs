@@ -28,6 +28,8 @@ public class InventoryScript : MonoBehaviour
     private CanvasGroup hotbarGroup;
     private Coroutine hideCoroutine;
 
+    public static bool isInvFull = false;
+
     private void Awake()
     {
         hotbarGroup = hotbar.GetComponent<CanvasGroup>();
@@ -102,6 +104,7 @@ public class InventoryScript : MonoBehaviour
                     inventoryData.currentSelectedSlot = -1;
                     DeactivateAllItems();
                 }
+
                 return;
             }
         }
@@ -110,6 +113,21 @@ public class InventoryScript : MonoBehaviour
     private void Update()
     {
         HandleHotkeyInput();
+        IsInventoryFull();
+    }
+
+    public bool IsInventoryFull()
+    {
+        int fullSlots = 0;
+        for (int i = 0; i < inventoryData.slots.Length; i++)
+        {
+            if (!inventoryData.slots[i].IsEmpty)
+            {
+                fullSlots++;
+            }
+        }
+
+        return fullSlots == inventoryData.slots.Length;
     }
 
     private void HandleHotkeyInput()
