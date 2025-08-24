@@ -22,6 +22,9 @@ public class GrabbableItem : MonoBehaviour, IInteractable
     [SerializeField] private TMP_Text warningTextComponent;
     [SerializeField] private string warningText;
 
+    private bool isWarningActive = false; // Add this flag to track warning state
+    private Coroutine warningCoroutine; // Track the current warning coroutine 
+
     public string InteractionPrompt => $"[{PlayerInteraction.interactButton}] Grab the {itemName}";
     public bool IsInteractable => true;
 
@@ -67,30 +70,50 @@ public class GrabbableItem : MonoBehaviour, IInteractable
             inventory.AddItem(gameObject, itemSprite, itemName);
 
             TaskManager.Instance.CheckItemTaskCompletion(gameObject);
-        }else
-        {
-            StartCoroutine(Warning());
         }
-        
+        else
+        {
+            // Only show warning if one isn't already active
+            if (!isWarningActive)
+            {
+                StartCoroutine(Warning());
+            }
+        }
     }
 
     IEnumerator Warning()
     {
+        isWarningActive = true;
+
+        // Stop any existing warning coroutine
+        if (warningCoroutine != null)
+        {
+            StopCoroutine(warningCoroutine);
+        }
+        warningCoroutine = StartCoroutine(WarningRoutine());
+
+        yield return warningCoroutine;
+
+        isWarningActive = false;
+        warningCoroutine = null;
+    }
+
+    IEnumerator WarningRoutine()
+    {
         Color color = warningTextComponent.color;
         warningTextComponent.color = new Color(color.r, color.g, color.b, 1f);
         warningTextComponent.text = "";
+
+        // Type out the text
         foreach (char c in warningText)
         {
             warningTextComponent.text += c;
             yield return new WaitForSeconds(0.05f);
         }
+
         yield return new WaitForSeconds(2f);
 
-        StartCoroutine(FadeOutText());
-    }
-
-    IEnumerator FadeOutText()
-    {
+        // Fade out the text
         float elapsed = 0f;
         Color originalColor = warningTextComponent.color;
 
@@ -102,10 +125,10 @@ public class GrabbableItem : MonoBehaviour, IInteractable
             yield return null;
         }
 
-        warningTextComponent.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f); // Ensure fully transparent
+        warningTextComponent.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
     }
 
-public void ReleaseItem()
+    public void ReleaseItem()
     {
         isGrabbed = false;
         GetComponent<Collider>().isTrigger = false;
