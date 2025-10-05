@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class SanitySystem : MonoBehaviour
 {
@@ -17,10 +18,18 @@ public class SanitySystem : MonoBehaviour
     [SerializeField] private float maxVignetteIntensity = 0.5f;
     [SerializeField] private float maxDesaturation = 0.8f;
 
+    [Header("UI Settings")]
+    [SerializeField] private Image sanityBarImage;
+    [SerializeField] private float fadeOutDelay = 2f; // Time to wait before fading out
+    [SerializeField] private float fadeOutDuration = 1f; // How long the fade out takes
+
     private Vector3 originalCameraPos;
     public bool isInDarkness = false;
     private bool isLookingAtMonster = false;
     private float shakePower = 0f;
+    private float timeAtFullSanity = 0f;
+    private bool isFadingOut = false;
+    private CanvasGroup sanityBarCanvasGroup;
 
     private void Start()
     {
@@ -33,6 +42,18 @@ public class SanitySystem : MonoBehaviour
         if (GetComponent<LightSanitySystem>() == null)
         {
             gameObject.AddComponent<LightSanitySystem>();
+        }
+
+        // Initialize sanity bar if it exists
+        if (sanityBarImage != null)
+        {
+            // Get or add CanvasGroup for fading
+            sanityBarCanvasGroup = sanityBarImage.GetComponent<CanvasGroup>();
+            if (sanityBarCanvasGroup == null)
+            {
+                sanityBarCanvasGroup = sanityBarImage.gameObject.AddComponent<CanvasGroup>();
+            }
+            UpdateSanityBar();
         }
     }
 
@@ -54,6 +75,93 @@ public class SanitySystem : MonoBehaviour
 
         currentSanity = Mathf.Clamp(currentSanity, 0f, maxSanity);
         UpdateVisualEffects();
+
+        // Update the sanity bar UI
+        if (sanityBarImage != null && sanityBarCanvasGroup != null)
+        {
+            UpdateSanityBar();
+            HandleSanityBarVisibility();
+        }
+    }
+
+    private void UpdateSanityBar()
+    {
+        float sanityPercentage = currentSanity / maxSanity;
+        sanityBarImage.fillAmount = sanityPercentage;
+    }
+
+    private void HandleSanityBarVisibility()
+    {
+        float sanityPercentage = currentSanity / maxSanity;
+
+        // If sanity is full and not already fading out
+        if (sanityPercentage >= 0.99f && !isFadingOut)
+        {
+            timeAtFullSanity += Time.deltaTime;
+
+            // After delay, start fading out
+            if (timeAtFullSanity >= fadeOutDelay)
+            {
+                StartFadeOut();
+            }
+        }
+        else if (sanityPercentage < 0.99f)
+        {
+            // Sanity dropped below full, reset timer and make sure bar is visible
+            timeAtFullSanity = 0f;
+            if (isFadingOut || sanityBarCanvasGroup.alpha < 1f)
+            {
+                StopAllCoroutines();
+                FadeInBar();
+            }
+        }
+    }
+
+    private void StartFadeOut()
+    {
+        isFadingOut = true;
+        StopAllCoroutines();
+        StartCoroutine(FadeOutBar());
+    }
+
+    private System.Collections.IEnumerator FadeOutBar()
+    {
+        float elapsedTime = 0f;
+        float startAlpha = sanityBarCanvasGroup.alpha;
+
+        while (elapsedTime < fadeOutDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(startAlpha, 0f, elapsedTime / fadeOutDuration);
+            sanityBarCanvasGroup.alpha = newAlpha;
+            yield return null;
+        }
+
+        sanityBarCanvasGroup.alpha = 0f;
+        isFadingOut = false;
+    }
+
+    private void FadeInBar()
+    {
+        StopAllCoroutines();
+        StartCoroutine(FadeInBarCoroutine());
+    }
+
+    private System.Collections.IEnumerator FadeInBarCoroutine()
+    {
+        float elapsedTime = 0f;
+        float startAlpha = sanityBarCanvasGroup.alpha;
+
+        while (elapsedTime < fadeOutDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(startAlpha, 1f, elapsedTime / fadeOutDuration);
+            sanityBarCanvasGroup.alpha = newAlpha;
+            yield return null;
+        }
+
+        sanityBarCanvasGroup.alpha = 1f;
+        isFadingOut = false;
     }
 
     public void SetInDarkness(bool inDarkness)
@@ -69,13 +177,27 @@ public class SanitySystem : MonoBehaviour
     public void ApplyLoudNoiseEffect()
     {
         currentSanity -= loudNoiseDrainAmount;
-        currentSanity = Mathf.Max(currentSanity, 0f); 
+        currentSanity = Mathf.Max(currentSanity, 0f);
+
+        // Update UI immediately and ensure bar is visible
+        if (sanityBarImage != null && sanityBarCanvasGroup != null)
+        {
+            UpdateSanityBar();
+            FadeInBar();
+        }
     }
 
     public void ChangeSanity(float amount)
     {
         currentSanity += amount;
         currentSanity = Mathf.Clamp(currentSanity, 0f, maxSanity);
+
+        // Update UI immediately and ensure bar is visible
+        if (sanityBarImage != null && sanityBarCanvasGroup != null)
+        {
+            UpdateSanityBar();
+            FadeInBar();
+        }
     }
 
     private void UpdateVisualEffects()
