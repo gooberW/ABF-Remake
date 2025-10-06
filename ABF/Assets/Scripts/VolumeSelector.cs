@@ -2,27 +2,46 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.Audio;
 
 public class VolumeSelector : MonoBehaviour
 {
     public TMP_Text volumeText;
-    public Button leftArrowButton; // Drag your left arrow button here in inspector
-    public Button rightArrowButton; // Drag your right arrow button here in inspector
+    public Button leftArrowButton;
+    public Button rightArrowButton;
     public Button targetButton;
-    public int volume = 5;
+
+    [Range(0, 10)] public int volume = 5;
     public int minVolume = 0;
     public int maxVolume = 10;
 
+    // Mixer
+    public AudioMixer audioMixer;
+    public string exposedParameterName; 
+
+    // Sounds
+    public AudioClip hoverSound;
+    public AudioClip clickSound;
+    public AudioSource audioSource;
+
     void Start()
     {
-        UpdateVolumeText();
-        AudioListener.volume = volume / 10f;
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
 
-        // Add click listeners to buttons
+        UpdateVolumeText();
+        SetMixerVolume(volume);
+
         if (leftArrowButton != null)
+        {
             leftArrowButton.onClick.AddListener(DecreaseVolume);
+            SetupButtonSounds(leftArrowButton);
+        }
         if (rightArrowButton != null)
+        {
             rightArrowButton.onClick.AddListener(IncreaseVolume);
+            SetupButtonSounds(rightArrowButton);
+        }
     }
 
     void Update()
@@ -30,10 +49,15 @@ public class VolumeSelector : MonoBehaviour
         if (EventSystem.current.currentSelectedGameObject == targetButton.gameObject)
         {
             if (Input.GetKeyDown(KeyCode.A))
+            {
                 DecreaseVolume();
-
+                PlayClickSound();
+            }
             if (Input.GetKeyDown(KeyCode.D))
+            {
                 IncreaseVolume();
+                PlayClickSound();
+            }
         }
     }
 
@@ -43,7 +67,7 @@ public class VolumeSelector : MonoBehaviour
         {
             volume--;
             UpdateVolumeText();
-            Debug.Log($"✅ Volume decreased to: {volume}");
+            SetMixerVolume(volume);
         }
     }
 
@@ -53,13 +77,55 @@ public class VolumeSelector : MonoBehaviour
         {
             volume++;
             UpdateVolumeText();
-            Debug.Log($"✅ Volume increased to: {volume}");
+            SetMixerVolume(volume);
         }
     }
 
     void UpdateVolumeText()
     {
         volumeText.text = volume.ToString();
-        AudioListener.volume = volume / 10f;
+    }
+
+    void SetMixerVolume(int vol)
+    {
+        // Convert 0-10 to decibels (linear → log scale)
+        float dB = Mathf.Lerp(-80f, 0f, vol / 10f);
+        audioMixer.SetFloat(exposedParameterName, dB);
+    }
+
+    private void SetupButtonSounds(Button button)
+    {
+        EventTrigger eventTrigger = button.GetComponent<EventTrigger>();
+        if (eventTrigger == null)
+            eventTrigger = button.gameObject.AddComponent<EventTrigger>();
+
+        EventTrigger.Entry pointerEnterEntry = new EventTrigger.Entry
+        {
+            eventID = EventTriggerType.PointerEnter
+        };
+        pointerEnterEntry.callback.AddListener((data) => { OnButtonHover(); });
+        eventTrigger.triggers.Add(pointerEnterEntry);
+
+        EventTrigger.Entry pointerClickEntry = new EventTrigger.Entry
+        {
+            eventID = EventTriggerType.PointerClick
+        };
+        pointerClickEntry.callback.AddListener((data) => { OnButtonClick(); });
+        eventTrigger.triggers.Add(pointerClickEntry);
+    }
+
+    private void OnButtonHover() => PlayHoverSound();
+    private void OnButtonClick() => PlayClickSound();
+
+    private void PlayHoverSound()
+    {
+        if (hoverSound != null && audioSource != null)
+            audioSource.PlayOneShot(hoverSound);
+    }
+
+    private void PlayClickSound()
+    {
+        if (clickSound != null && audioSource != null)
+            audioSource.PlayOneShot(clickSound);
     }
 }
