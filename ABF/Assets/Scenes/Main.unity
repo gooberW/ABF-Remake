@@ -561,7 +561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSanity: 100
   currentSanity: 100
-  darknessDrainRate: 0.75
+  darknessDrainRate: 3
   lightRecoveryRate: 3.5
   monsterViewDrainRate: 15
   loudNoiseDrainAmount: 7
@@ -1152,7 +1152,6 @@ MonoBehaviour:
   itemSprite: {fileID: 0}
   dropForce: 5
   warningTextComponent: {fileID: 1718505512}
-  warningText: I'm already carrying too much!
 --- !u!135 &120220453
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2752,7 +2751,7 @@ GameObject:
   - component: {fileID: 788573693}
   m_Layer: 0
   m_Name: Grab Point
-  m_TagString: Untagged
+  m_TagString: GrabPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2856,7 +2855,6 @@ MonoBehaviour:
   itemSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   dropForce: 5
   warningTextComponent: {fileID: 1718505512}
-  warningText: I'm already carrying too much!
 --- !u!135 &880586848
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4035,7 +4033,6 @@ MonoBehaviour:
   itemSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   dropForce: 5
   warningTextComponent: {fileID: 1718505512}
-  warningText: I'm already carrying too much!
 --- !u!54 &1194836400
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4481,7 +4478,6 @@ MonoBehaviour:
   itemSprite: {fileID: 0}
   dropForce: 5
   warningTextComponent: {fileID: 1718505512}
-  warningText: I'm already carrying too much!
 --- !u!54 &1214627522
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5302,6 +5298,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f66fe119305c16c4c8d96d6389a700f4, type: 3}
+--- !u!1001 &1472759748
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7347778627332241006, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_Name
+      value: pillbox
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.5123808
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.886
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.344701
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
 --- !u!1 &1479438877
 GameObject:
   m_ObjectHideFlags: 0
@@ -6197,7 +6250,7 @@ GameObject:
   - component: {fileID: 1718505512}
   m_Layer: 5
   m_Name: WarningTxt
-  m_TagString: Untagged
+  m_TagString: Warning
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7485,3 +7538,4 @@ SceneRoots:
   - {fileID: 1450642122}
   - {fileID: 1323624255}
   - {fileID: 1877768005}
+  - {fileID: 1472759748}

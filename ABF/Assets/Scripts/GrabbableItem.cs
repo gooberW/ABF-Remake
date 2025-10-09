@@ -20,7 +20,7 @@ public class GrabbableItem : MonoBehaviour, IInteractable
     private Camera cam;
     private bool isGrabbed = false;
     [SerializeField] private TMP_Text warningTextComponent;
-    [SerializeField] private string warningText;
+    private string warningText = "I'm already carrying too much!";
 
     private bool isWarningActive = false; // Add this flag to track warning state
     private Coroutine warningCoroutine; // Track the current warning coroutine 
@@ -35,6 +35,17 @@ public class GrabbableItem : MonoBehaviour, IInteractable
         outline.enabled = false;
         rb = GetComponent<Rigidbody>();
         cam = Camera.main;
+        GameObject grabObj = GameObject.FindGameObjectWithTag("GrabPoint");
+        if (grabObj != null)
+            grabPosition = grabObj.transform;
+        else
+            Debug.LogWarning("No object with tag 'GrabPoint' found!");
+
+        GameObject warningObj = GameObject.FindGameObjectWithTag("Warning");
+        if (warningObj != null)
+            warningTextComponent = warningObj.GetComponent<TMP_Text>();
+        else
+            Debug.LogWarning("No object with tag 'Warning' found!");
     }
 
     public void OnHover()

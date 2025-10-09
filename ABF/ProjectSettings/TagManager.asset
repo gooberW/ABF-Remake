@@ -8,6 +8,8 @@ TagManager:
   - Slot2
   - Slot3
   - HouseEntry
+  - Warning
+  - GrabPoint
   layers:
   - Default
   - TransparentFX
