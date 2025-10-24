@@ -59,20 +59,20 @@ public class DoorInteraction : MonoBehaviour
 
         if (isDoorOpen)
         {
-            // Open the door (positive velocity)
+            
             motor.targetVelocity = speedMultiplier * Time.deltaTime * leftDoor;
             
         }
         if (!isDoorOpen)
         {
-            // Close the door (negative velocity)
+            
             motor.targetVelocity = -speedMultiplier * Time.deltaTime * leftDoor;
             
         }
 
         joint.motor = motor;
 
-        // Update interaction prompt
+      
         if (isLookingAtDoor)
         {
             crosshairController.SetInteractable(isDoorOpen ? closePrompt : openPrompt);
