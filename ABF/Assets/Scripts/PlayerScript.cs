@@ -40,15 +40,9 @@ public class PlayerScript : MonoBehaviour
     //[SerializeField] private NotebookScript _notebook;
     [SerializeField] private CanvasGroup _staminaBar;
     [SerializeField] private UnityEngine.UI.Image _slider;
-    [SerializeField] Camera cam;
-    [SerializeField] private LayerMask doorLayer;
-    [SerializeField] CrosshairController crosshairController;
-    [SerializeField] string openPrompt = "Open Door";
-    [SerializeField] string closePrompt = "Close Door";
-    [SerializeField] private bool isDoorOpen = false;
-    Transform selectedDoor;
+
     private bool isLookingAtDoor = false;
-    Door Door;
+    
 
     void Start()
     {
@@ -124,33 +118,9 @@ public class PlayerScript : MonoBehaviour
         CheckStamina();
         //Debug.Log(_currentStamina);
 
-        RaycastHit hit;
-        bool hitDoor = Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 20, doorLayer);
-        if (hitDoor && !isLookingAtDoor)
-        {
-            Door = hit.collider.GetComponent<Door>();
-            if (selectedDoor != null)
-            {
-                crosshairController.SetInteractable( Door.IsDoorOpen ? closePrompt : openPrompt);
-            }
-            else
-            {
-                crosshairController.SetInteractable(openPrompt);
-            }
-            isLookingAtDoor = true;
-        }
-        else if (!hitDoor && isLookingAtDoor)
-        {
-            crosshairController.SetNormal();
-            isLookingAtDoor = false;
-        }
-
-        if (hitDoor && Input.GetMouseButtonDown(0))
-        {
-            selectedDoor = hit.collider.gameObject.transform;
-            Door.OnDoorInteratable();
-        }
+        
     }
+
 
     void CheckStamina()
     {
