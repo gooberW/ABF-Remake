@@ -4,10 +4,18 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    string InteractionPrompt { get; }  
-    bool IsInteractable { get; }      
 
-    void OnHover();     
-    void OnUnhover();   
-    void OnInteract();  
+    string InteractionPrompt { get; }
+    bool IsInteractable { get; }
+
+    void OnHover();
+    void OnUnhover();
+    void OnInteract();
+
+
+    protected virtual void OnDoorInteratable()
+    {
+
+    }
 }
+

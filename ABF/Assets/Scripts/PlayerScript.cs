@@ -41,6 +41,8 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private CanvasGroup _staminaBar;
     [SerializeField] private UnityEngine.UI.Image _slider;
 
+    private bool isLookingAtDoor = false;
+    
 
     void Start()
     {
@@ -115,7 +117,10 @@ public class PlayerScript : MonoBehaviour
         Crouch();
         CheckStamina();
         //Debug.Log(_currentStamina);
+
+        
     }
+
 
     void CheckStamina()
     {
