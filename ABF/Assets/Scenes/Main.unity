@@ -499,14 +499,6 @@ MonoBehaviour:
   playerSpeed: 0
   _staminaBar: {fileID: 1841240897}
   _slider: {fileID: 502496853}
-  cam: {fileID: 1479438880}
-  doorLayer:
-    serializedVersion: 2
-    m_Bits: 16384
-  crosshairController: {fileID: 508778086}
-  openPrompt: Open Door
-  closePrompt: Close Door
-  isDoorOpen: 0
 --- !u!136 &57133894
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1373,7 +1365,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1005284730448836491, guid: 516d03718a292924d9109c52287a0fe2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1937038624}
   m_SourcePrefab: {fileID: 100100000, guid: 516d03718a292924d9109c52287a0fe2, type: 3}
 --- !u!1 &169597726
 GameObject:
@@ -4710,10 +4705,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1005284730448836491, guid: 516d03718a292924d9109c52287a0fe2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1682847435}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 516d03718a292924d9109c52287a0fe2, type: 3}
 --- !u!1 &1248597698
 GameObject:
@@ -6506,23 +6498,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1682847432 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1005284730448836491, guid: 516d03718a292924d9109c52287a0fe2, type: 3}
-  m_PrefabInstance: {fileID: 1245558795}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1682847435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1682847432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bac50c6835440e42938b1121e6f979f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1718505510
 GameObject:
   m_ObjectHideFlags: 0
@@ -7121,6 +7096,11 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &1783582730 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1005284730448836491, guid: 516d03718a292924d9109c52287a0fe2, type: 3}
+  m_PrefabInstance: {fileID: 148847016}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1795473275 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4883606806779825789, guid: be6876e14d9d1254db7dfa0b099e0fdb, type: 3}
@@ -7434,6 +7414,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1916402690885601155, guid: 516d03718a292924d9109c52287a0fe2, type: 3}
   m_PrefabInstance: {fileID: 148847016}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1937038624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783582730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bac50c6835440e42938b1121e6f979f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openAngle: 90
+  openSpeed: 120
+  invertDirection: 0
+  cam: {fileID: 1479438880}
+  doorLayer:
+    serializedVersion: 2
+    m_Bits: 16384
+  crosshairController: {fileID: 508778086}
+  openPrompt: Open Door
+  closePrompt: Close Door
 --- !u!1 &1954072289
 GameObject:
   m_ObjectHideFlags: 0
