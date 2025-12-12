@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lines:
   - characterName: Kyle
-    text: Pilas?
+    text: I can't lose you, Kevin.
   - characterName: Kevin
-    text: Pilas piroquinha
+    text: Don't worry, I'll always be here.
   - characterName: Kyle
-    text: OH! I memo.
+    text: But you're not.
   - characterName: Kevin
-    text: TUNG TUNG TUNG TUNG SAHUR!
+    text: I am. Just inside your head.
   nextDialogue: {fileID: 0}
