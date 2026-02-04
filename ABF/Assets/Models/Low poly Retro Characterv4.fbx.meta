@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 1ba24895ff599e04bbb7092a70dff67f
+guid: ae7f968b6cb060a44a5c4f99a9054538
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.007
+    second: {fileID: 2100000, guid: 713f164a0388d87489095b6ed30d35e1, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: LowpolyCharTexture
+    second: {fileID: 2800000, guid: 5689267a073120a488fe5926734e1e4e, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

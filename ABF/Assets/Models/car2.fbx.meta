@@ -1,9 +1,59 @@
 fileFormatVersion: 2
-guid: 1ba24895ff599e04bbb7092a70dff67f
+guid: f301420bea974784cb23eb373812ef1c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: d9b09696fa790a74b980ee7fd9e347b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lights
+    second: {fileID: 2100000, guid: 0ed7778959154744b9e52d0271d99f27, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: 5beaecff81d033043a4a59701eb15818, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal.001
+    second: {fileID: 2100000, guid: a59e5f9a2e6acc14097ad77fbae581f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Paint
+    second: {fileID: 2100000, guid: 1a90462b69bb665489e58ce2b15858d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plastic
+    second: {fileID: 2100000, guid: 347ba872f83e3de429347689f2f73496, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rim
+    second: {fileID: 2100000, guid: 2b965c9b4b8befe47b1fca805d8af24d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rubber
+    second: {fileID: 2100000, guid: 09814110741c1f3469e7508a4d10e167, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: uProt
+    second: {fileID: 2100000, guid: a119d147982d15c449b882e24600e67a, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: headlights
+    second: {fileID: 2800000, guid: c8b95ce146e05f040b6c024eefad4d10, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
