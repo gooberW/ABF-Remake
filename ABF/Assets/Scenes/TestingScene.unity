@@ -2772,6 +2772,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  onPuzzleComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1334179310
 Transform:
   m_ObjectHideFlags: 0
