@@ -10,6 +10,7 @@ TagManager:
   - HouseEntry
   - Warning
   - GrabPoint
+  - BedroomTrigger
   layers:
   - Default
   - TransparentFX

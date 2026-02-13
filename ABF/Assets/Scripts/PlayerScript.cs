@@ -25,7 +25,8 @@ public class PlayerScript : MonoBehaviour
 
     [HideInInspector] public float playerSpeed;
 
-    
+    // Toggle used by other systems (DialogueManager) to enable/disable movement
+    public static bool CanMove = true;
 
     private float originalHeight;
     private Vector3 originalCenter;
@@ -63,6 +64,13 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        // If movement is disabled, keep vertical velocity and zero horizontal movement
+        if (!CanMove)
+        {
+            _rb.velocity = new Vector3(0, _rb.velocity.y, 0);
+            return;
+        }
+
         horizontalInput = Input.GetAxis("Horizontal") * playerSpeed;
         verticalInput = Input.GetAxis("Vertical") * playerSpeed;
 
@@ -82,6 +90,9 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
+        // If movement is disabled, skip movement-related updates (crouch/run/stamina)
+        if (!CanMove) return;
+
         //hasCeiling = CheckCeiling();
         //Debug.Log(hasCeiling);
 

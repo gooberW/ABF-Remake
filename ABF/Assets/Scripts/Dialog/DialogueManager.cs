@@ -11,6 +11,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TMP_Text characterNameText;    // Displays the character's name
     [SerializeField] private TMP_Text dialogueText;        // Displays the dialogue text
 
+    [Header("Behaviour")]
+    [SerializeField] private bool blockPlayerMovement = true; // If true, disables player movement while dialogue is active
+
     private Dialogue currentDialogue;  // The currently active dialogue
     private int currentLineIndex;      // Tracks which line we're on
     private bool isDialogueActive;     // Is dialogue currently playing?
@@ -36,6 +39,12 @@ public class DialogueManager : MonoBehaviour
         currentLineIndex = 0;
         isDialogueActive = true;
         dialoguePanel.SetActive(true);
+
+        if (blockPlayerMovement)
+        {
+            PlayerScript.CanMove = false;
+        }
+
         DisplayCurrentLine();
     }
 
@@ -55,7 +64,7 @@ public class DialogueManager : MonoBehaviour
         if (!isDialogueActive) return;
 
         currentLineIndex++;
-        
+
         if (currentLineIndex < currentDialogue.lines.Length)
         {
             DisplayCurrentLine();  // Show next line
@@ -79,6 +88,11 @@ public class DialogueManager : MonoBehaviour
         // Otherwise, close the dialogue
         isDialogueActive = false;
         dialoguePanel.SetActive(false);
+
+        if (blockPlayerMovement)
+        {
+            PlayerScript.CanMove = true;
+        }
     }
 
     // Space key to advance dialogue
