@@ -2068,6 +2068,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1040792111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 901222103504752386, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
+  m_PrefabInstance: {fileID: 7579254612564343200}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1063231552
 GameObject:
   m_ObjectHideFlags: 0
@@ -3669,6 +3674,20 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 101633951668622650, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
   m_PrefabInstance: {fileID: 7579254612564343200}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1479438887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040792111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 631343c55ccee1b4a820c75ea6aa391b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeMultiplier: 0.03
+  shakeIntensity: 2
 --- !u!1 &1479760077
 GameObject:
   m_ObjectHideFlags: 0
@@ -5281,9 +5300,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 508778086}
     - target: {fileID: 1313890661892990441, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1479438880}
+    - target: {fileID: 1313890661892990441, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
       propertyPath: sanityBarImage
       value: 
       objectReference: {fileID: 1500968566}
+    - target: {fileID: 1313890661892990441, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
+      propertyPath: shakeMultiplier
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313890661892990441, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
+      propertyPath: maxShakeIntensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313890661892990441, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
+      propertyPath: sanityTickInterval
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3049205763859066073, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5343,7 +5378,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 901222103504752386, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1479438887}
   m_SourcePrefab: {fileID: 100100000, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
 --- !u!1001 &7908593239788530750
 PrefabInstance:

@@ -2566,7 +2566,7 @@ GameObject:
   m_Component:
   - component: {fileID: 198240697}
   - component: {fileID: 198240698}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spot Light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10442,7 +10442,7 @@ GameObject:
   m_Component:
   - component: {fileID: 453231019}
   - component: {fileID: 453231020}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10966,7 +10966,7 @@ GameObject:
   m_Component:
   - component: {fileID: 506337672}
   - component: {fileID: 506337673}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spot Light (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11723,7 +11723,7 @@ GameObject:
   m_Component:
   - component: {fileID: 557495497}
   - component: {fileID: 557495498}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spot Light (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12141,7 +12141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 573598799}
   - component: {fileID: 573598800}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12401,7 +12401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 578374223}
   - component: {fileID: 578374224}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15098,7 +15098,7 @@ GameObject:
   m_Component:
   - component: {fileID: 705507995}
   - component: {fileID: 705507994}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Directional Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19245,7 +19245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1253964005}
   - component: {fileID: 1253964006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spot Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20365,7 +20365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1328967305}
   - component: {fileID: 1328967306}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21495,7 +21495,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1525033584}
   - component: {fileID: 1525033585}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22184,7 +22184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1606158813}
   - component: {fileID: 1606158814}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spot Light (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24018,7 +24018,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1820797453}
   - component: {fileID: 1820797454}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26825,7 +26825,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1970335104}
   - component: {fileID: 1970335105}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

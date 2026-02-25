@@ -1,46 +1,54 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using Cinemachine;
 
 public class SanitySystem : MonoBehaviour
 {
     [Header("Sanity Settings")]
     [SerializeField] private float maxSanity = 100f;
     [SerializeField] private float currentSanity = 100f;
-    [SerializeField] private float darknessDrainRate = 5f;
-    [SerializeField] private float lightRecoveryRate = 3f;
-    [SerializeField] private float monsterViewDrainRate = 10f;
-    [SerializeField] private float loudNoiseDrainAmount = 15f;
+    [SerializeField] private float darknessDrainRate = 3f;
+    [SerializeField] private float lightRecoveryRate = 3.5f;
+    [SerializeField] private float monsterViewDrainRate = 15f;
+    [SerializeField] private float loudNoiseDrainAmount = 7f;
+
+    [Header("Tick Settings (Optimization)")]
+    [SerializeField] private float sanityTickInterval = 0.1f; // Sanity updates every 0.1s for CPU savings
 
     [Header("Visual Effects")]
     [SerializeField] private Camera playerCamera;
-    [SerializeField] private float maxShakeIntensity = 0.5f;
-    [SerializeField] private float maxVignetteIntensity = 0.5f;
-    [SerializeField] private float maxDesaturation = 0.8f;
+    [SerializeField] private float maxShakeIntensity = 1.5f;
+    [SerializeField] private float maxVignetteIntensity = 2f;
+    [SerializeField] private float maxDesaturation = 1f;
 
     [Header("UI Settings")]
     [SerializeField] private Image sanityBarImage;
     [SerializeField] private float fadeOutDelay = 2f;
     [SerializeField] private float fadeOutDuration = 1f;
 
-    private Vector3 originalCameraPos;
+    private SanityPostEffects sanityPostEffects;
+    private CameraShake cameraShake; // Reference to new CameraShake component
+    private float lastSanity = -1f;
+
+    // Tick system vars
+    private float sanityTickTimer = 0f;
+
     public bool isInDarkness = false;
     private bool isLookingAtMonster = false;
-    private float shakePower = 0f;
     private float timeAtFullSanity = 0f;
     private bool isFadingOut = false;
     private CanvasGroup sanityBarCanvasGroup;
-    private SanityPostEffects sanityPostEffects;
-    private float lastSanity = -1f;
 
     private void Start()
     {
         if (playerCamera == null)
             playerCamera = Camera.main;
-        originalCameraPos = playerCamera.transform.localPosition;
 
+        // Auto-add LightSanitySystem if missing
         if (GetComponent<LightSanitySystem>() == null)
             gameObject.AddComponent<LightSanitySystem>();
-
+         
         if (sanityBarImage != null)
         {
             sanityBarCanvasGroup = sanityBarImage.GetComponent<CanvasGroup>() ?? sanityBarImage.gameObject.AddComponent<CanvasGroup>();
@@ -48,22 +56,17 @@ public class SanitySystem : MonoBehaviour
         }
 
         sanityPostEffects = playerCamera.GetComponent<SanityPostEffects>() ?? playerCamera.gameObject.AddComponent<SanityPostEffects>();
+
+        // Add or get CameraShake on the camera
+        cameraShake = playerCamera.GetComponent<CameraShake>() ?? playerCamera.gameObject.AddComponent<CameraShake>();
     }
 
     private void Update()
     {
-        float prevSanity = currentSanity;
+        // Tick-based sanity drain/recovery
+        UpdateSanityTick();
 
-        if (isInDarkness)
-            currentSanity -= darknessDrainRate * Time.deltaTime;
-        else
-            currentSanity += lightRecoveryRate * Time.deltaTime;
-
-        if (isLookingAtMonster)
-            currentSanity -= monsterViewDrainRate * Time.deltaTime;
-
-        currentSanity = Mathf.Clamp(currentSanity, 0f, maxSanity);
-
+        // Every-frame visuals and UI
         if (Mathf.Abs(currentSanity - lastSanity) > 0.01f)
         {
             UpdateSanityBar();
@@ -74,6 +77,27 @@ public class SanitySystem : MonoBehaviour
 
         if (sanityBarImage != null && sanityBarCanvasGroup != null)
             HandleSanityBarVisibility();
+    }
+
+    private void UpdateSanityTick()
+    {
+        sanityTickTimer += Time.deltaTime;
+        if (sanityTickTimer >= sanityTickInterval)
+        {
+            float tickTime = sanityTickTimer;
+            sanityTickTimer = 0f;
+
+            float change = 0f;
+            if (isInDarkness)
+                change -= darknessDrainRate * tickTime;
+            else
+                change += lightRecoveryRate * tickTime;
+
+            if (isLookingAtMonster)
+                change -= monsterViewDrainRate * tickTime;
+
+            currentSanity = Mathf.Clamp(currentSanity + change, 0f, maxSanity);
+        }
     }
 
     private void UpdateSanityBar()
@@ -109,7 +133,7 @@ public class SanitySystem : MonoBehaviour
         StartCoroutine(FadeOutBar());
     }
 
-    private System.Collections.IEnumerator FadeOutBar()
+    private IEnumerator FadeOutBar()
     {
         float elapsedTime = 0f;
         float startAlpha = sanityBarCanvasGroup.alpha;
@@ -129,7 +153,7 @@ public class SanitySystem : MonoBehaviour
         StartCoroutine(FadeInBarCoroutine());
     }
 
-    private System.Collections.IEnumerator FadeInBarCoroutine()
+    private IEnumerator FadeInBarCoroutine()
     {
         float elapsedTime = 0f;
         float startAlpha = sanityBarCanvasGroup.alpha;
@@ -165,31 +189,14 @@ public class SanitySystem : MonoBehaviour
         float sanityPercentage = currentSanity / maxSanity;
         float inverseSanity = 1f - sanityPercentage;
 
-        if (inverseSanity > 0.1f)
-        {
-            shakePower = inverseSanity * maxShakeIntensity;
-            ApplyCameraShake();
-        }
-        else
-        {
-            playerCamera.transform.localPosition = originalCameraPos;
-        }
+        // Shake factor: starts slightly at ~50% sanity
+        float shakeFactor = Mathf.Clamp01((inverseSanity - 0.45f) / 0.55f);
+        float shakePower = shakeFactor * maxShakeIntensity;
+
+        // Set shake on separate component
+        if (cameraShake != null)
+            cameraShake.shakeIntensity = shakePower;
 
         sanityPostEffects.UpdateEffects(inverseSanity, maxVignetteIntensity, maxDesaturation);
-    }
-
-    private void ApplyCameraShake()
-    {
-        if (shakePower > 0)
-        {
-            float xShake = (Mathf.PerlinNoise(Time.time * 30f, 0f) - 0.5f); // Increased frequency
-            float yShake = (Mathf.PerlinNoise(0f, Time.time * 30f) - 0.5f);
-            Vector3 shakeOffset = new Vector3(xShake, yShake, 0f) * shakePower * 2f; // Increased amplitude
-            playerCamera.transform.localPosition = originalCameraPos + shakeOffset;
-        }
-        else
-        {
-            playerCamera.transform.localPosition = originalCameraPos;
-        }
     }
 }
