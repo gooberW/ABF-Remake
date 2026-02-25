@@ -46,10 +46,7 @@ public class InventoryScript : MonoBehaviour
             hotbarGroup.blocksRaycasts = false;
         }
 
-        for (int i = 0; i < 3; i++)
-        {
-            UpdateSlotUI(i);
-        }
+        UpdateAllSlotsUI();
     }
 
     public void AddItem(GameObject item, Sprite sprite, string itemName)
@@ -65,9 +62,11 @@ public class InventoryScript : MonoBehaviour
                     itemName = itemName
                 };
 
+                // Only activate if this is the selected slot
                 item.SetActive(i == inventoryData.currentSelectedSlot);
                 UpdateSlotUI(i);
 
+                // If nothing was selected, select this slot
                 if (inventoryData.currentSelectedSlot == -1)
                 {
                     SelectSlot(i);
@@ -81,10 +80,10 @@ public class InventoryScript : MonoBehaviour
 
     public GameObject GetCurrentItem()
     {
-        if (inventoryData.currentSelectedSlot >= 0 &&
-            !inventoryData.slots[inventoryData.currentSelectedSlot].IsEmpty)
+        int idx = inventoryData.currentSelectedSlot;
+        if (idx >= 0 && idx < inventoryData.slots.Length && !inventoryData.slots[idx].IsEmpty)
         {
-            return inventoryData.slots[inventoryData.currentSelectedSlot].itemObject;
+            return inventoryData.slots[idx].itemObject;
         }
         return null;
     }
@@ -93,8 +92,8 @@ public class InventoryScript : MonoBehaviour
     {
         for (int i = 0; i < inventoryData.slots.Length; i++)
         {
-            if (!inventoryData.slots[i].IsEmpty &&
-                inventoryData.slots[i].itemObject == itemToRemove)
+            var slot = inventoryData.slots[i];
+            if (!slot.IsEmpty && slot.itemObject == itemToRemove)
             {
                 inventoryData.slots[i] = new InventoryData.InventorySlot();
                 UpdateSlotUI(i);
@@ -104,7 +103,6 @@ public class InventoryScript : MonoBehaviour
                     inventoryData.currentSelectedSlot = -1;
                     DeactivateAllItems();
                 }
-
                 return;
             }
         }
@@ -113,21 +111,17 @@ public class InventoryScript : MonoBehaviour
     private void Update()
     {
         HandleHotkeyInput();
-        IsInventoryFull();
+        isInvFull = IsInventoryFull();
     }
 
     public bool IsInventoryFull()
     {
-        int fullSlots = 0;
         for (int i = 0; i < inventoryData.slots.Length; i++)
         {
-            if (!inventoryData.slots[i].IsEmpty)
-            {
-                fullSlots++;
-            }
+            if (inventoryData.slots[i].IsEmpty)
+                return false;
         }
-
-        return fullSlots == inventoryData.slots.Length;
+        return true;
     }
 
     private void HandleHotkeyInput()
@@ -140,6 +134,8 @@ public class InventoryScript : MonoBehaviour
     private void SelectSlot(int index)
     {
         if (index < 0 || index >= inventoryData.slots.Length) return;
+
+        if (inventoryData.currentSelectedSlot == index) return;
 
         inventoryData.currentSelectedSlot = index;
         UpdateAllSlotsUI();
@@ -157,7 +153,9 @@ public class InventoryScript : MonoBehaviour
 
     private void ShowHotbarWithFeedback()
     {
-        source.PlayOneShot(sound);
+        if (sound != null && source != null)
+            source.PlayOneShot(sound);
+
         ShowHotbar();
 
         if (hideCoroutine != null)
@@ -167,13 +165,14 @@ public class InventoryScript : MonoBehaviour
 
     private void UpdateSlotUI(int index)
     {
-        bool hasItem = !inventoryData.slots[index].IsEmpty;
+        var slot = inventoryData.slots[index];
+        bool hasItem = !slot.IsEmpty;
         bool isSelected = inventoryData.currentSelectedSlot == index;
 
         // Update slot appearance
         if (slotImages[index] != null)
         {
-            RectTransform rt = slotImages[index].GetComponent<RectTransform>();
+            RectTransform rt = slotImages[index].rectTransform;
             rt.sizeDelta = new Vector2(rt.sizeDelta.x, isSelected ? SEL_SLOT_HEIGHT : SLOT_HEIGHT);
 
             Color slotColor = slotImages[index].color;
@@ -187,7 +186,7 @@ public class InventoryScript : MonoBehaviour
             slotIcons[index].enabled = hasItem;
             if (hasItem)
             {
-                slotIcons[index].sprite = inventoryData.slots[index].itemSprite;
+                slotIcons[index].sprite = slot.itemSprite;
                 slotIcons[index].color = new Color(1, 1, 1, slotImages[index].color.a);
             }
         }
@@ -195,7 +194,7 @@ public class InventoryScript : MonoBehaviour
         // Update name
         if (itemNameTexts[index] != null)
         {
-            itemNameTexts[index].text = hasItem && isSelected ? inventoryData.slots[index].itemName : "";
+            itemNameTexts[index].text = (hasItem && isSelected) ? slot.itemName : "";
             itemNameTexts[index].color = new Color(1, 1, 1, isSelected ? 1f : 0f);
         }
     }
@@ -212,7 +211,7 @@ public class InventoryScript : MonoBehaviour
     {
         foreach (var slot in inventoryData.slots)
         {
-            if (!slot.IsEmpty)
+            if (!slot.IsEmpty && slot.itemObject != null)
             {
                 slot.itemObject.SetActive(false);
             }

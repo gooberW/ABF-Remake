@@ -206,9 +206,6 @@ public class PlayerScript : MonoBehaviour
         return hitSomething;
     }
 
-
-
-
     private void Crouch()
     {
         if (isCrouching)
