@@ -3,9 +3,8 @@ using UnityEngine;
 public class LightSwitch : MonoBehaviour
 {
     [Header("Configurações da Luz")]
-    [SerializeField] private Light targetLight;     
-    [SerializeField] private Light ambientLight;    
-    [SerializeField] private bool startOn = false;   
+    [SerializeField] private Light targetLight;
+    [SerializeField] private Light ambientLight;
 
     [Header("Interação")]
     [SerializeField] private Camera cam;
@@ -16,23 +15,20 @@ public class LightSwitch : MonoBehaviour
     [SerializeField] private float interactDistance = 2.5f;
 
     private bool isLookingAtSwitch = false;
-    private bool isLightOn;
     private bool isSwitching = false;
 
     void Start()
     {
-        isLightOn = startOn;
 
         if (targetLight != null)
-            targetLight.enabled = isLightOn;
+            targetLight.enabled = false;
 
         if (ambientLight != null)
-            ambientLight.enabled = !isLightOn; 
+            ambientLight.enabled = true;
     }
 
     void Update()
     {
-
         RaycastHit hit;
         bool hitSwitch = Physics.Raycast(
             cam.transform.position,
@@ -49,23 +45,21 @@ public class LightSwitch : MonoBehaviour
             Transform hitTransform = hit.collider.transform;
 
             if (hitTransform == this.transform || hitTransform.IsChildOf(this.transform))
-            {
                 thisSwitchHit = true;
-            }
         }
 
         if (thisSwitchHit)
         {
             if (!isLookingAtSwitch)
             {
-                crosshairController.SetInteractable(isLightOn ? offPrompt : onPrompt);
+                crosshairController.SetInteractable(targetLight.enabled ? offPrompt : onPrompt);
                 isLookingAtSwitch = true;
             }
 
             if (Input.GetMouseButtonDown(0))
             {
                 ToggleLight();
-                crosshairController.SetInteractable(isLightOn ? offPrompt : onPrompt);
+                crosshairController.SetInteractable(targetLight.enabled ? offPrompt : onPrompt);
             }
         }
         else
@@ -84,16 +78,16 @@ public class LightSwitch : MonoBehaviour
 
         isSwitching = true;
 
-        isLightOn = !isLightOn;
+       
+        LightManager manager = FindObjectOfType<LightManager>();
+        if (manager != null && targetLight != null)
+        {
+            manager.ToggleLight(targetLight);
+        }
 
-
-        if (targetLight != null)
-            targetLight.enabled = isLightOn;
-
+  
         if (ambientLight != null)
-            ambientLight.enabled = !isLightOn; 
-
-        Debug.Log($"Luz principal: {(isLightOn ? "LIGADA" : "DESLIGADA")} | Luz ambiente: {(!isLightOn ? "LIGADA" : "DESLIGADA")}");
+            ambientLight.enabled = !(targetLight != null && targetLight.enabled);
 
         isSwitching = false;
     }
