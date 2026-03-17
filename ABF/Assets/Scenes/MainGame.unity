@@ -17184,7 +17184,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2900.5984, y: 5.7436867, z: 109.022514}
+  m_LocalPosition: {x: -22.928772, y: 10.7143135, z: -19.27481}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25825,6 +25825,58 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1795181691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1795181693}
+  - component: {fileID: 1795181692}
+  m_Layer: 11
+  m_Name: ligthManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1795181692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795181691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5b2c6a0ce0ed3b47b5a5680224b0ac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoredLights:
+  - {fileID: 1815634020}
+  - {fileID: 611382135}
+  - {fileID: 982832053}
+  - {fileID: 1493251919}
+  - {fileID: 725383053}
+  - {fileID: 995403230}
+  - {fileID: 662213076}
+--- !u!4 &1795181693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795181691}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -3089.73, y: 3.47, z: 192.92}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1815634019
 GameObject:
   m_ObjectHideFlags: 0
@@ -29152,6 +29204,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 5875837251562161973, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
+      propertyPath: _PixelationFactor
+      value: 0.512
+      objectReference: {fileID: 0}
     - target: {fileID: 5972895657064249111, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
       propertyPath: textComponent
       value: 
@@ -32433,6 +32489,7 @@ SceneRoots:
   - {fileID: 1497241763}
   - {fileID: 39024244}
   - {fileID: 191859056}
+  - {fileID: 1795181693}
   - {fileID: 1815634021}
   - {fileID: 611382136}
   - {fileID: 982832054}

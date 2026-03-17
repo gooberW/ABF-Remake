@@ -17,14 +17,26 @@ public class LightSwitch : MonoBehaviour
     private bool isLookingAtSwitch = false;
     private bool isSwitching = false;
 
+    private LightManager manager;
+
     void Start()
     {
-
         if (targetLight != null)
             targetLight.enabled = false;
 
         if (ambientLight != null)
             ambientLight.enabled = true;
+
+
+        manager = FindObjectOfType<LightManager>();
+        if (manager != null)
+            manager.OnLightChanged += OnLightChanged;
+    }
+
+    void OnDestroy()
+    {
+        if (manager != null)
+            manager.OnLightChanged -= OnLightChanged;
     }
 
     void Update()
@@ -43,7 +55,6 @@ public class LightSwitch : MonoBehaviour
         if (hitSwitch && hit.collider != null)
         {
             Transform hitTransform = hit.collider.transform;
-
             if (hitTransform == this.transform || hitTransform.IsChildOf(this.transform))
                 thisSwitchHit = true;
         }
@@ -75,20 +86,19 @@ public class LightSwitch : MonoBehaviour
     private void ToggleLight()
     {
         if (isSwitching) return;
-
         isSwitching = true;
 
-       
-        LightManager manager = FindObjectOfType<LightManager>();
         if (manager != null && targetLight != null)
-        {
             manager.ToggleLight(targetLight);
-        }
-
-  
-        if (ambientLight != null)
-            ambientLight.enabled = !(targetLight != null && targetLight.enabled);
 
         isSwitching = false;
+    }
+
+
+    private void OnLightChanged(Light changedLight, bool isOn)
+    {
+        if (changedLight != targetLight || ambientLight == null) return;
+
+        ambientLight.enabled = !isOn;
     }
 }

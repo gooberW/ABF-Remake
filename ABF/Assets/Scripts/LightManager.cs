@@ -1,13 +1,17 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class LightManager : MonoBehaviour
 {
-    private Light[] lights; 
-    public List<Light> ignoredLights; 
+    private Light[] lights;
+    public List<Light> ignoredLights;
 
     private int lightsOn = 0;
     private bool locked = false;
+
+ 
+    public event Action<Light, bool> OnLightChanged;
 
     void Start()
     {
@@ -26,8 +30,12 @@ public class LightManager : MonoBehaviour
             lights = temp.ToArray();
         }
 
+
         foreach (Light l in lights)
+        {
             l.enabled = false;
+            OnLightChanged?.Invoke(l, false);
+        }
 
         lightsOn = 0;
         locked = false;
@@ -37,16 +45,15 @@ public class LightManager : MonoBehaviour
     {
 
         if (Input.GetKeyDown(KeyCode.F))
-        {
             fused();
-        }
     }
+
 
     public void ToggleLight(Light lightToToggle)
     {
         if (lightToToggle == null) return;
+        if (locked) return; 
 
-        if (locked) return;
 
         if (lightToToggle.enabled)
         {
@@ -59,6 +66,7 @@ public class LightManager : MonoBehaviour
             lightsOn++;
         }
 
+        OnLightChanged?.Invoke(lightToToggle, lightToToggle.enabled);
 
         if (lightsOn >= 3)
         {
@@ -73,8 +81,12 @@ public class LightManager : MonoBehaviour
         foreach (Light l in lights)
         {
             if (l != null)
+            {
                 l.enabled = false;
+                OnLightChanged?.Invoke(l, false); 
+            }
         }
+
         lightsOn = 0;
     }
 
@@ -82,6 +94,5 @@ public class LightManager : MonoBehaviour
     public void fused()
     {
         locked = false;
-       
     }
 }
