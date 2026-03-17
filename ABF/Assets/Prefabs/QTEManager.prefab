@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8160789850976926084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1644946950950072037}
+  - component: {fileID: 3103692112148742391}
+  - component: {fileID: 1880371220879385737}
+  - component: {fileID: 1581845982685981627}
+  m_Layer: 0
+  m_Name: QTEManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1644946950950072037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8160789850976926084}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 641.0704, y: 218.93896, z: 131.66646}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3103692112148742391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8160789850976926084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4db47da2cbe10547bbbcf19edc6ce32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spamQTE: {fileID: 1880371220879385737}
+  decisionQTE: {fileID: 1581845982685981627}
+--- !u!114 &1880371220879385737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8160789850976926084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6627dc5acce1d37478dbab6126b3344f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  promptText: {fileID: 0}
+  progressCircle: {fileID: 0}
+  progressBackground: {fileID: 0}
+  mashKey: 101
+  qteDuration: 5
+  requiredPresses: 20
+  decayRate: 0.5
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls: []
+  onFailure:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1581845982685981627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8160789850976926084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42fa030cba411234594a155f6b22bc1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  option1Text: {fileID: 0}
+  option2Text: {fileID: 0}
+  questionText: {fileID: 0}
+  timerCircle: {fileID: 0}
+  qteDuration: 25
+  onChoice1:
+    m_PersistentCalls:
+      m_Calls: []
+  onChoice2:
+    m_PersistentCalls:
+      m_Calls: []
+  onTimeout:
+    m_PersistentCalls:
+      m_Calls: []

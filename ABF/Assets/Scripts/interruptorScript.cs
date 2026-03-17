@@ -3,15 +3,16 @@ using UnityEngine;
 public class LightSwitch : MonoBehaviour
 {
     [Header("Configurações da Luz")]
-    [SerializeField] private Light targetLight;
-    [SerializeField] private bool startOn = false;
+    [SerializeField] private Light targetLight;     
+    [SerializeField] private Light ambientLight;    
+    [SerializeField] private bool startOn = false;   
 
     [Header("Interação")]
     [SerializeField] private Camera cam;
     [SerializeField] private LayerMask switchLayer;
     [SerializeField] private CrosshairController crosshairController;
-    [SerializeField] private string onPrompt = "Turn On Light";
-    [SerializeField] private string offPrompt = "Turn Off Light";
+    [SerializeField] private string onPrompt = "Ligar Luz";
+    [SerializeField] private string offPrompt = "Desligar Luz";
     [SerializeField] private float interactDistance = 2.5f;
 
     private bool isLookingAtSwitch = false;
@@ -24,10 +25,14 @@ public class LightSwitch : MonoBehaviour
 
         if (targetLight != null)
             targetLight.enabled = isLightOn;
+
+        if (ambientLight != null)
+            ambientLight.enabled = !isLightOn; 
     }
 
     void Update()
     {
+
         RaycastHit hit;
         bool hitSwitch = Physics.Raycast(
             cam.transform.position,
@@ -81,8 +86,14 @@ public class LightSwitch : MonoBehaviour
 
         isLightOn = !isLightOn;
 
+
         if (targetLight != null)
             targetLight.enabled = isLightOn;
+
+        if (ambientLight != null)
+            ambientLight.enabled = !isLightOn; 
+
+        Debug.Log($"Luz principal: {(isLightOn ? "LIGADA" : "DESLIGADA")} | Luz ambiente: {(!isLightOn ? "LIGADA" : "DESLIGADA")}");
 
         isSwitching = false;
     }

@@ -23,7 +23,7 @@ TagManager:
   - Light
   - Monster
   - Obstacle
-  - Light
+  - Fake Light
   - Prop
   - Division
   - Door
