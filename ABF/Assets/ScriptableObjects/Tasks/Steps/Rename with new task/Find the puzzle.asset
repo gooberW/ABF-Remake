@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5dc0da67bfd6b104eb9c4139d836d437, type: 3}
-  m_Name: Explore the house
+  m_Name: Find the puzzle
   m_EditorClassIdentifier: 
-  description: Explore the Room
+  description: Find the Family Photo
   requiredItemName: 
-  requiredTriggerTag: BedroomTrigger
+  requiredTriggerTag: PhotoPuzzle
   isCompleted: 1

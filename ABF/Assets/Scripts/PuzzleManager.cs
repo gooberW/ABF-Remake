@@ -33,5 +33,12 @@ public class PuzzleManager : MonoBehaviour
         {
             piece.gameObject.SetActive(false);
         }
+
+        // Encontrar e sair do photo puzzle
+        PhotoPuzzleInteractable photoPuzzle = FindObjectOfType<PhotoPuzzleInteractable>();
+        if (photoPuzzle != null)
+        {
+            photoPuzzle.CompletePuzzle();
+        }
     }
 }
