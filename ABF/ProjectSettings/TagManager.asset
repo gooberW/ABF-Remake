@@ -12,6 +12,8 @@ TagManager:
   - GrabPoint
   - BedroomTrigger
   - PhotoPuzzle
+  - CheckArea
+  - Cursor
   layers:
   - Default
   - TransparentFX
