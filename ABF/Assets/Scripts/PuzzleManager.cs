@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
@@ -10,6 +10,9 @@ public class PuzzleManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+
+        if (fullImageObject != null)
+            fullImageObject.SetActive(false); // começa escondida
     }
 
     public void CheckCompletion()
@@ -27,14 +30,21 @@ public class PuzzleManager : MonoBehaviour
     {
         Debug.Log("Puzzle Complete!");
 
-        fullImageObject.SetActive(true);
+        // ✅ mostrar imagem final
+        if (fullImageObject != null)
+        {
+            fullImageObject.SetActive(true);
+
+            // opcional: alinhar com puzzle
+            fullImageObject.transform.position = pieces[0].transform.position;
+            fullImageObject.transform.rotation = pieces[0].transform.rotation;
+        }
 
         foreach (var piece in pieces)
         {
             piece.gameObject.SetActive(false);
         }
 
-        // Encontrar e sair do photo puzzle
         PhotoPuzzleInteractable photoPuzzle = FindObjectOfType<PhotoPuzzleInteractable>();
         if (photoPuzzle != null)
         {

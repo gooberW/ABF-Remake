@@ -2,70 +2,161 @@
 
 public class PuzzlePiece : MonoBehaviour
 {
-    private Plane dragPlane;
-    private Vector3 offset;
-    private bool isDragging;
-    public Vector3 correctPosition;
-    public float snapDistance = 0.5f;
-    private bool isPlaced;
-    private Transform cameraTransform;
+    [Header("Referências")]
+    public Collider frameCollider;
+
+    [Header("Slot correto")]
+    public Transform correctSlot;
+
+    [Header("Arrasto")]
+    public float offset = 0.01f;
+    public float smoothSpeed = 18f;
+
+    [Header("Magnetismo")]
+    public float magnetDistance = 0.3f;
+    public float magnetSpeed = 12f;
+    public float snapDistance = 0.1f;
+
+    private bool dragging;
+    private bool placed;
+    private bool overFrame;
+
+    private Collider myCollider;
+    private Quaternion initialRotationOffset;
 
     void Start()
     {
-        cameraTransform = Camera.main.transform;
-        if (cameraTransform == null)
-            Debug.LogError("Camera.main não encontrada!");
-    }
+        myCollider = GetComponent<Collider>();
 
-    void OnMouseDown()
-    {
-        if (isPlaced) return;
-
-        // AUMENTAR A DISTÂNCIA DO RAYCAST DA CÂMARA
-        Camera cam = Camera.main;
-        cam.farClipPlane = 1000f; // Garantir que a câmera vê longe
-
-        dragPlane = new Plane(cameraTransform.forward, transform.position);
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-        if (dragPlane.Raycast(ray, out float enter))
+        // 🔥 calcular offset de rotação correto
+        if (frameCollider != null)
         {
-            Vector3 hitPoint = ray.GetPoint(enter);
-            offset = transform.position - hitPoint;
-            isDragging = true;
+            initialRotationOffset =
+                Quaternion.Inverse(frameCollider.transform.rotation) * transform.rotation;
         }
     }
 
-    void OnMouseDrag()
+    void Update()
     {
-        if (!isDragging || isPlaced) return;
+        if (placed) return;
+
+        if (Input.GetMouseButtonDown(0))
+            TryStartDrag();
+
+        if (Input.GetMouseButton(0) && dragging)
+            Drag();
+
+        if (Input.GetMouseButtonUp(0) && dragging)
+            StopDrag();
+    }
+
+    void TryStartDrag()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            if (hit.collider == myCollider)
+            {
+                dragging = true;
+                myCollider.enabled = false;
+            }
+        }
+    }
+
+    void Drag()
+    {
+        overFrame = false;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (dragPlane.Raycast(ray, out float enter))
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            Vector3 hitPoint = ray.GetPoint(enter);
-            transform.position = hitPoint + offset;
+            if (hit.collider == frameCollider)
+            {
+                overFrame = true;
+
+                Vector3 targetPos =
+                    hit.point + frameCollider.transform.forward * offset;
+
+                transform.position = Vector3.Lerp(
+                    transform.position,
+                    targetPos,
+                    Time.deltaTime * smoothSpeed
+                );
+
+                // ✅ seguir inclinação da moldura
+                transform.rotation =
+                    frameCollider.transform.rotation * initialRotationOffset;
+
+                // 🔥 magnetismo só quando está na moldura
+                if (correctSlot != null)
+                {
+                    float dist = Vector3.Distance(hit.point, correctSlot.position);
+
+                    if (dist < magnetDistance)
+                    {
+                        transform.position = Vector3.Lerp(
+                            transform.position,
+                            correctSlot.position,
+                            Time.deltaTime * magnetSpeed
+                        );
+
+                        transform.rotation = Quaternion.Lerp(
+                            transform.rotation,
+                            correctSlot.rotation * initialRotationOffset,
+                            Time.deltaTime * magnetSpeed
+                        );
+
+                        if (dist < snapDistance)
+                        {
+                            SnapPiece();
+                        }
+                    }
+                }
+            }
         }
     }
 
-    void OnMouseUp()
+    void StopDrag()
     {
-        if (!isDragging) return;
+        dragging = false;
+        myCollider.enabled = true;
 
-        Debug.Log($"🟢 OnMouseUp em {gameObject.name}");
-        isDragging = false;
-
-        if (Vector3.Distance(transform.position, correctPosition) < snapDistance)
+        // 🔥 snap apenas se estiver na moldura
+        if (correctSlot != null && overFrame)
         {
-            transform.position = correctPosition;
-            isPlaced = true;
-            Debug.Log($"✨ Peça {gameObject.name} encaixada!");
+            float dist = Vector3.Distance(transform.position, correctSlot.position);
 
-            if (PuzzleManager.Instance != null)
-                PuzzleManager.Instance.CheckCompletion();
+            if (dist < snapDistance)
+            {
+                SnapPiece();
+            }
         }
     }
 
-    public bool IsPlaced() => isPlaced;
+    void SnapPiece()
+    {
+        placed = true;
+        dragging = false;
+
+        if (correctSlot != null)
+        {
+            transform.position = correctSlot.position;
+
+            // ✅ rotação perfeita (sem bug 90°)
+            transform.rotation = correctSlot.rotation * initialRotationOffset;
+        }
+
+        if (myCollider != null)
+            myCollider.enabled = true;
+
+        if (PuzzleManager.Instance != null)
+            PuzzleManager.Instance.CheckCompletion();
+    }
+
+    public bool IsPlaced()
+    {
+        return placed;
+    }
 }
