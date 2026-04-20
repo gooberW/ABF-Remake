@@ -34392,6 +34392,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1313890661892990441, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
+      propertyPath: cameraShake
+      value: 
+      objectReference: {fileID: 2007840509}
+    - target: {fileID: 1313890661892990441, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
       propertyPath: sanityBarImage
       value: 
       objectReference: {fileID: 1721520504}

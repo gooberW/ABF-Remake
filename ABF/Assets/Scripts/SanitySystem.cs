@@ -28,10 +28,9 @@ public class SanitySystem : MonoBehaviour
     [SerializeField] private float fadeOutDuration = 1f;
 
     private SanityPostEffects sanityPostEffects;
-    private CameraShake cameraShake; // Reference to new CameraShake component
+    [SerializeField] private CameraShake cameraShake;
     private float lastSanity = -1f;
 
-    // Tick system vars
     private float sanityTickTimer = 0f;
 
     public bool isInDarkness = false;
@@ -45,7 +44,6 @@ public class SanitySystem : MonoBehaviour
         if (playerCamera == null)
             playerCamera = Camera.main;
 
-        // Auto-add LightSanitySystem if missing
         if (GetComponent<LightSanitySystem>() == null)
             gameObject.AddComponent<LightSanitySystem>();
          
@@ -57,16 +55,13 @@ public class SanitySystem : MonoBehaviour
 
         sanityPostEffects = playerCamera.GetComponent<SanityPostEffects>() ?? playerCamera.gameObject.AddComponent<SanityPostEffects>();
 
-        // Add or get CameraShake on the camera
-        cameraShake = playerCamera.GetComponent<CameraShake>() ?? playerCamera.gameObject.AddComponent<CameraShake>();
+        //cameraShake = playerCamera.GetComponent<CameraShake>() ?? playerCamera.gameObject.AddComponent<CameraShake>();
     }
 
     private void Update()
     {
-        // Tick-based sanity drain/recovery
         UpdateSanityTick();
 
-        // Every-frame visuals and UI
         if (Mathf.Abs(currentSanity - lastSanity) > 0.01f)
         {
             UpdateSanityBar();
@@ -189,11 +184,9 @@ public class SanitySystem : MonoBehaviour
         float sanityPercentage = currentSanity / maxSanity;
         float inverseSanity = 1f - sanityPercentage;
 
-        // Shake factor: starts slightly at ~50% sanity
         float shakeFactor = Mathf.Clamp01((inverseSanity - 0.45f) / 0.55f);
         float shakePower = shakeFactor * maxShakeIntensity;
 
-        // Set shake on separate component
         if (cameraShake != null)
             cameraShake.shakeIntensity = shakePower;
 
