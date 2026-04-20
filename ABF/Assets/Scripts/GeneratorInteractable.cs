@@ -1,34 +1,31 @@
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.UI;
 
 public class GeneratorInteractable : MonoBehaviour, IInteractable
 {
     [Header("Generator Settings")]
     public string interactionPrompt = "Repair Generator";
-    public float repairTime = 60f;
-    public int requiredSkillChecks = 8;              
+    public float repairTime = 60f;           // Not directly used now, but kept for future
+    public int requiredSkillChecks = 8;
 
     [Header("References")]
-    public PlayableDirector enterTimeline;           
-    public PlayableDirector exitTimeline;             
+    public PlayableDirector enterTimeline;
+    public PlayableDirector exitTimeline;
     public RepairManager repairManager;
-    private Outline outline;
 
-    private bool isRepairing = false;
-    private float currentRepairProgress = 0f;
+    public bool isRepairing = false;
 
     public string InteractionPrompt => interactionPrompt;
     public bool IsInteractable => !isRepairing;
 
     public void OnHover()
     {
-        
+
     }
 
     public void OnUnhover()
     {
-       
+
     }
 
     public void OnInteract()
@@ -36,12 +33,11 @@ public class GeneratorInteractable : MonoBehaviour, IInteractable
         if (isRepairing) return;
 
         isRepairing = true;
-        currentRepairProgress = 0f;
 
         if (enterTimeline != null)
             enterTimeline.Play();
 
-        repairManager?.StartRepair(this);
+        repairManager.StartRepair(this);
     }
 
     public void OnRepairComplete()
@@ -50,11 +46,12 @@ public class GeneratorInteractable : MonoBehaviour, IInteractable
         if (exitTimeline != null)
             exitTimeline.Play();
 
-        Debug.Log("Generator repaired!");
+        Debug.Log("Generator repaired successfully!");
     }
 
     public void RegressProgress(float amount)
     {
-        currentRepairProgress = Mathf.Max(0f, currentRepairProgress - amount);
+        // You can expand this later if you want regression on the progress bar
+        Debug.Log($"Progress regressed by {amount}");
     }
 }

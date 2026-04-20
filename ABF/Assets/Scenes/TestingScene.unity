@@ -759,6 +759,12 @@ MonoBehaviour:
   needlePivot: {fileID: 446112534}
   successZone: {fileID: 442420784}
   needleSpeed: 280
+  successZoneWidth: 48
+  requiredSkillChecks: 3
+  minTimeBetweenChecks: 2
+  maxTimeBetweenChecks: 5
+  feedbackFlash: {fileID: 0}
+  flashDuration: 0.2
 --- !u!4 &225350523
 Transform:
   m_ObjectHideFlags: 0
@@ -1655,7 +1661,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &553974792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4267,11 +4273,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionPrompt: Repair Generator
-  repairTime: 60
-  requiredSkillChecks: 5
+  repairTime: 30
+  requiredSkillChecks: 3
   enterTimeline: {fileID: 0}
   exitTimeline: {fileID: 0}
   repairManager: {fileID: 225350522}
+  isRepairing: 0
 --- !u!65 &1630344006
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6331,6 +6338,10 @@ PrefabInstance:
       propertyPath: crosshair
       value: 
       objectReference: {fileID: 508778086}
+    - target: {fileID: 1313890661892990441, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
+      propertyPath: cameraShake
+      value: 
+      objectReference: {fileID: 1479438887}
     - target: {fileID: 1313890661892990441, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
       propertyPath: playerCamera
       value: 
