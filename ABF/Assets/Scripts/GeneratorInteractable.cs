@@ -12,6 +12,7 @@ public class GeneratorInteractable : MonoBehaviour, IInteractable
     public PlayableDirector enterTimeline;
     public PlayableDirector exitTimeline;
     public RepairManager repairManager;
+    public LightManager lightManager;
 
     public bool isRepairing = false;
 
@@ -45,6 +46,7 @@ public class GeneratorInteractable : MonoBehaviour, IInteractable
         isRepairing = false;
         if (exitTimeline != null)
             exitTimeline.Play();
+        lightManager.fused();
 
         Debug.Log("Generator repaired successfully!");
     }
