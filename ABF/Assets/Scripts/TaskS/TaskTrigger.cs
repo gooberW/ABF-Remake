@@ -42,6 +42,10 @@ public class TaskTrigger : MonoBehaviour
         if (other.CompareTag("Player") && !isDisplaying)
         {
             CheckTaskCompletion();
+            if (disableAfterTrigger)
+            {
+                triggerCollider.enabled = false;
+            }
         }
     }
 

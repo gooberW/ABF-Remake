@@ -170,13 +170,32 @@ public class PhotoPuzzleInteractable : MonoBehaviour, IInteractable
     private void SetRippedPartsActive(bool active)
     {
         foreach (GameObject part in rippedParts)
-            if (part != null) part.SetActive(active);
+        {
+            if (part == null) continue;
+
+            if (active)
+            {
+                part.SetActive(true);
+            }
+            else
+            {
+                Destroy(part);
+            }
+        }
     }
 
     private void SetPuzzlePartsActive(bool active)
     {
         foreach (GameObject part in puzzleParts)
-            if (part != null) part.SetActive(active);
+        {
+            if (part == null) continue;
+
+            if (active)
+            {
+                part.SetActive(true);
+            }
+
+        }
     }
 
     public void CompletePuzzle()
@@ -187,6 +206,18 @@ public class PhotoPuzzleInteractable : MonoBehaviour, IInteractable
         {
             StopAllCoroutines();
             StartCoroutine(ReturnFromPhoto());
+        }
+
+        var taskManager = FindObjectOfType<TaskManager>();
+        if (taskManager != null && taskManager.taskTrigger != null)
+        {
+            taskManager.taskTrigger.CompleteCurrentTask();
+        }
+        else
+        {
+            var trigger = FindObjectOfType<TaskTrigger>();
+            if (trigger != null)
+                trigger.CompleteCurrentTask();
         }
     }
 }
