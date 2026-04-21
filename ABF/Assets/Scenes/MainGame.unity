@@ -12762,7 +12762,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 563087022}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Slot_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13610,6 +13610,63 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5540152905454602004, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
   m_PrefabInstance: {fileID: 1296604429}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &599544565
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7347778627332241006, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_Name
+      value: pillbox
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3094.4058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.5424635
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 191.64922
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976821721068481748, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 28175a1b72bfc9d419632487a8733591, type: 3}
 --- !u!1 &599831835
 GameObject:
   m_ObjectHideFlags: 0
@@ -17015,7 +17072,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 799981891}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Slot_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23655,7 +23712,11 @@ PrefabInstance:
     - target: {fileID: 3183889578527080222, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
       propertyPath: correctSlot
       value: 
-      objectReference: {fileID: 1747844178}
+      objectReference: {fileID: 563087022}
+    - target: {fileID: 3183889578527080222, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
+      propertyPath: puzzleCamera
+      value: 
+      objectReference: {fileID: 2007840503}
     - target: {fileID: 3183889578527080222, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
       propertyPath: frameCollider
       value: 
@@ -23733,7 +23794,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 7804878641570077448, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -24700,7 +24761,11 @@ PrefabInstance:
     - target: {fileID: 3183889578527080222, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
       propertyPath: correctSlot
       value: 
-      objectReference: {fileID: 563087022}
+      objectReference: {fileID: 1747844178}
+    - target: {fileID: 3183889578527080222, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
+      propertyPath: puzzleCamera
+      value: 
+      objectReference: {fileID: 2007840503}
     - target: {fileID: 3183889578527080222, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
       propertyPath: frameCollider
       value: 
@@ -24720,6 +24785,10 @@ PrefabInstance:
     - target: {fileID: 3706143068514412728, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
       propertyPath: m_Name
       value: Puzzle Piece 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706143068514412728, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3706143068514412728, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
       propertyPath: m_IsActive
@@ -24773,20 +24842,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7804878641570077448, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 6.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 7804878641570077448, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 7.5
-      objectReference: {fileID: 0}
     - target: {fileID: 8665693296696642491, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 4f50c2ea7bedbbf41846c30e877ff7aa, type: 3}
     m_RemovedComponents:
-    - {fileID: 7804878641570077448, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -27988,6 +28049,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1676618331}
     - target: {fileID: 3183889578527080222, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
+      propertyPath: puzzleCamera
+      value: 
+      objectReference: {fileID: 2007840503}
+    - target: {fileID: 3183889578527080222, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
       propertyPath: frameCollider
       value: 
       objectReference: {fileID: 430726686}
@@ -28006,6 +28071,10 @@ PrefabInstance:
     - target: {fileID: 3706143068514412728, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
       propertyPath: m_Name
       value: Puzzle Piece 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706143068514412728, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3706143068514412728, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
       propertyPath: m_IsActive
@@ -28059,20 +28128,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7804878641570077448, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 5.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 7804878641570077448, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 10.67
-      objectReference: {fileID: 0}
     - target: {fileID: 8665693296696642491, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 981842a40eeccf545a25ee7eb4f4b9aa, type: 3}
     m_RemovedComponents:
-    - {fileID: 7804878641570077448, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -29324,7 +29385,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1676618331}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Slot_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30309,7 +30370,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1747844178}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Slot_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30619,7 +30680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1711949687261988994, guid: a32b84ede6b925a4a9f4ac2625e6cc4b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8596163650943041188, guid: a32b84ede6b925a4a9f4ac2625e6cc4b, type: 3}
       propertyPath: m_LocalScale.x
@@ -31874,6 +31935,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 799981891}
     - target: {fileID: 3183889578527080222, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
+      propertyPath: puzzleCamera
+      value: 
+      objectReference: {fileID: 2007840503}
+    - target: {fileID: 3183889578527080222, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
       propertyPath: frameCollider
       value: 
       objectReference: {fileID: 430726686}
@@ -31892,6 +31957,10 @@ PrefabInstance:
     - target: {fileID: 3706143068514412728, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
       propertyPath: m_Name
       value: Puzzle Piece 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706143068514412728, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3706143068514412728, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
       propertyPath: m_IsActive
@@ -31945,20 +32014,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7804878641570077448, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 7.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7804878641570077448, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 9.57
-      objectReference: {fileID: 0}
     - target: {fileID: 8665693296696642491, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 4974955b8108d3e4e813df08707491c2, type: 3}
     m_RemovedComponents:
-    - {fileID: 7804878641570077448, guid: e351d35b84b639e4086a0d54c39460db, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -38059,3 +38120,4 @@ SceneRoots:
   - {fileID: 1502338713}
   - {fileID: 897121198}
   - {fileID: 1795181693}
+  - {fileID: 599544565}

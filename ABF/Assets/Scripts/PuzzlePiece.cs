@@ -8,6 +8,10 @@ public class PuzzlePiece : MonoBehaviour
     [Header("Slot correto")]
     public Transform correctSlot;
 
+    [Header("Câmera (opcional)")]
+    [Tooltip("Assign the camera you want to use for dragging. If left empty, it will use Camera.main")]
+    public Camera puzzleCamera;
+
     [Header("Arrasto")]
     public float offset = 0.01f;
     public float smoothSpeed = 18f;
@@ -24,20 +28,29 @@ public class PuzzlePiece : MonoBehaviour
     private Collider myCollider;
     private Quaternion initialRotationOffset;
 
-    void Start()
+    private void Start()
     {
         myCollider = GetComponent<Collider>();
 
-        // 🔥 calcular offset de rotação correto
         if (frameCollider != null)
         {
-            initialRotationOffset =
-                Quaternion.Inverse(frameCollider.transform.rotation) * transform.rotation;
+            initialRotationOffset = Quaternion.Inverse(frameCollider.transform.rotation) * transform.rotation;
+        }
+
+        // If no camera is assigned, use Camera.main
+        if (puzzleCamera == null)
+        {
+            puzzleCamera = Camera.main;
+            Debug.Log($"[PuzzlePiece] {gameObject.name}: No camera assigned, using Camera.main", this);
         }
     }
 
-    void Update()
+    private void Update()
     {
+        // Debug: show which camera we're using
+        if (puzzleCamera != null)
+            Debug.Log($"Using camera: {puzzleCamera.gameObject.name}");
+
         if (placed) return;
 
         if (Input.GetMouseButtonDown(0))
@@ -52,23 +65,33 @@ public class PuzzlePiece : MonoBehaviour
 
     void TryStartDrag()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (puzzleCamera == null) return;
+
+        Ray ray = puzzleCamera.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
+            Debug.Log($"[TryStartDrag] Hit: {hit.collider.gameObject.name}");
+
             if (hit.collider == myCollider)
             {
                 dragging = true;
                 myCollider.enabled = false;
+                Debug.Log($"<color=green>DRAG STARTED on {gameObject.name}</color>");
             }
+        }
+        else
+        {
+            Debug.Log("[TryStartDrag] Raycast missed everything");
         }
     }
 
     void Drag()
     {
-        overFrame = false;
+        if (puzzleCamera == null) return;
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        overFrame = false;
+        Ray ray = puzzleCamera.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
@@ -76,8 +99,7 @@ public class PuzzlePiece : MonoBehaviour
             {
                 overFrame = true;
 
-                Vector3 targetPos =
-                    hit.point + frameCollider.transform.forward * offset;
+                Vector3 targetPos = hit.point + frameCollider.transform.forward * offset;
 
                 transform.position = Vector3.Lerp(
                     transform.position,
@@ -85,11 +107,9 @@ public class PuzzlePiece : MonoBehaviour
                     Time.deltaTime * smoothSpeed
                 );
 
-                // ✅ seguir inclinação da moldura
-                transform.rotation =
-                    frameCollider.transform.rotation * initialRotationOffset;
+                transform.rotation = frameCollider.transform.rotation * initialRotationOffset;
 
-                // 🔥 magnetismo só quando está na moldura
+                // Magnetism
                 if (correctSlot != null)
                 {
                     float dist = Vector3.Distance(hit.point, correctSlot.position);
@@ -123,11 +143,9 @@ public class PuzzlePiece : MonoBehaviour
         dragging = false;
         myCollider.enabled = true;
 
-        // 🔥 snap apenas se estiver na moldura
         if (correctSlot != null && overFrame)
         {
             float dist = Vector3.Distance(transform.position, correctSlot.position);
-
             if (dist < snapDistance)
             {
                 SnapPiece();
@@ -143,8 +161,6 @@ public class PuzzlePiece : MonoBehaviour
         if (correctSlot != null)
         {
             transform.position = correctSlot.position;
-
-            // ✅ rotação perfeita (sem bug 90°)
             transform.rotation = correctSlot.rotation * initialRotationOffset;
         }
 
