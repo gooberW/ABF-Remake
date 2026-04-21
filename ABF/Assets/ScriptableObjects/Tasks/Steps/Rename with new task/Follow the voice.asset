@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5dc0da67bfd6b104eb9c4139d836d437, type: 3}
-  m_Name: Fix photo Puzzle
+  m_Name: Follow the voice
   m_EditorClassIdentifier: 
-  description: Fix the Family Photo
+  description: Follow the Voice.
   requiredItemName: 
-  requiredTriggerTag: 
-  isCompleted: 1
+  requiredTriggerTag: BedroomTrigger
+  isCompleted: 0

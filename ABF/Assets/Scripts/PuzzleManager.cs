@@ -6,21 +6,24 @@ public class PuzzleManager : MonoBehaviour
 
     public PuzzlePiece[] pieces;
     public GameObject fullImageObject;
-    public GameObject DialogueTriggerPuzzle;
-
-
+    public GameObject[] DialogueTriggerPuzzle = new GameObject[0];
 
     void Awake()
     {
         Instance = this;
 
-
         if (fullImageObject != null)
             fullImageObject.SetActive(false); // começa escondida
 
-
-            if (DialogueTriggerPuzzle != null)
-            DialogueTriggerPuzzle.SetActive(false);
+        // Safely disable any dialogue triggers assigned in the inspector
+        if (DialogueTriggerPuzzle != null)
+        {
+            for (int i = 0; i < DialogueTriggerPuzzle.Length; i++)
+            {
+                if (DialogueTriggerPuzzle[i] != null)
+                    DialogueTriggerPuzzle[i].SetActive(false);
+            }
+        }
     }
 
     public void CheckCompletion()
@@ -38,15 +41,19 @@ public class PuzzleManager : MonoBehaviour
     {
         Debug.Log("Puzzle Complete!");
 
-        // ✅ mostrar imagem final
         if (fullImageObject != null)
         {
             fullImageObject.SetActive(true);
 
-            // opcional: alinhar com puzzle
             fullImageObject.transform.position = pieces[0].transform.position;
             fullImageObject.transform.rotation = pieces[0].transform.rotation;
-            DialogueTriggerPuzzle.SetActive(true);
+
+            if (DialogueTriggerPuzzle != null)
+            {
+                for (int i = 0; i < DialogueTriggerPuzzle.Length; i++)
+                    if (DialogueTriggerPuzzle[i] != null)
+                        DialogueTriggerPuzzle[i].SetActive(true);
+            }
         }
 
         foreach (var piece in pieces)
