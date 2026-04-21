@@ -40,7 +40,7 @@ public class PlayerInteraction : MonoBehaviour, IInteractionHandler
             TaskTrigger taskTrigger = hit.collider.GetComponent<TaskTrigger>();
             if (taskTrigger != null)
             {
-                taskTrigger.CheckTaskCompletion();
+                taskTrigger.CheckTaskCompletionByTrigger();
                 return;
             }
 

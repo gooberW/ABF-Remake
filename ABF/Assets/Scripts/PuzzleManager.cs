@@ -6,6 +6,8 @@ public class PuzzleManager : MonoBehaviour
 
     public PuzzlePiece[] pieces;
     public GameObject fullImageObject;
+    public GameObject TaskTriggerKitchen;
+    public GameObject DialogueTriggerPuzzle;
 
     void Awake()
     {
@@ -13,6 +15,12 @@ public class PuzzleManager : MonoBehaviour
 
         if (fullImageObject != null)
             fullImageObject.SetActive(false); // começa escondida
+
+            if (TaskTriggerKitchen != null)
+            TaskTriggerKitchen.SetActive(false);
+
+            if (DialogueTriggerPuzzle != null)
+            DialogueTriggerPuzzle.SetActive(false);
     }
 
     public void CheckCompletion()
@@ -38,6 +46,8 @@ public class PuzzleManager : MonoBehaviour
             // opcional: alinhar com puzzle
             fullImageObject.transform.position = pieces[0].transform.position;
             fullImageObject.transform.rotation = pieces[0].transform.rotation;
+            TaskTriggerKitchen.SetActive(true);
+            DialogueTriggerPuzzle.SetActive(true);
         }
 
         foreach (var piece in pieces)
