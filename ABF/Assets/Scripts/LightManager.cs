@@ -8,6 +8,7 @@ public class LightManager : MonoBehaviour
     private Light[] lights;
     public List<Light> ignoredLights;
     public bool isGeneratorOff = false;
+    public int maxLightsOn = 3;
 
     private int lightsOn = 0;
     private bool locked = false;
@@ -70,7 +71,7 @@ public class LightManager : MonoBehaviour
 
         OnLightChanged?.Invoke(lightToToggle, lightToToggle.enabled);
 
-        if (lightsOn >= 3)
+        if (lightsOn >= maxLightsOn)
         {
             TurnOffAllLights();
             locked = true;
