@@ -21478,7 +21478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6198d9205ceec064c860ad59500d4690, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 6198d9205ceec064c860ad59500d4690, type: 3}
       propertyPath: m_Controller
@@ -26985,7 +26985,7 @@ PrefabInstance:
       objectReference: {fileID: 784419781}
     - target: {fileID: 8243821948648622712, guid: 467773f1881286941b9098c2be8756c5, type: 3}
       propertyPath: DialogueTriggerPuzzle.Array.size
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8243821948648622712, guid: 467773f1881286941b9098c2be8756c5, type: 3}
       propertyPath: DialogueTriggerPuzzle.Array.data[0]
