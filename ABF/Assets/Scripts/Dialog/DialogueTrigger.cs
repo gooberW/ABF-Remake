@@ -15,7 +15,6 @@ public class DialogueTrigger : MonoBehaviour
         }
     }
 
-    // Trigger when player enters collider (2D)
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !(oneTimeTrigger && hasTriggered))
@@ -24,7 +23,6 @@ public class DialogueTrigger : MonoBehaviour
         }
     }
 
-    // Manually trigger dialogue
     public void TriggerDialogue()
     {
         if (oneTimeTrigger && hasTriggered) return;

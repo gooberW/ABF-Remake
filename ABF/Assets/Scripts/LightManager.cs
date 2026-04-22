@@ -1,11 +1,13 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using TMPro;
 
 public class LightManager : MonoBehaviour
 {
     private Light[] lights;
     public List<Light> ignoredLights;
+    public bool isGeneratorOff = false;
 
     private int lightsOn = 0;
     private bool locked = false;
@@ -72,7 +74,7 @@ public class LightManager : MonoBehaviour
         {
             TurnOffAllLights();
             locked = true;
-
+            isGeneratorOff = true;
         }
     }
 

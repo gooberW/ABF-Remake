@@ -23,6 +23,13 @@ public class PlayerInteraction : MonoBehaviour, IInteractionHandler
     {
         playerCamera = GetComponent<Camera>();
         inventory = FindObjectOfType<InventoryScript>();
+
+        if (crosshair == null)
+        {
+            crosshair = FindObjectOfType<CrosshairController>();
+            if (crosshair == null)
+                Debug.LogWarning("PlayerInteraction: CrosshairController not assigned and not found in scene.");
+        }
     }
 
     private void Update()
@@ -85,12 +92,14 @@ public class PlayerInteraction : MonoBehaviour, IInteractionHandler
 
     public void HandleHover(IInteractable interactable)
     {
-        crosshair.SetInteractable(interactable.InteractionPrompt);
+        if (crosshair != null)
+            crosshair.SetInteractable(interactable.InteractionPrompt);
     }
 
     public void HandleUnhover()
     {
-        crosshair.SetNormal();
+        if (crosshair != null)
+            crosshair.SetNormal();
     }
 
     public void HandleInteraction(IInteractable interactable)

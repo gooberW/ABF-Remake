@@ -11,26 +11,29 @@ public class CrosshairController : MonoBehaviour
     [SerializeField] private TMP_Text interactionText;
     [SerializeField] private Color interactableTextColor = Color.white;
 
-    private void Start()
+    private void Awake()
     {
-        defaultCrosshair.enabled = true;
-        interactCrosshair.enabled = false;
-        interactionText.text = "";
-        interactionText.color = interactableTextColor;
+        if (defaultCrosshair == null || interactCrosshair == null || interactionText == null)
+            Debug.LogWarning("CrosshairController: missing inspector references.");
+
+        SetNormal();
     }
 
     public void SetNormal()
     {
-        defaultCrosshair.enabled = true;
-        interactCrosshair.enabled = false;
-        interactionText.text = "";
+        if (defaultCrosshair != null) defaultCrosshair.gameObject.SetActive(true);
+        if (interactCrosshair != null) interactCrosshair.gameObject.SetActive(false);
+        if (interactionText != null) interactionText.text = "";
     }
 
     public void SetInteractable(string prompt)
     {
-        defaultCrosshair.enabled = false;
-        interactCrosshair.enabled = true;
-        interactionText.text = prompt;
-        interactionText.color = interactableTextColor;
+        if (defaultCrosshair != null) defaultCrosshair.gameObject.SetActive(false);
+        if (interactCrosshair != null) interactCrosshair.gameObject.SetActive(true);
+        if (interactionText != null)
+        {
+            interactionText.text = prompt;
+            interactionText.color = interactableTextColor;
+        }
     }
 }

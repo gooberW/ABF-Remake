@@ -13,11 +13,11 @@ public class GrabbableItem : MonoBehaviour, IInteractable
     [SerializeField] private Transform grabPosition;
     [SerializeField] private Sprite itemSprite;
     [SerializeField] private float dropForce = 5f;
+    [SerializeField] private Camera cam;
 
     private Outline outline;
     private InventoryScript inventory;
     private Rigidbody rb;
-    private Camera cam;
     private bool isGrabbed = false;
     [SerializeField] private TMP_Text warningTextComponent;
     private string warningText = "I'm already carrying too much!";
@@ -34,7 +34,6 @@ public class GrabbableItem : MonoBehaviour, IInteractable
         outline = GetComponent<Outline>();
         outline.enabled = false;
         rb = GetComponent<Rigidbody>();
-        cam = Camera.main;
         GameObject grabObj = GameObject.FindGameObjectWithTag("GrabPoint");
         if (grabObj != null)
             grabPosition = grabObj.transform;
