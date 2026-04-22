@@ -15,7 +15,7 @@ public class PuzzleManager : MonoBehaviour
         if (fullImageObject != null)
             fullImageObject.SetActive(false);
 
-        // Safely disable any dialogue triggers assigned in the inspector
+        
         if (DialogueTriggerPuzzle != null)
         {
             for (int i = 0; i < DialogueTriggerPuzzle.Length; i++)
@@ -45,8 +45,6 @@ public class PuzzleManager : MonoBehaviour
         {
             fullImageObject.SetActive(true);
 
-            fullImageObject.transform.position = pieces[0].transform.position;
-            fullImageObject.transform.rotation = pieces[0].transform.rotation;
 
             if (DialogueTriggerPuzzle != null)
             {
