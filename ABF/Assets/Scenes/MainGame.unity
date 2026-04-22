@@ -3532,6 +3532,10 @@ PrefabInstance:
       propertyPath: crosshairController
       value: 
       objectReference: {fileID: 895785278}
+    - target: {fileID: 3215308873876863287, guid: f06d8481beb49624ca50c7a71f57fac0, type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 8175134376952118839, guid: f06d8481beb49624ca50c7a71f57fac0, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.023303997
@@ -18064,6 +18068,10 @@ PrefabInstance:
       propertyPath: crosshairController
       value: 
       objectReference: {fileID: 895785278}
+    - target: {fileID: 3215308873876863287, guid: f06d8481beb49624ca50c7a71f57fac0, type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 8175134376952118839, guid: f06d8481beb49624ca50c7a71f57fac0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.1242676
@@ -19515,6 +19523,10 @@ PrefabInstance:
       propertyPath: crosshairController
       value: 
       objectReference: {fileID: 895785278}
+    - target: {fileID: 3215308873876863287, guid: f06d8481beb49624ca50c7a71f57fac0, type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 8175134376952118839, guid: f06d8481beb49624ca50c7a71f57fac0, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.023303997
@@ -19604,6 +19616,10 @@ PrefabInstance:
       propertyPath: crosshairController
       value: 
       objectReference: {fileID: 895785278}
+    - target: {fileID: 3215308873876863287, guid: f06d8481beb49624ca50c7a71f57fac0, type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 8175134376952118839, guid: f06d8481beb49624ca50c7a71f57fac0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.2543945
@@ -27323,6 +27339,10 @@ PrefabInstance:
       propertyPath: crosshairController
       value: 
       objectReference: {fileID: 895785278}
+    - target: {fileID: 3215308873876863287, guid: f06d8481beb49624ca50c7a71f57fac0, type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 8175134376952118839, guid: f06d8481beb49624ca50c7a71f57fac0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.4372559
@@ -28324,6 +28344,10 @@ PrefabInstance:
       propertyPath: crosshairController
       value: 
       objectReference: {fileID: 895785278}
+    - target: {fileID: 3215308873876863287, guid: f06d8481beb49624ca50c7a71f57fac0, type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 8175134376952118839, guid: f06d8481beb49624ca50c7a71f57fac0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.3986816
@@ -28625,6 +28649,10 @@ PrefabInstance:
       propertyPath: crosshairController
       value: 
       objectReference: {fileID: 895785278}
+    - target: {fileID: 3215308873876863287, guid: f06d8481beb49624ca50c7a71f57fac0, type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 8175134376952118839, guid: f06d8481beb49624ca50c7a71f57fac0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.2685547
@@ -32073,6 +32101,10 @@ PrefabInstance:
       propertyPath: crosshairController
       value: 
       objectReference: {fileID: 895785278}
+    - target: {fileID: 3215308873876863287, guid: f06d8481beb49624ca50c7a71f57fac0, type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 8175134376952118839, guid: f06d8481beb49624ca50c7a71f57fac0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.3706055

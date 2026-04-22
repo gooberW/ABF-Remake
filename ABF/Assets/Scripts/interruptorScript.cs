@@ -9,6 +9,7 @@ public class LightSwitch : MonoBehaviour
     [Header("Interação")]
     [SerializeField] private Camera cam;
     [SerializeField] private LayerMask switchLayer;
+    [SerializeField] private LayerMask obstacleMask; // new: layers that block line of sight (e.g. "Obstacle")
     [SerializeField] private CrosshairController crosshairController;
     [SerializeField] private string onPrompt = "Ligar Luz";
     [SerializeField] private string offPrompt = "Desligar Luz";
@@ -27,7 +28,6 @@ public class LightSwitch : MonoBehaviour
         if (ambientLight != null)
             ambientLight.enabled = true;
 
-
         manager = FindObjectOfType<LightManager>();
         if (manager != null)
             manager.OnLightChanged += OnLightChanged;
@@ -41,36 +41,53 @@ public class LightSwitch : MonoBehaviour
 
     void Update()
     {
-        RaycastHit hit;
-        bool hitSwitch = Physics.Raycast(
-            cam.transform.position,
-            cam.transform.forward,
-            out hit,
-            interactDistance,
-            switchLayer
-        );
+        if (cam == null || crosshairController == null) return;
 
-        bool thisSwitchHit = false;
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+        RaycastHit[] hits = Physics.RaycastAll(ray, interactDistance);
+        System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 
-        if (hitSwitch && hit.collider != null)
+        bool visible = false;
+
+        foreach (var hit in hits)
         {
-            Transform hitTransform = hit.collider.transform;
-            if (hitTransform == this.transform || hitTransform.IsChildOf(this.transform))
-                thisSwitchHit = true;
+            if (hit.collider == null) continue;
+
+            // If we hit this switch (or a child) first -> visible
+            if (hit.collider.transform == transform || hit.collider.transform.IsChildOf(transform))
+            {
+                // ensure the hit actually belongs to switchLayer (prevents non-switch colliders on same transform)
+                if ((switchLayer.value & (1 << hit.collider.gameObject.layer)) != 0)
+                {
+                    visible = true;
+                    break;
+                }
+                // if not on switchLayer, continue scanning
+                continue;
+            }
+
+            // If the hit is on an obstacle layer, it blocks view -> not visible
+            if ((obstacleMask.value & (1 << hit.collider.gameObject.layer)) != 0)
+            {
+                visible = false;
+                break;
+            }
+
+            // Otherwise, ignore and continue scanning (e.g., triggers, decorative colliders)
         }
 
-        if (thisSwitchHit)
+        if (visible)
         {
             if (!isLookingAtSwitch)
             {
-                crosshairController.SetInteractable(targetLight.enabled ? offPrompt : onPrompt);
+                crosshairController.SetInteractable(targetLight != null && targetLight.enabled ? offPrompt : onPrompt);
                 isLookingAtSwitch = true;
             }
 
             if (Input.GetMouseButtonDown(0))
             {
                 ToggleLight();
-                crosshairController.SetInteractable(targetLight.enabled ? offPrompt : onPrompt);
+                crosshairController.SetInteractable(targetLight != null && targetLight.enabled ? offPrompt : onPrompt);
             }
         }
         else
@@ -93,7 +110,6 @@ public class LightSwitch : MonoBehaviour
 
         isSwitching = false;
     }
-
 
     private void OnLightChanged(Light changedLight, bool isOn)
     {
