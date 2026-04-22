@@ -4,103 +4,178 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
-    public static DialogueManager Instance { get; private set; }  // Singleton pattern
+    public static DialogueManager Instance { get; private set; }
 
     [Header("UI References")]
-    [SerializeField] private GameObject dialoguePanel;  // The dialogue box UI
-    [SerializeField] private TMP_Text characterNameText;    // Displays the character's name
-    [SerializeField] private TMP_Text dialogueText;        // Displays the dialogue text
+    [SerializeField] private GameObject dialoguePanel;
+    [SerializeField] private TMP_Text characterNameText;
+    [SerializeField] private TMP_Text dialogueText;
 
     [Header("Behaviour")]
-    [SerializeField] private bool blockPlayerMovement = true; // If true, disables player movement while dialogue is active
+    [SerializeField] private bool blockPlayerMovement = true;
 
-    private Dialogue currentDialogue;  // The currently active dialogue
-    private int currentLineIndex;      // Tracks which line we're on
-    private bool isDialogueActive;     // Is dialogue currently playing?
+    [Header("Audio")]
+    [SerializeField] private AudioSource defaultAudioSource;
+
+    [System.Serializable]
+    public class NamedAudioSource
+    {
+        public string key;
+        public AudioSource source;
+    }
+
+    [Header("Named Audio Sources")]
+    [SerializeField] private NamedAudioSource[] namedAudioSources;
+
+    [Header("Typewriter")]
+    [SerializeField] private float typingSpeed = 0.03f;
+
+    private Dialogue currentDialogue;
+    private int currentLineIndex;
+    private bool isDialogueActive;
+    private Coroutine typingCoroutine;
+    private bool isTyping;
 
     private void Awake()
     {
-        // Singleton setup
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);  // Persist across scenes (optional)
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
+
+        if (defaultAudioSource == null)
+        {
+            defaultAudioSource = GetComponent<AudioSource>();
+            if (defaultAudioSource == null)
+                defaultAudioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
-    // Starts a new dialogue
     public void StartDialogue(Dialogue dialogue)
     {
         currentDialogue = dialogue;
         currentLineIndex = 0;
         isDialogueActive = true;
-        dialoguePanel.SetActive(true);
+        if (dialoguePanel != null) dialoguePanel.SetActive(true);
 
-        if (blockPlayerMovement)
-        {
-            PlayerScript.CanMove = false;
-        }
+        if (blockPlayerMovement) PlayerScript.CanMove = false;
 
         DisplayCurrentLine();
     }
 
-    // Displays the current line of dialogue
     private void DisplayCurrentLine()
     {
         if (currentDialogue == null || currentLineIndex >= currentDialogue.lines.Length) return;
 
         DialogueLine line = currentDialogue.lines[currentLineIndex];
-        characterNameText.text = line.characterName;
-        dialogueText.text = line.text;
+        if (characterNameText != null) characterNameText.text = line.characterName;
+
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+        typingCoroutine = StartCoroutine(TypeLine(line.text));
+
+        // choose audio source by key (if provided), otherwise use default
+        AudioSource src = GetAudioSourceForKey(line.audioSourceKey) ?? defaultAudioSource;
+
+        if (line.voiceClip != null && src != null)
+        {
+            src.Stop();
+            src.clip = line.voiceClip;
+            src.Play();
+        }
+        else if (src != null && src.isPlaying && line.voiceClip == null)
+        {
+            src.Stop();
+        }
     }
 
-    // Advances to the next line (or ends dialogue)
+    private AudioSource GetAudioSourceForKey(string key)
+    {
+        if (string.IsNullOrEmpty(key)) return null;
+
+        if (namedAudioSources != null)
+        {
+            for (int i = 0; i < namedAudioSources.Length; i++)
+            {
+                if (namedAudioSources[i] == null) continue;
+                if (string.Equals(namedAudioSources[i].key, key, System.StringComparison.OrdinalIgnoreCase))
+                    return namedAudioSources[i].source;
+            }
+        }
+        return null;
+    }
+
+    private System.Collections.IEnumerator TypeLine(string text)
+    {
+        isTyping = true;
+        if (dialogueText != null) dialogueText.text = "";
+
+        for (int i = 0; i < text.Length; i++)
+        {
+            if (dialogueText != null) dialogueText.text += text[i];
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+        isTyping = false;
+        typingCoroutine = null;
+    }
+
     public void ContinueDialogue()
     {
         if (!isDialogueActive) return;
 
+        if (isTyping)
+        {
+            if (typingCoroutine != null)
+            {
+                StopCoroutine(typingCoroutine);
+                typingCoroutine = null;
+            }
+
+            DialogueLine currentLine = currentDialogue.lines[currentLineIndex];
+            if (dialogueText != null) dialogueText.text = currentLine.text;
+            isTyping = false;
+            return;
+        }
+
         currentLineIndex++;
 
-        if (currentLineIndex < currentDialogue.lines.Length)
+        if (currentDialogue != null && currentLineIndex < currentDialogue.lines.Length)
         {
-            DisplayCurrentLine();  // Show next line
+            DisplayCurrentLine();
         }
         else
         {
-            EndDialogue();  // No more lines left
+            EndDialogue();
         }
     }
 
-    // Ends the current dialogue
     private void EndDialogue()
     {
-        // If there's a chained dialogue, start it
-        if (currentDialogue.nextDialogue != null)
+        if (currentDialogue != null && currentDialogue.nextDialogue != null)
         {
             StartDialogue(currentDialogue.nextDialogue);
             return;
         }
 
-        // Otherwise, close the dialogue
         isDialogueActive = false;
-        dialoguePanel.SetActive(false);
+        if (dialoguePanel != null) dialoguePanel.SetActive(false);
 
-        if (blockPlayerMovement)
-        {
-            PlayerScript.CanMove = true;
-        }
+        if (blockPlayerMovement) PlayerScript.CanMove = true;
+
+        if (defaultAudioSource != null && defaultAudioSource.isPlaying) defaultAudioSource.Stop();
     }
 
-    // Space key to advance dialogue
     private void Update()
     {
-        if (isDialogueActive && Input.GetKeyDown(KeyCode.Space))
-        {
-            ContinueDialogue();
-        }
+        if (isDialogueActive && Input.GetKeyDown(KeyCode.Space)) ContinueDialogue();
     }
 }

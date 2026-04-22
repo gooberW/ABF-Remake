@@ -17,4 +17,6 @@ MonoBehaviour:
     text: 'psst, come here
 
 '
+    voiceClip: {fileID: 8300000, guid: 734a6c07760ea6e47866950fa96e7333, type: 3}
+    audioSourceKey: BrotherSource2
   nextDialogue: {fileID: 0}

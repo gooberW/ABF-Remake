@@ -15,14 +15,26 @@ MonoBehaviour:
   lines:
   - characterName: Kyle
     text: Who are you?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
   - characterName: Unknown
     text: "Seriously? You don\u2019t remember me\u2026?"
+    voiceClip: {fileID: 8300000, guid: 3b29c5995b478434c90925f666be4b3e, type: 3}
+    audioSourceKey: BrotherSource
   - characterName: Kyle
     text: ...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
   - characterName: Kyle
     text: Kev?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
   - characterName: Kyle
     text: Is that you?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
   - characterName: Kevin
     text: "Let\u2019s play, I'm bored!"
+    voiceClip: {fileID: 0}
+    audioSourceKey: BrotherSource
   nextDialogue: {fileID: 0}

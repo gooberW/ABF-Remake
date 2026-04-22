@@ -15,6 +15,10 @@ MonoBehaviour:
   lines:
   - characterName: Unknown
     text: Where are you looking at?
+    voiceClip: {fileID: 8300000, guid: 117d1e07a8a46b94baab4bbb13f38059, type: 3}
+    audioSourceKey: BrotherSource3
   - characterName: Unknown
     text: Not there dummy, heeere.
+    voiceClip: {fileID: 8300000, guid: 90edae3a3a1d1c9468892080ba0b2001, type: 3}
+    audioSourceKey: BrotherSource3
   nextDialogue: {fileID: 0}
