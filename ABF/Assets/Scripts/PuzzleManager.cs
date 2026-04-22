@@ -13,7 +13,7 @@ public class PuzzleManager : MonoBehaviour
         Instance = this;
 
         if (fullImageObject != null)
-            fullImageObject.SetActive(false); // começa escondida
+            fullImageObject.SetActive(false);
 
         // Safely disable any dialogue triggers assigned in the inspector
         if (DialogueTriggerPuzzle != null)
