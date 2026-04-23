@@ -35,6 +35,6 @@ MonoBehaviour:
     audioSourceKey: 
   - characterName: Kevin
     text: "Let\u2019s play, I'm bored!"
-    voiceClip: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: b13458863d96bb146a16e36b11ebdadf, type: 3}
     audioSourceKey: BrotherSource
   nextDialogue: {fileID: 0}
