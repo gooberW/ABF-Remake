@@ -14567,7 +14567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &574779091
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19502,6 +19502,7 @@ GameObject:
   - component: {fileID: 868973244}
   - component: {fileID: 868973243}
   - component: {fileID: 868973246}
+  - component: {fileID: 868973247}
   m_Layer: 0
   m_Name: FifthTask
   m_TagString: BedroomTrigger
@@ -19577,6 +19578,25 @@ MonoBehaviour:
   triggerTag: Player
   taskcollider: {fileID: 0}
   spawnDialogue: {fileID: 0}
+--- !u!114 &868973247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868973242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f34967d998ad2384ab783de3d4cdccaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerTag: 
+  triggerObject: {fileID: 0}
+  newObject: {fileID: 0}
+  fadeDuration: 1
+  destroyOnExit: 1
+  brotherSource: {fileID: 0}
+  disappearSound: {fileID: 0}
 --- !u!1 &872779098 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eb23fae3ee225ec4a85d66d57e5784e3, type: 3}
@@ -37409,7 +37429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5875837251562161973, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
       propertyPath: _PixelationFactor
-      value: 0.512
+      value: 0.42
       objectReference: {fileID: 0}
     - target: {fileID: 5972895657064249111, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
       propertyPath: textComponent
