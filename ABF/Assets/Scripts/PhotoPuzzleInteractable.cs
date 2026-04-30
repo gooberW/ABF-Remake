@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class PhotoPuzzleInteractable : MonoBehaviour, IInteractable
 {
@@ -174,13 +173,9 @@ public class PhotoPuzzleInteractable : MonoBehaviour, IInteractable
             if (part == null) continue;
 
             if (active)
-            {
                 part.SetActive(true);
-            }
             else
-            {
                 Destroy(part);
-            }
         }
     }
 
@@ -191,10 +186,7 @@ public class PhotoPuzzleInteractable : MonoBehaviour, IInteractable
             if (part == null) continue;
 
             if (active)
-            {
                 part.SetActive(true);
-            }
-
         }
     }
 
@@ -208,16 +200,6 @@ public class PhotoPuzzleInteractable : MonoBehaviour, IInteractable
             StartCoroutine(ReturnFromPhoto());
         }
 
-        var taskManager = FindObjectOfType<TaskManager>();
-        if (taskManager != null && taskManager.taskTrigger != null)
-        {
-            taskManager.taskTrigger.CompleteCurrentTask();
-        }
-        else
-        {
-            var trigger = FindObjectOfType<TaskTrigger>();
-            if (trigger != null)
-                trigger.CompleteCurrentTask();
-        }
+        TaskManager.Instance?.CompleteCurrentTask();
     }
 }

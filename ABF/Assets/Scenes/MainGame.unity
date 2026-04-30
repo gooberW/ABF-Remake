@@ -19635,7 +19635,7 @@ GameObject:
   - component: {fileID: 868973246}
   m_Layer: 0
   m_Name: FifthTask
-  m_TagString: BedroomTrigger
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -19673,10 +19673,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6965ed88b37ed3943b631c5c6d9b8e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskSequence: {fileID: 11400000, guid: 493b3ca341e36664b83e380d50b5a7a4, type: 2}
-  textSpeed: 0.05
-  toDoTask: {fileID: 72453527}
-  doneTask: {fileID: 821422462}
   disableAfterTrigger: 1
 --- !u!4 &868973245
 Transform:
@@ -28001,10 +27997,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6965ed88b37ed3943b631c5c6d9b8e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskSequence: {fileID: 11400000, guid: 493b3ca341e36664b83e380d50b5a7a4, type: 2}
-  textSpeed: 0.05
-  toDoTask: {fileID: 72453527}
-  doneTask: {fileID: 821422462}
   disableAfterTrigger: 1
 --- !u!114 &1418718538
 MonoBehaviour:
@@ -28151,7 +28143,7 @@ GameObject:
   - component: {fileID: 1441966412}
   m_Layer: 0
   m_Name: SixthTask
-  m_TagString: BedroomTrigger
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -28204,10 +28196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6965ed88b37ed3943b631c5c6d9b8e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskSequence: {fileID: 11400000, guid: 493b3ca341e36664b83e380d50b5a7a4, type: 2}
-  textSpeed: 0.05
-  toDoTask: {fileID: 72453527}
-  doneTask: {fileID: 821422462}
   disableAfterTrigger: 1
 --- !u!4 &1450089546 stripped
 Transform:
@@ -28507,10 +28495,6 @@ PrefabInstance:
       propertyPath: taskTrigger
       value: 
       objectReference: {fileID: 322955452}
-    - target: {fileID: 1613515950388130712, guid: 5065ddf9ef1022c478e352f9b2725438, type: 3}
-      propertyPath: currentTaskTrigger
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2040039822793069038, guid: 5065ddf9ef1022c478e352f9b2725438, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.073583
@@ -28555,10 +28539,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaskManager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1613515950388130712, guid: 5065ddf9ef1022c478e352f9b2725438, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4469164285516066551, guid: 5065ddf9ef1022c478e352f9b2725438, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1992923637}
   m_SourcePrefab: {fileID: 100100000, guid: 5065ddf9ef1022c478e352f9b2725438, type: 3}
 --- !u!1001 &1502338713
 PrefabInstance:
@@ -33824,7 +33812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1be19d797434d7a46b170e980e5795f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 574779090}
+  pauseMenuUI: {fileID: 1908939559}
   SettingsUI: {fileID: 895092698}
   AudioUI: {fileID: 1637837505}
   GameplayUI: {fileID: 817253364}
@@ -36382,6 +36370,11 @@ Transform:
   - {fileID: 1172750601}
   m_Father: {fileID: 1235412316}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 180}
+--- !u!1 &1908939559 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 510306772764475948, guid: ad64637477ea39141bcc72bedb08eed6, type: 3}
+  m_PrefabInstance: {fileID: 1341367411}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1909243488 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6198d9205ceec064c860ad59500d4690, type: 3}
@@ -37631,6 +37624,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1a144c622ca7c46b18d8ef6b82d98e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1992923634 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4469164285516066551, guid: 5065ddf9ef1022c478e352f9b2725438, type: 3}
+  m_PrefabInstance: {fileID: 1497241763}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1992923637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992923634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c406819cf8847e5499c491aa392c1711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskSequence: {fileID: 11400000, guid: 493b3ca341e36664b83e380d50b5a7a4, type: 2}
+  textSpeed: 0.05
+  toDoTask: {fileID: 72453527}
+  doneTask: {fileID: 821422462}
 --- !u!43 &1993655546
 Mesh:
   m_ObjectHideFlags: 0

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Go Back to Your Room.
   requiredItemName: 
-  requiredTriggerTag: BedroomTrigger
-  isCompleted: 1
+  requiredTriggerTag: 
+  isCompleted: 0

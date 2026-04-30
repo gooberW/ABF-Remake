@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Meet Kevin on the Sandbox
   requiredItemName: 
-  requiredTriggerTag: Player
+  requiredTriggerTag: 
   isCompleted: 0
