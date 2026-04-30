@@ -39,7 +39,7 @@ public class TaskTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !isDisplaying)
+        if (other.CompareTag("Player"))  
         {
             CheckTaskCompletion();
             if (disableAfterTrigger)
@@ -52,15 +52,16 @@ public class TaskTrigger : MonoBehaviour
     public void CheckTaskCompletion()
     {
         var currentStep = taskSequence.GetCurrentStep();
-        if (currentStep != null && !string.IsNullOrEmpty(currentStep.requiredTriggerTag) &&
-            CompareTag(currentStep.requiredTriggerTag))
+        if (currentStep == null) return;
+
+        bool tagMatches = string.IsNullOrEmpty(currentStep.requiredTriggerTag) ||
+                          CompareTag(currentStep.requiredTriggerTag);
+
+        if (tagMatches)
         {
             CompleteCurrentTask();
         }
-        else
-        {
-            DisplayCurrentTask();
-        }
+        
     }
 
     public void DisplayCurrentTask()
@@ -79,15 +80,18 @@ public class TaskTrigger : MonoBehaviour
 
     public void CompleteCurrentTask()
     {
-        // Mark previous task as done
+        if (textCoroutine != null)
+        {
+            StopCoroutine(textCoroutine);
+            isDisplaying = false;
+        }
+
         doneTask.text = toDoTask.text;
         doneTask.enabled = true;
         toDoTask.text = "";
 
-        // Complete the step
         taskSequence.CompleteCurrentStep();
 
-        // Display next task if available
         DisplayCurrentTask();
     }
 
