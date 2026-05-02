@@ -464,6 +464,7 @@ MonoBehaviour:
   grabPosition: {fileID: 788573693}
   itemSprite: {fileID: 0}
   dropForce: 5
+  cam: {fileID: 0}
   warningTextComponent: {fileID: 1718505512}
 --- !u!135 &120220453
 SphereCollider:
@@ -1143,34 +1144,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3240906810548990169, guid: b5202681fc0dc554da6934c94cfb6bea, type: 3}
   m_PrefabInstance: {fileID: 3561262411600564731}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &455653109 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1005284730448836491, guid: 516d03718a292924d9109c52287a0fe2, type: 3}
-  m_PrefabInstance: {fileID: 1245558795}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &455653110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 455653109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bac50c6835440e42938b1121e6f979f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  openAngle: 90
-  openSpeed: 120
-  invertDirection: 0
-  cam: {fileID: 1479438880}
-  doorLayer:
-    serializedVersion: 2
-    m_Bits: 16384
-  crosshairController: {fileID: 508778086}
-  openPrompt: Open Door
-  closePrompt: Close Door
-  interactDistance: 2.5
 --- !u!114 &465921763 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4350729633726301349, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
@@ -1641,6 +1614,7 @@ MonoBehaviour:
   grabPosition: {fileID: 788573693}
   itemSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   dropForce: 5
+  cam: {fileID: 0}
   warningTextComponent: {fileID: 1718505512}
 --- !u!135 &880586848
 SphereCollider:
@@ -2330,6 +2304,7 @@ MonoBehaviour:
   grabPosition: {fileID: 788573693}
   itemSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   dropForce: 5
+  cam: {fileID: 0}
   warningTextComponent: {fileID: 1718505512}
 --- !u!54 &1194836400
 Rigidbody:
@@ -2652,6 +2627,7 @@ MonoBehaviour:
   grabPosition: {fileID: 788573693}
   itemSprite: {fileID: 0}
   dropForce: 5
+  cam: {fileID: 0}
   warningTextComponent: {fileID: 1718505512}
 --- !u!54 &1214627522
 Rigidbody:
@@ -2837,13 +2813,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2597293113074929935, guid: 516d03718a292924d9109c52287a0fe2, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1479438880}
+    - target: {fileID: 2597293113074929935, guid: 516d03718a292924d9109c52287a0fe2, type: 3}
+      propertyPath: crosshairController
+      value: 
+      objectReference: {fileID: 508778086}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1005284730448836491, guid: 516d03718a292924d9109c52287a0fe2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 455653110}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 516d03718a292924d9109c52287a0fe2, type: 3}
 --- !u!1 &1265402576
 GameObject:
@@ -4723,6 +4704,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6105625587863823844, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cae1be85bca051541bd77a8f496db620, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
