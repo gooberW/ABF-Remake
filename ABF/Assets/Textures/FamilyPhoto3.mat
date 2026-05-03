@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Rug3
+  m_Name: FamilyPhoto3
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -41,12 +41,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: -0.14, y: 0.47}
-        m_Offset: {x: 0.51, y: -0.3}
+        m_Scale: {x: 1.4, y: 1.06}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 40670a825cb028040ad04009a4728503, type: 3}
-        m_Scale: {x: -0.14, y: 0.47}
-        m_Offset: {x: 0.51, y: -0.3}
+        m_Texture: {fileID: 2800000, guid: 39491ec615b9c59419ef3e92c2b3a446, type: 3}
+        m_Scale: {x: 1.4, y: 1.06}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
