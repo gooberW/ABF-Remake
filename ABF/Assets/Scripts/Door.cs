@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public class Door : MonoBehaviour
 {
     [Header("Configurações da Porta")]
@@ -17,31 +18,39 @@ public class Door : MonoBehaviour
     [SerializeField] private string openPrompt = "Open Door";
     [SerializeField] private string closePrompt = "Close Door";
     [SerializeField] private float interactDistance = 2.5f;
+
+    [Header("Sons")]                                          
+    [SerializeField] private AudioSource audioSource;        
+    [SerializeField] private AudioClip openSound;           
+    [SerializeField] private AudioClip closeSound;           
+
     private bool isLookingAtDoor = false;
     private bool isDoorOpen = false;
     public bool IsDoorOpen => isDoorOpen;
     private Quaternion closedRotation;
     private Quaternion openRotation;
     private bool isMoving = false;
+
     void Start()
     {
         closedRotation = transform.localRotation;
         float direction = invertDirection ? -1f : 1f;
         openRotation = closedRotation * Quaternion.Euler(0f, openAngle * direction, 0f);
     }
+
     void Update()
     {
         RaycastHit hit;
         bool hitDoor = Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactDistance, doorLayer);
         bool thisDoorHit = false;
+
         if (hitDoor && hit.collider != null)
         {
             Transform hitTransform = hit.collider.transform;
             if (hitTransform == this.transform || hitTransform.IsChildOf(this.transform))
-            {
                 thisDoorHit = true;
-            }
         }
+
         if (thisDoorHit)
         {
             if (!isLookingAtDoor)
@@ -49,6 +58,7 @@ public class Door : MonoBehaviour
                 crosshairController.SetInteractable(GetCurrentPrompt());
                 isLookingAtDoor = true;
             }
+
             if (Input.GetMouseButtonDown(0))
             {
                 if (!isLocked)
@@ -56,7 +66,6 @@ public class Door : MonoBehaviour
                     ToggleDoor();
                     crosshairController.SetInteractable(GetCurrentPrompt());
                 }
-                // If locked, prompt stays as-is — no action taken
             }
         }
         else
@@ -67,10 +76,9 @@ public class Door : MonoBehaviour
                 isLookingAtDoor = false;
             }
         }
+
         if (isMoving)
-        {
             MoveDoor();
-        }
     }
 
     private string GetCurrentPrompt()
@@ -83,20 +91,25 @@ public class Door : MonoBehaviour
     {
         Quaternion targetRot = isDoorOpen ? openRotation : closedRotation;
         transform.localRotation = Quaternion.RotateTowards(transform.localRotation, targetRot, openSpeed * Time.deltaTime);
+
         if (Quaternion.Angle(transform.localRotation, targetRot) < 0.5f)
         {
             transform.localRotation = targetRot;
             isMoving = false;
         }
     }
+
     public void ToggleDoor()
     {
         if (isMoving || isLocked) return;
         isDoorOpen = !isDoorOpen;
         isMoving = true;
+
+        AudioClip clip = isDoorOpen ? openSound : closeSound;
+        if (audioSource != null && clip != null)
+            audioSource.PlayOneShot(clip);
     }
 
-    // Call this from other scripts (e.g. a key pickup) to unlock the door
     public void Unlock()
     {
         isLocked = false;

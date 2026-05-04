@@ -33,6 +33,8 @@ public class TriggerObject : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (triggerObject == null) return;
+        if (newObject == null) return;
+
         if (!string.IsNullOrEmpty(triggerTag) && !other.CompareTag(triggerTag)) return;
 
         PrepareTargets(); 
@@ -43,6 +45,8 @@ public class TriggerObject : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (triggerObject == null) return;
+        if (newObject == null) return;
+
         if (!string.IsNullOrEmpty(triggerTag) && !other.CompareTag(triggerTag)) return;
 
         StopAllCoroutines();
