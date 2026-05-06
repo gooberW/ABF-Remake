@@ -3,7 +3,32 @@ guid: c006c661dfad2f04b94d2159605b2e31
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _mixer_part_01
+    second: {fileID: 2100000, guid: 5d99db79d8bdd8940bf400375f4e3c0c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _mixer_part_02
+    second: {fileID: 2100000, guid: 38d3e82de9f89d341843224459469e87, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _mixer_part_03
+    second: {fileID: 2100000, guid: aca585f59a321a64287d4188f03ac0ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: red line
+    second: {fileID: 2100000, guid: 7931260240880514f9b4a36bf057e56d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: y_arror
+    second: {fileID: 2100000, guid: c1c57b58e596ebe40a040a8d8b67120b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

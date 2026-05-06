@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ce18b14d582114993d7efcbe167ded, type: 3}
+  m_Name: ParkSquence
+  m_EditorClassIdentifier: 
+  steps:
+  - {fileID: 11400000, guid: 4d0860b831be7774da803f6e3068feda, type: 2}
+  - {fileID: 11400000, guid: decd3bf7f677866459afab02148d1cce, type: 2}
+  - {fileID: 11400000, guid: 11d9035673cb4b248be6f3ddd8d026c5, type: 2}
+  - {fileID: 11400000, guid: 5f3da7fc4eac5a949a07d2563f082e1c, type: 2}
+  - {fileID: 11400000, guid: 24bd1c007f7842648be67e6898423b44, type: 2}

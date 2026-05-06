@@ -37,6 +37,8 @@ public class TriggerObject : MonoBehaviour
 
         if (!string.IsNullOrEmpty(triggerTag) && !other.CompareTag(triggerTag)) return;
 
+
+        newObject.SetActive(true);
         PrepareTargets(); 
         StopAllCoroutines();
         StartCoroutine(FadeRoutine(visible: true));

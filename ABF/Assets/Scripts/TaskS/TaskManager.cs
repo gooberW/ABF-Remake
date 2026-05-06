@@ -14,6 +14,7 @@ public class TaskManager : MonoBehaviour
 
     private bool isDisplaying = false;
     private Coroutine textCoroutine;
+    private Coroutine timerCoroutine;
 
     private void Awake()
     {
@@ -54,16 +55,25 @@ public class TaskManager : MonoBehaviour
     public void DisplayCurrentTask()
     {
         var currentStep = taskSequence.GetCurrentStep();
-        if (currentStep != null)
-        {
-            toDoTask.enabled = true;
-            if (textCoroutine != null) StopCoroutine(textCoroutine);
-            textCoroutine = StartCoroutine(DisplayText(currentStep.description));
-        }
+        if (currentStep == null) return;
+
+        toDoTask.enabled = true;
+        if (textCoroutine != null) StopCoroutine(textCoroutine);
+        textCoroutine = StartCoroutine(DisplayText(currentStep.description));
+
+        if (timerCoroutine != null) StopCoroutine(timerCoroutine);
+        if (currentStep.duration > 0f)
+            timerCoroutine = StartCoroutine(TaskTimer(currentStep.duration));
     }
 
     public void CompleteCurrentTask()
     {
+        if (timerCoroutine != null)
+        {
+            StopCoroutine(timerCoroutine);
+            timerCoroutine = null;
+        }
+
         if (textCoroutine != null)
         {
             StopCoroutine(textCoroutine);
@@ -76,6 +86,12 @@ public class TaskManager : MonoBehaviour
 
         taskSequence.CompleteCurrentStep();
         DisplayCurrentTask();
+    }
+
+    private IEnumerator TaskTimer(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        CompleteCurrentTask();
     }
 
     private IEnumerator DisplayText(string text)
