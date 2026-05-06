@@ -38,15 +38,8 @@ public class DialogueManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
 
         if (defaultAudioSource == null)
         {
@@ -82,7 +75,6 @@ public class DialogueManager : MonoBehaviour
         }
         typingCoroutine = StartCoroutine(TypeLine(line.text));
 
-        // choose audio source by key (if provided), otherwise use default
         AudioSource src = GetAudioSourceForKey(line.audioSourceKey) ?? defaultAudioSource;
 
         if (line.voiceClip != null && src != null)

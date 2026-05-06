@@ -33,11 +33,22 @@ public class InventoryScript : MonoBehaviour
     private void Awake()
     {
         hotbarGroup = hotbar.GetComponent<CanvasGroup>();
-        InitializeUI();
         inventoryData.Clear();
+        InitializeUI();
+    }
+
+    private void Start()
+    {
+        HideHotbar();
     }
 
     private void InitializeUI()
+    {
+        HideHotbar();
+        UpdateAllSlotsUI();
+    }
+
+    private void HideHotbar()
     {
         if (hotbarGroup != null)
         {
@@ -45,8 +56,6 @@ public class InventoryScript : MonoBehaviour
             hotbarGroup.interactable = false;
             hotbarGroup.blocksRaycasts = false;
         }
-
-        UpdateAllSlotsUI();
     }
 
     public void AddItem(GameObject item, Sprite sprite, string itemName)
@@ -62,11 +71,9 @@ public class InventoryScript : MonoBehaviour
                     itemName = itemName
                 };
 
-                // Only activate if this is the selected slot
                 item.SetActive(i == inventoryData.currentSelectedSlot);
                 UpdateSlotUI(i);
 
-                // If nothing was selected, select this slot
                 if (inventoryData.currentSelectedSlot == -1)
                 {
                     SelectSlot(i);
@@ -134,7 +141,6 @@ public class InventoryScript : MonoBehaviour
     private void SelectSlot(int index)
     {
         if (index < 0 || index >= inventoryData.slots.Length) return;
-
         if (inventoryData.currentSelectedSlot == index) return;
 
         inventoryData.currentSelectedSlot = index;
@@ -169,7 +175,6 @@ public class InventoryScript : MonoBehaviour
         bool hasItem = !slot.IsEmpty;
         bool isSelected = inventoryData.currentSelectedSlot == index;
 
-        // Update slot appearance
         if (slotImages[index] != null)
         {
             RectTransform rt = slotImages[index].rectTransform;
@@ -180,7 +185,6 @@ public class InventoryScript : MonoBehaviour
             slotImages[index].color = slotColor;
         }
 
-        // Update icon
         if (slotIcons[index] != null)
         {
             slotIcons[index].enabled = hasItem;
@@ -191,7 +195,6 @@ public class InventoryScript : MonoBehaviour
             }
         }
 
-        // Update name
         if (itemNameTexts[index] != null)
         {
             itemNameTexts[index].text = (hasItem && isSelected) ? slot.itemName : "";
@@ -231,12 +234,6 @@ public class InventoryScript : MonoBehaviour
     private IEnumerator HideHotbarAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-
-        if (hotbarGroup != null)
-        {
-            hotbarGroup.alpha = 0;
-            hotbarGroup.interactable = false;
-            hotbarGroup.blocksRaycasts = false;
-        }
+        HideHotbar();
     }
 }

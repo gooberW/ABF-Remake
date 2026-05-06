@@ -28,6 +28,7 @@ public class TaskManager : MonoBehaviour
 
     private void Start()
     {
+        DynamicGI.UpdateEnvironment();
         inventory = FindObjectOfType<InventoryScript>();
         taskSequence.ResetSequence();
         DisplayCurrentTask();
