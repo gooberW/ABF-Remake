@@ -4267,6 +4267,8 @@ MonoBehaviour:
   openAngle: 90
   openSpeed: 120
   invertDirection: 0
+  isLocked: 0
+  lockedPrompt: Locked
   cam: {fileID: 1479438880}
   doorLayer:
     serializedVersion: 2
@@ -4275,6 +4277,9 @@ MonoBehaviour:
   openPrompt: Open Door
   closePrompt: Close Door
   interactDistance: 2.5
+  audioSource: {fileID: 0}
+  openSound: {fileID: 0}
+  closeSound: {fileID: 0}
 --- !u!1 &1954072289
 GameObject:
   m_ObjectHideFlags: 0
@@ -4556,9 +4561,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1613515950388130712, guid: 5065ddf9ef1022c478e352f9b2725438, type: 3}
+      propertyPath: doneTask
+      value: 
+      objectReference: {fileID: 465921763}
+    - target: {fileID: 1613515950388130712, guid: 5065ddf9ef1022c478e352f9b2725438, type: 3}
+      propertyPath: toDoTask
+      value: 
+      objectReference: {fileID: 1210624743}
+    - target: {fileID: 1613515950388130712, guid: 5065ddf9ef1022c478e352f9b2725438, type: 3}
       propertyPath: taskTrigger
       value: 
       objectReference: {fileID: 86689685}
+    - target: {fileID: 1613515950388130712, guid: 5065ddf9ef1022c478e352f9b2725438, type: 3}
+      propertyPath: taskSequence
+      value: 
+      objectReference: {fileID: 11400000, guid: 125bd9c94ca38b64da47a5dd57b8b7ad, type: 2}
     - target: {fileID: 2040039822793069038, guid: 5065ddf9ef1022c478e352f9b2725438, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.073583

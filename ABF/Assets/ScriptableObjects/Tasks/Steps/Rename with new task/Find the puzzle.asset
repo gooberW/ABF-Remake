@@ -15,4 +15,5 @@ MonoBehaviour:
   description: Find the Family Photo
   requiredItemName: 
   requiredTriggerTag: PhotoPuzzle
-  isCompleted: 1
+  duration: 0
+  isCompleted: 0

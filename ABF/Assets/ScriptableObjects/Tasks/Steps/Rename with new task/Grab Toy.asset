@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Grab Toy
   m_EditorClassIdentifier: 
   description: Grab Kevin's Toy on the Sandbox
-  requiredItemName: 
+  requiredItemName: RobotToy
   requiredTriggerTag: 
+  duration: 0
   isCompleted: 0

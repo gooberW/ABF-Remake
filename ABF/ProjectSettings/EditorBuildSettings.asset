@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainGame.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
-    path: Assets/Scenes/TestingScene.unity
-    guid: 9544094bbb6d7984e83435f998e36ef8
+  - enabled: 1
+    path: Assets/Scenes/ParkScene.unity
+    guid: 8385a1d8589f9ce42b921a2dc7d57734
+  - enabled: 1
+    path: Assets/Scenes/MainGamePartTwo.unity
+    guid: 8ddb3a960bcdc97419338e4db55a01f4
   m_configObjects: {}

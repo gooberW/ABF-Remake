@@ -6967,7 +6967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline: {fileID: 1065237276}
-  sceneName: MainMenu
+  sceneName: MainGamePartTwo
 --- !u!65 &1768466658
 BoxCollider:
   m_ObjectHideFlags: 0

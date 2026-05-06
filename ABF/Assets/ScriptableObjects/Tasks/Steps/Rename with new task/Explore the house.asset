@@ -15,4 +15,5 @@ MonoBehaviour:
   description: Explore the Room
   requiredItemName: 
   requiredTriggerTag: BedroomTrigger
+  duration: 0
   isCompleted: 1

@@ -15,6 +15,7 @@ public class TaskManager : MonoBehaviour
     private bool isDisplaying = false;
     private Coroutine textCoroutine;
     private Coroutine timerCoroutine;
+    private InventoryScript inventory;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class TaskManager : MonoBehaviour
 
     private void Start()
     {
+        inventory = FindObjectOfType<InventoryScript>();
         taskSequence.ResetSequence();
         DisplayCurrentTask();
     }
@@ -39,7 +41,14 @@ public class TaskManager : MonoBehaviour
         bool tagMatches = string.IsNullOrEmpty(currentStep.requiredTriggerTag) ||
                           currentStep.requiredTriggerTag == triggerTag;
 
-        if (tagMatches) CompleteCurrentTask();
+        bool itemMatches = string.IsNullOrEmpty(currentStep.requiredItemName) ||
+                           PlayerIsHolding(currentStep.requiredItemName);
+
+        Debug.Log($"Tag: '{currentStep.requiredTriggerTag}' | tagMatches: {tagMatches}");
+        Debug.Log($"Item: '{currentStep.requiredItemName}' | itemMatches: {itemMatches}");
+        Debug.Log($"Held item: {inventory?.GetCurrentItem()?.name ?? "null"}");
+
+        if (tagMatches && itemMatches) CompleteCurrentTask();
     }
 
     public void CheckItemTaskCompletion(GameObject item)
@@ -50,6 +59,12 @@ public class TaskManager : MonoBehaviour
         {
             CompleteCurrentTask();
         }
+    }
+
+    private bool PlayerIsHolding(string itemName)
+    {
+        GameObject heldItem = inventory.GetCurrentItem();
+        return heldItem != null && heldItem.name.Contains(itemName);
     }
 
     public void DisplayCurrentTask()
