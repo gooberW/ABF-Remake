@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "Steal Dad\u2019s pills"
   m_EditorClassIdentifier: 
   description: "Steal Dad\u2019s pills."
-  requiredItemName: 
+  requiredItemName: pillbox
   requiredTriggerTag: 
   duration: 0
   isCompleted: 0

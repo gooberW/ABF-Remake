@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Steal mom purse
   m_EditorClassIdentifier: 
   description: Steal mom purse.
-  requiredItemName: 
+  requiredItemName: Purse
   requiredTriggerTag: 
   duration: 0
-  isCompleted: 0
+  isCompleted: 1
