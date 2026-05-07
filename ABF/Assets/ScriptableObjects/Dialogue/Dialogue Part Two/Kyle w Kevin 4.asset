@@ -13,28 +13,32 @@ MonoBehaviour:
   m_Name: Kyle w Kevin 4
   m_EditorClassIdentifier: 
   lines:
-  - characterName: Kyle
-    text: Found them.
-    voiceClip: {fileID: 0}
-    audioSourceKey: 
-  - characterName: Kyle
-    text: What now?
+  - characterName: Kevin
+    text: "Don\u2019t fall for her lies, Kyle."
     voiceClip: {fileID: 0}
     audioSourceKey: 
   - characterName: Kevin
-    text: Try one!
+    text: She wants to break us.
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: She wants to torn us apart.
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: "She wants you to believe that you\u2019re sick..."
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: that I don't exist.
     voiceClip: {fileID: 0}
     audioSourceKey: 
   - characterName: Kyle
-    text: Is it good?
+    text: "Okay Mom\u2026"
     voiceClip: {fileID: 0}
     audioSourceKey: 
-  - characterName: Kevin
-    text: Yea, they're good for you.
-    voiceClip: {fileID: 0}
-    audioSourceKey: 
-  - characterName: Kevin
-    text: Try one.
+  - characterName: Kyle
+    text: "Thank you\u2026"
     voiceClip: {fileID: 0}
     audioSourceKey: 
   nextDialogue: {fileID: 0}

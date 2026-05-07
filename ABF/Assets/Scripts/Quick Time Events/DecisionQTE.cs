@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class DecisionQTE : MonoBehaviour
 {
+    public Canvas qteCanvas;
     public TextMeshProUGUI option1Text;
     public TextMeshProUGUI option2Text;
     public TextMeshProUGUI questionText;
@@ -73,6 +74,7 @@ public class DecisionQTE : MonoBehaviour
         option1Text.text = $"{label1}";
         option2Text.text = $"{label2}";
         questionText.text = $"{question}";
+        qteCanvas.gameObject.SetActive(true);
         option1Text.gameObject.SetActive(true);
         option2Text.gameObject.SetActive(true);
         timerCircle.gameObject.SetActive(true);
@@ -85,6 +87,7 @@ public class DecisionQTE : MonoBehaviour
         timer = qteDuration;
         chosenOption = -1;
         timerCircle.fillAmount = 1f;
+        qteCanvas.gameObject.SetActive(false);
         option1Text.gameObject.SetActive(false);
         option2Text.gameObject.SetActive(false);
         timerCircle.gameObject.SetActive(false);

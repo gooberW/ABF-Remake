@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class SpamQTE : MonoBehaviour
 {
+    public Canvas qteCanvas;
     public TextMeshProUGUI promptText;
     public Image progressCircle;
     public Image progressBackground;
@@ -57,6 +58,7 @@ public class SpamQTE : MonoBehaviour
         ResetQTE();
         isActive = true;
         promptText.text = $"{mashKey}";
+        qteCanvas.gameObject.SetActive(true);
         promptText.gameObject.SetActive(true);
         progressCircle.gameObject.SetActive(true);
         progressBackground.gameObject.SetActive(true);
@@ -69,6 +71,8 @@ public class SpamQTE : MonoBehaviour
         pressCount = 0;
         progressCircle.fillAmount = 0f;
         progressCircle.color = Color.white;
+        qteCanvas.gameObject.SetActive(false);
+
         promptText.gameObject.SetActive(false);
         progressCircle.gameObject.SetActive(false);
         progressBackground.gameObject.SetActive(false);
