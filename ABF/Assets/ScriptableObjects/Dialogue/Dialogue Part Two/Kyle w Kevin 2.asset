@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c47ef5dd4717aa43bcfb01f91a4c2ed, type: 3}
+  m_Name: Kyle w Kevin 2
+  m_EditorClassIdentifier: 
+  lines:
+  - characterName: Kevin
+    text: You got the purse?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: Ahm, yes...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: But why steal Mom's purse?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: Mom says stealing is bad...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: Mom says this...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: Mom says that...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: You're such a wuss!
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: Let's have some fun, Kyle!
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: ...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: Let's play a game, Okay?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: Truth or dare?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: Ahm, Okay...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: Truth or dare, Kyle?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: Dare?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: I dare you...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: To steal dad's pill in the bathroom.
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: Dad's pills...?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: But he needs those pills...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: He gets sick without them...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: He'll be just fine.
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: We'll return them later. I promise.
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: Can't we play something else, Kevin?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: I don't like this game...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: NO.
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: 
+    voiceClip: {fileID: 0}
+    audioSourceKey: I like this game.
+  - characterName: Kevin
+    text: So don't back down, go steal those pills.
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: if you say so...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  nextDialogue: {fileID: 0}

@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c47ef5dd4717aa43bcfb01f91a4c2ed, type: 3}
+  m_Name: Kyle w Kevin
+  m_EditorClassIdentifier: 
+  lines:
+  - characterName: Kevin
+    text: Mom is wrong, you know?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: What?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: She thinks I died...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: But I'm here.
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: That's what I told her...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: But she didn't believe me...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: Who cares?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: Let's play.
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: What do you wanna play?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: I dare you to steal mom's purse from the kitchen table.
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: Mom hates when we go through her purse...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kevin
+    text: Is little Kyle afraid of mom?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: AM NOT!
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: Fine! I'll do it!
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  nextDialogue: {fileID: 0}

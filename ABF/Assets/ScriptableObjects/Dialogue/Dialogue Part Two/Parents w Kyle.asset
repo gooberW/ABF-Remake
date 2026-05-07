@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c47ef5dd4717aa43bcfb01f91a4c2ed, type: 3}
+  m_Name: Parents w Kyle
+  m_EditorClassIdentifier: 
+  lines:
+  - characterName: Kyle
+    text: Mom!!!
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: Dad!!!
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Mom
+    text: What happened Kyle?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Mom
+    text: Is everything okay?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: I was playing with Kevin, but he disappeared...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: Have you seen him?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Mom
+    text: Oh Kyle...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Mom
+    text: Don't you remember what happened?
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: No...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: I mean yes...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: But I saw him!
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: We were talking and playing and...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Mom
+    text: Please Kyle...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Mom
+    text: Don't do this today...
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Mom
+    text: Not today, please.
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Kyle
+    text: But he's here Mom!!
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  - characterName: Mom
+    text: Kyle! Go to your room!
+    voiceClip: {fileID: 0}
+    audioSourceKey: 
+  nextDialogue: {fileID: 0}
