@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3022d94cdb03a804b8d8d04ebacfd4d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.297
+      value: -3097.732
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3022d94cdb03a804b8d8d04ebacfd4d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.847
+      value: 0.902
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3022d94cdb03a804b8d8d04ebacfd4d5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.6
+      value: 185.286
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3022d94cdb03a804b8d8d04ebacfd4d5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -84,6 +84,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3022d94cdb03a804b8d8d04ebacfd4d5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4184040013563339865}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3022d94cdb03a804b8d8d04ebacfd4d5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 712251094299188022}
   m_SourcePrefab: {fileID: 100100000, guid: 3022d94cdb03a804b8d8d04ebacfd4d5, type: 3}
 --- !u!1 &7347778627332241006 stripped
 GameObject:
@@ -106,8 +109,8 @@ MonoBehaviour:
   grabPosition: {fileID: 0}
   itemSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   dropForce: 5
+  cam: {fileID: 0}
   warningTextComponent: {fileID: 0}
-  warningText: 
 --- !u!114 &7618869122242067345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,3 +177,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &712251094299188022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7347778627332241006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3df737e2604857d43ae1a2ccc6f40677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sanityRestoreAmount: 100
+  useTimes: 1
+  playerAudio: {fileID: 0}
+  pillUseSound: {fileID: 0}

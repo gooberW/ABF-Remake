@@ -40,6 +40,12 @@ public class LightManager : MonoBehaviour
             OnLightChanged?.Invoke(l, false);
         }
 
+        foreach (Light l in ignoredLights)
+        {
+            if (l != null)
+                l.enabled = true;
+        }
+
         lightsOn = 0;
         locked = false;
     }
@@ -89,6 +95,8 @@ public class LightManager : MonoBehaviour
                 OnLightChanged?.Invoke(l, false); 
             }
         }
+
+        
 
         lightsOn = 0;
     }
