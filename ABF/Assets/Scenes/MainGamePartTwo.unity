@@ -1228,6 +1228,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timelineplayer: {fileID: 553685245}
+  blockPlayerMovement: 1
+  isOneTimeTrigger: 0
 --- !u!1 &68292048
 GameObject:
   m_ObjectHideFlags: 0
@@ -6268,6 +6270,12 @@ PlayableDirector:
     value: {fileID: 1402427990}
   - key: {fileID: -108547931692998243, guid: 92f833ff567935742b7bb7715d323bec, type: 2}
     value: {fileID: 2007840504}
+  - key: {fileID: 8878389391516322698, guid: 92f833ff567935742b7bb7715d323bec, type: 2}
+    value: {fileID: 1924776308}
+  - key: {fileID: 6861067301231085041, guid: 92f833ff567935742b7bb7715d323bec, type: 2}
+    value: {fileID: 598595006}
+  - key: {fileID: 7814434833414339099, guid: 92f833ff567935742b7bb7715d323bec, type: 2}
+    value: {fileID: 1223909432}
   m_ExposedReferences:
     m_References:
     - dd3820836cf5b9f498bd9b61d298a66d: {fileID: 2109357864}
@@ -7615,6 +7623,24 @@ MonoBehaviour:
   dropForce: 5
   cam: {fileID: 2007840503}
   warningTextComponent: {fileID: 1480307378}
+--- !u!114 &631837710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631837703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.5686275, b: 0, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &644840821
 GameObject:
   m_ObjectHideFlags: 0
@@ -12401,6 +12427,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Purse
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5b0cd2c94f90d194ea1490d43c18c98b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12414,6 +12444,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5b0cd2c94f90d194ea1490d43c18c98b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 631837704}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5b0cd2c94f90d194ea1490d43c18c98b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 631837710}
   m_SourcePrefab: {fileID: 100100000, guid: 5b0cd2c94f90d194ea1490d43c18c98b, type: 3}
 --- !u!4 &1059711318 stripped
 Transform:
@@ -18160,6 +18193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timelineplayer: {fileID: 1825692123}
+  blockPlayerMovement: 0
+  isOneTimeTrigger: 1
 --- !u!4 &1542657254 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: eb23fae3ee225ec4a85d66d57e5784e3, type: 3}
