@@ -1,6 +1,7 @@
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private AudioSource defaultAudioSource;
+
+    [Header("Events")]
+    public UnityEvent onDialogueEnd;
 
     [System.Serializable]
     public class NamedAudioSource
@@ -35,6 +39,7 @@ public class DialogueManager : MonoBehaviour
     private bool isDialogueActive;
     private Coroutine typingCoroutine;
     private bool isTyping;
+    private UnityEvent onCompleteCallback;
 
     private void Awake()
     {
@@ -49,15 +54,14 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(Dialogue dialogue, UnityEvent onComplete = null)
     {
         currentDialogue = dialogue;
         currentLineIndex = 0;
         isDialogueActive = true;
+        onCompleteCallback = onComplete;
         if (dialoguePanel != null) dialoguePanel.SetActive(true);
-
         if (blockPlayerMovement) PlayerScript.CanMove = false;
-
         DisplayCurrentLine();
     }
 
@@ -154,16 +158,17 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentDialogue != null && currentDialogue.nextDialogue != null)
         {
-            StartDialogue(currentDialogue.nextDialogue);
+            StartDialogue(currentDialogue.nextDialogue, onCompleteCallback); 
             return;
         }
 
         isDialogueActive = false;
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
-
         if (blockPlayerMovement) PlayerScript.CanMove = true;
-
         if (defaultAudioSource != null && defaultAudioSource.isPlaying) defaultAudioSource.Stop();
+
+        onCompleteCallback?.Invoke(); 
+        onCompleteCallback = null;
     }
 
     private void Update()

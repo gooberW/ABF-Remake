@@ -21,24 +21,57 @@ public class TriggerQTE : MonoBehaviour
 
     public string decisionQuestion = "Incoming Attack!";
 
-    void Start()
+    void OnEnable()
     {
         qteManager = FindObjectOfType<QTEManager>();
+        if (qteManager != null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                Collider triggerCollider = GetComponent<Collider>();
+                if (triggerCollider != null && triggerCollider.bounds.Contains(player.transform.position))
+                {
+                    if (qteType == QTEType.Spam)
+                    {
+                        qteManager.StartSpamQTE(onQTE_Success, onQTE_Failure);
+                    }
+                    else
+                    {
+                        qteManager.StartDecisionQTE(decisionKey1, decisionLabel1, onDecisionChoice1,
+                                                    decisionKey2, decisionLabel2, onDecisionChoice2,
+                                                    onDecisionTimeout, decisionQuestion);
+                    }
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("TriggerQTE: No QTEManager found in scene!", this);
+        }
     }
+
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (qteType == QTEType.Spam)
+            if (qteManager != null)
             {
-                qteManager.StartSpamQTE(onQTE_Success, onQTE_Failure);
+                if (qteType == QTEType.Spam)
+                {
+                    qteManager.StartSpamQTE(onQTE_Success, onQTE_Failure);
+                }
+                else
+                {
+                    qteManager.StartDecisionQTE(decisionKey1, decisionLabel1, onDecisionChoice1,
+                                                decisionKey2, decisionLabel2, onDecisionChoice2,
+                                                onDecisionTimeout, decisionQuestion);
+                }
             }
             else
             {
-                qteManager.StartDecisionQTE(decisionKey1, decisionLabel1, onDecisionChoice1,
-                                            decisionKey2, decisionLabel2, onDecisionChoice2,
-                                            onDecisionTimeout, decisionQuestion);
+                Debug.LogError("TriggerQTE: QTEManager is missing!", this);
             }
         }
     }
