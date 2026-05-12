@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dc0da67bfd6b104eb9c4139d836d437, type: 3}
   m_Name: Talk with your mom
   m_EditorClassIdentifier: 
-  description: Steal mom purse.
+  description: Talk with Mom in the Kitchen.
   requiredItemName: 
   requiredTriggerTag: 
   duration: 0

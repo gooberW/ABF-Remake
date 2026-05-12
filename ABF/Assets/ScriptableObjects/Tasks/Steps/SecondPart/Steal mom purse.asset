@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dc0da67bfd6b104eb9c4139d836d437, type: 3}
   m_Name: Steal mom purse
   m_EditorClassIdentifier: 
-  description: Steal mom purse.
+  description: Steal mom's Purse.
   requiredItemName: Purse
   requiredTriggerTag: 
   duration: 0
