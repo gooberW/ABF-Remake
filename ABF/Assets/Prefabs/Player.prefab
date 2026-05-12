@@ -15,12 +15,13 @@ GameObject:
   - component: {fileID: 5674013414103384754}
   - component: {fileID: 7122847789692991175}
   - component: {fileID: 4213975498029003532}
+  - component: {fileID: 7559849837350210770}
   m_Layer: 0
   m_Name: POV
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1133287443927125853
 Transform:
@@ -77,7 +78,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 32631
+    m_Bits: 524151
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -147,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ce9fefad9d2b948b654981efd87fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _source: {fileID: 0}
+  _source: {fileID: 2115272076702615820}
   _step: {fileID: 0}
   _player: {fileID: 6754107417436640498}
 --- !u!114 &4213975498029003532
@@ -166,6 +167,20 @@ MonoBehaviour:
   vignetteIntensity: 0
   vignetteRoundness: 2
   desaturation: 0
+--- !u!114 &7559849837350210770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901222103504752386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 631343c55ccee1b4a820c75ea6aa391b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeMultiplier: 0.2
+  shakeIntensity: 2
 --- !u!1 &2721670821746097856
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +199,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6900276592507781735
 Transform:
@@ -264,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 433faa8b758afed4f9295b193c697276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PixelationFactor: 0.3
+  _PixelationFactor: 0.42
   _ColorEmulationMode: 1
   _FullscreenColorDepth: {x: 512, y: 512, z: 512}
   _FullscreenDitherDepth: {x: 128, y: 128, z: 128}
@@ -335,13 +350,15 @@ GameObject:
   - component: {fileID: 1313890661892990441}
   - component: {fileID: 5972895657064249111}
   - component: {fileID: 160899603784508949}
+  - component: {fileID: 1543869609827104808}
   - component: {fileID: 2115272076702615820}
+  - component: {fileID: 1838504736259489803}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4578870748028004999
 Transform:
@@ -459,6 +476,12 @@ MonoBehaviour:
   obstructionLayers:
     serializedVersion: 2
     m_Bits: 1024
+  realLightLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  fakeLightLayers:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!114 &1313890661892990441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,10 +496,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSanity: 100
   currentSanity: 100
-  darknessDrainRate: 3
+  darknessDrainRate: 1.5
   lightRecoveryRate: 3.5
   monsterViewDrainRate: 15
   loudNoiseDrainAmount: 7
+  sanityTickInterval: 0.1
   playerCamera: {fileID: 7141893191173400089}
   maxShakeIntensity: 1.5
   maxVignetteIntensity: 2
@@ -484,6 +508,7 @@ MonoBehaviour:
   sanityBarImage: {fileID: 0}
   fadeOutDelay: 2
   fadeOutDuration: 1
+  cameraShake: {fileID: 7559849837350210770}
   isInDarkness: 0
 --- !u!114 &5972895657064249111
 MonoBehaviour:
@@ -500,7 +525,7 @@ MonoBehaviour:
   textSpeed: 0.05
   disappearSpeed: 0.03
   textComponent: {fileID: 0}
-  displayDurationAfterExit: 5
+  displayDurationAfterExit: 3
   disableAfterTrigger: 0
 --- !u!114 &160899603784508949
 MonoBehaviour:
@@ -531,6 +556,39 @@ MonoBehaviour:
   - {fileID: 0}
   sound: {fileID: 8300000, guid: 755367002624100438e8f8a35fd70c7a, type: 3}
   source: {fileID: 2115272076702615820}
+--- !u!114 &1543869609827104808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3049205763859066073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fa4f616f8dec1448451196e1c0b372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  concreteFootsteps:
+  - {fileID: 8300000, guid: a9d0d79ee60569f439e54e3bd71cd1a1, type: 3}
+  - {fileID: 8300000, guid: f5a984fcad18f9c47a41841807f7fa79, type: 3}
+  - {fileID: 8300000, guid: 75447e7b72c27464bb8c819c48f83a91, type: 3}
+  sandFootsteps:
+  - {fileID: 8300000, guid: ffba343e22574cf4e9c80770bb774689, type: 3}
+  - {fileID: 8300000, guid: ee209056af28c9449b45ee76190d21f9, type: 3}
+  - {fileID: 8300000, guid: 6bf93eec558e930489009c12568d78c2, type: 3}
+  grassFootsteps:
+  - {fileID: 8300000, guid: 0b16d1ec57f2d004d8b255dc441f95ae, type: 3}
+  - {fileID: 8300000, guid: b53ca16a36051054fb19309edab67952, type: 3}
+  - {fileID: 8300000, guid: e9a77f20061fcc043a087a6ecb987668, type: 3}
+  walkStepInterval: 0.5
+  runStepInterval: 0.3
+  crouchStepInterval: 0.7
+  walkVolume: 0.6
+  runVolume: 0.9
+  crouchVolume: 0.3
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 459776
 --- !u!82 &2115272076702615820
 AudioSource:
   m_ObjectHideFlags: 0
@@ -540,7 +598,7 @@ AudioSource:
   m_GameObject: {fileID: 3049205763859066073}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -5378546469705793415, guid: 45dff91957ac9494c9876161ffc52ad6, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -627,6 +685,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &1838504736259489803
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3049205763859066073}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3609736389698489148
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,7 +720,7 @@ GameObject:
   m_TagString: GrabPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1410565737024341271
 Transform:
@@ -673,7 +752,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5160119923333066157
 Transform:
@@ -705,3 +784,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SENSITIVITY: 2
+  isPaused: 0

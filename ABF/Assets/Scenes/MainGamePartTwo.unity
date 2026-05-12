@@ -24722,7 +24722,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 101633951668622650, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 130935
+      value: 524151
       objectReference: {fileID: 0}
     - target: {fileID: 160899603784508949, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
       propertyPath: hotbar

@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 91217378}
   - component: {fileID: 91217377}
   - component: {fileID: 91217376}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Terrain_(-89.00, 0.00, 178.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 116573428}
   - component: {fileID: 116573427}
   - component: {fileID: 116573426}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Terrain_(161.00, 0.00, -322.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -680,7 +680,7 @@ GameObject:
   - component: {fileID: 128976653}
   - component: {fileID: 128976652}
   - component: {fileID: 128976656}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1725,7 +1725,7 @@ GameObject:
   - component: {fileID: 403317176}
   - component: {fileID: 403317175}
   - component: {fileID: 403317174}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Terrain_(161.00, 0.00, -72.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2611,7 +2611,7 @@ GameObject:
   - component: {fileID: 742802591}
   - component: {fileID: 742802590}
   - component: {fileID: 742802589}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Terrain_(161.00, 0.00, 178.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2896,7 +2896,7 @@ GameObject:
   - component: {fileID: 765321842}
   - component: {fileID: 765321841}
   - component: {fileID: 765321840}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Terrain_(-339.00, 0.00, 178.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3903,7 +3903,7 @@ GameObject:
   - component: {fileID: 1135297500}
   - component: {fileID: 1135297499}
   - component: {fileID: 1135297498}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4360,7 +4360,7 @@ GameObject:
   - component: {fileID: 1193529809}
   - component: {fileID: 1193529808}
   - component: {fileID: 1193529807}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Terrain_(-339.00, 0.00, -72.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4738,7 +4738,7 @@ GameObject:
   - component: {fileID: 1234869318}
   - component: {fileID: 1234869317}
   - component: {fileID: 1234869316}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Terrain_(-339.00, 0.00, -322.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5059,7 +5059,7 @@ GameObject:
   - component: {fileID: 1327637089}
   - component: {fileID: 1327637088}
   - component: {fileID: 1327637087}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6317,7 +6317,7 @@ GameObject:
   - component: {fileID: 1507794128}
   - component: {fileID: 1507794127}
   - component: {fileID: 1507794126}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Terrain_(-89.00, 0.00, -322.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7187,7 +7187,7 @@ GameObject:
   - component: {fileID: 1814167762}
   - component: {fileID: 1814167761}
   - component: {fileID: 1814167760}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8432,6 +8432,10 @@ PrefabInstance:
       propertyPath: field of view
       value: 60.000004
       objectReference: {fileID: 0}
+    - target: {fileID: 101633951668622650, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 524151
+      objectReference: {fileID: 0}
     - target: {fileID: 160899603784508949, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
       propertyPath: hotbar
       value: 
@@ -8975,7 +8979,7 @@ GameObject:
   - component: {fileID: 2100489504}
   - component: {fileID: 2100489503}
   - component: {fileID: 2100489502}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
