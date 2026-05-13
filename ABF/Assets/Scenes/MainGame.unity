@@ -1334,6 +1334,7 @@ MonoBehaviour:
   triggerTag: Player
   taskcollider: {fileID: 868973243}
   spawnDialogue: {fileID: 131217488}
+  taskObject: {fileID: 0}
 --- !u!65 &63959774
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14050,6 +14051,7 @@ MonoBehaviour:
   triggerTag: Player
   taskcollider: {fileID: 971869550}
   spawnDialogue: {fileID: 0}
+  taskObject: {fileID: 0}
 --- !u!1 &676422596
 GameObject:
   m_ObjectHideFlags: 0
@@ -14715,6 +14717,7 @@ MonoBehaviour:
   triggerTag: 
   taskcollider: {fileID: 1060015482}
   spawnDialogue: {fileID: 0}
+  taskObject: {fileID: 0}
 --- !u!65 &752265596
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15878,6 +15881,7 @@ MonoBehaviour:
   triggerTag: Player
   taskcollider: {fileID: 671591949}
   spawnDialogue: {fileID: 0}
+  taskObject: {fileID: 0}
 --- !u!1 &872779098 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eb23fae3ee225ec4a85d66d57e5784e3, type: 3}
@@ -17038,6 +17042,7 @@ MonoBehaviour:
   triggerTag: Player
   taskcollider: {fileID: 1052431250}
   spawnDialogue: {fileID: 0}
+  taskObject: {fileID: 0}
 --- !u!1001 &975377027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18402,6 +18407,7 @@ MonoBehaviour:
   triggerTag: Player
   taskcollider: {fileID: 1151575651}
   spawnDialogue: {fileID: 0}
+  taskObject: {fileID: 0}
 --- !u!4 &1052576192 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a3d1369f5bb5a9a498f1e4ef13f0ee1d, type: 3}
@@ -19276,6 +19282,7 @@ MonoBehaviour:
   triggerTag: Player
   taskcollider: {fileID: 1441966412}
   spawnDialogue: {fileID: 0}
+  taskObject: {fileID: 0}
 --- !u!114 &1151575654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19291,6 +19298,7 @@ MonoBehaviour:
   triggerTag: Player
   taskcollider: {fileID: 1674994995}
   spawnDialogue: {fileID: 0}
+  taskObject: {fileID: 0}
 --- !u!1001 &1154718945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21931,6 +21939,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2780446571122414669, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3027436663761486729, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_SizeDelta.x
       value: 750
@@ -22015,12 +22027,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5204556147046121291, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+      propertyPath: m_Color.a
+      value: 0.3882353
+      objectReference: {fileID: 0}
     - target: {fileID: 6105625587863823844, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: cae1be85bca051541bd77a8f496db620, type: 3}
     - target: {fileID: 6105625587863823844, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435801631696021834, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435801631696021834, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435801631696021834, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+      propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7860742605478235820, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
@@ -22913,6 +22941,7 @@ MonoBehaviour:
   triggerTag: 
   taskcollider: {fileID: 752265596}
   spawnDialogue: {fileID: 0}
+  taskObject: {fileID: 0}
 --- !u!1 &1334979819
 GameObject:
   m_ObjectHideFlags: 0
@@ -24005,6 +24034,7 @@ MonoBehaviour:
   triggerTag: Player
   taskcollider: {fileID: 1860639191}
   spawnDialogue: {fileID: 0}
+  taskObject: {fileID: 0}
 --- !u!1001 &1421609408
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29006,6 +29036,7 @@ MonoBehaviour:
   triggerTag: 
   taskcollider: {fileID: 1332533013}
   spawnDialogue: {fileID: 0}
+  taskObject: {fileID: 0}
 --- !u!1 &1676618330
 GameObject:
   m_ObjectHideFlags: 0

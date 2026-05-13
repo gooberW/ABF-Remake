@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using Cinemachine;
 
@@ -14,7 +15,7 @@ public class SanitySystem : MonoBehaviour
     [SerializeField] private float loudNoiseDrainAmount = 7f;
 
     [Header("Tick Settings (Optimization)")]
-    [SerializeField] private float sanityTickInterval = 0.1f; // Sanity updates every 0.1s for CPU savings
+    [SerializeField] private float sanityTickInterval = 0.1f;
 
     [Header("Visual Effects")]
     [SerializeField] private Camera playerCamera;
@@ -29,15 +30,19 @@ public class SanitySystem : MonoBehaviour
 
     private SanityPostEffects sanityPostEffects;
     [SerializeField] private CameraShake cameraShake;
-    private float lastSanity = -1f;
 
+    private float lastSanity = -1f;
     private float sanityTickTimer = 0f;
 
     public bool isInDarkness = false;
     private bool isLookingAtMonster = false;
+
     private float timeAtFullSanity = 0f;
     private bool isFadingOut = false;
+
     private CanvasGroup sanityBarCanvasGroup;
+
+    private bool isReloadingScene = false;
 
     private void Start()
     {
@@ -46,14 +51,19 @@ public class SanitySystem : MonoBehaviour
 
         if (GetComponent<LightSanitySystem>() == null)
             gameObject.AddComponent<LightSanitySystem>();
-         
+
         if (sanityBarImage != null)
         {
-            sanityBarCanvasGroup = sanityBarImage.GetComponent<CanvasGroup>() ?? sanityBarImage.gameObject.AddComponent<CanvasGroup>();
+            sanityBarCanvasGroup =
+                sanityBarImage.GetComponent<CanvasGroup>() ??
+                sanityBarImage.gameObject.AddComponent<CanvasGroup>();
+
             UpdateSanityBar();
         }
 
-        sanityPostEffects = playerCamera.GetComponent<SanityPostEffects>() ?? playerCamera.gameObject.AddComponent<SanityPostEffects>();
+        sanityPostEffects =
+            playerCamera.GetComponent<SanityPostEffects>() ??
+            playerCamera.gameObject.AddComponent<SanityPostEffects>();
 
         //cameraShake = playerCamera.GetComponent<CameraShake>() ?? playerCamera.gameObject.AddComponent<CameraShake>();
     }
@@ -76,13 +86,18 @@ public class SanitySystem : MonoBehaviour
 
     private void UpdateSanityTick()
     {
+        if (isReloadingScene)
+            return;
+
         sanityTickTimer += Time.deltaTime;
+
         if (sanityTickTimer >= sanityTickInterval)
         {
             float tickTime = sanityTickTimer;
             sanityTickTimer = 0f;
 
             float change = 0f;
+
             if (isInDarkness)
                 change -= darknessDrainRate * tickTime;
             else
@@ -92,7 +107,24 @@ public class SanitySystem : MonoBehaviour
                 change -= monsterViewDrainRate * tickTime;
 
             currentSanity = Mathf.Clamp(currentSanity + change, 0f, maxSanity);
+
+            // Reload da cena quando a sanidade chega a 0
+            if (currentSanity <= 0f)
+            {
+                ReloadCurrentScene();
+            }
         }
+    }
+
+    private void ReloadCurrentScene()
+    {
+        if (isReloadingScene)
+            return;
+
+        isReloadingScene = true;
+
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.buildIndex);
     }
 
     private void UpdateSanityBar()
@@ -104,15 +136,18 @@ public class SanitySystem : MonoBehaviour
     private void HandleSanityBarVisibility()
     {
         float sanityPercentage = currentSanity / maxSanity;
+
         if (sanityPercentage >= 0.99f && !isFadingOut)
         {
             timeAtFullSanity += Time.deltaTime;
+
             if (timeAtFullSanity >= fadeOutDelay)
                 StartFadeOut();
         }
         else if (sanityPercentage < 0.99f)
         {
             timeAtFullSanity = 0f;
+
             if (isFadingOut || sanityBarCanvasGroup.alpha < 1f)
             {
                 StopAllCoroutines();
@@ -124,6 +159,7 @@ public class SanitySystem : MonoBehaviour
     private void StartFadeOut()
     {
         isFadingOut = true;
+
         StopAllCoroutines();
         StartCoroutine(FadeOutBar());
     }
@@ -132,12 +168,17 @@ public class SanitySystem : MonoBehaviour
     {
         float elapsedTime = 0f;
         float startAlpha = sanityBarCanvasGroup.alpha;
+
         while (elapsedTime < fadeOutDuration)
         {
             elapsedTime += Time.deltaTime;
-            sanityBarCanvasGroup.alpha = Mathf.Lerp(startAlpha, 0f, elapsedTime / fadeOutDuration);
+
+            sanityBarCanvasGroup.alpha =
+                Mathf.Lerp(startAlpha, 0f, elapsedTime / fadeOutDuration);
+
             yield return null;
         }
+
         sanityBarCanvasGroup.alpha = 0f;
         isFadingOut = false;
     }
@@ -152,29 +193,44 @@ public class SanitySystem : MonoBehaviour
     {
         float elapsedTime = 0f;
         float startAlpha = sanityBarCanvasGroup.alpha;
+
         while (elapsedTime < fadeOutDuration)
         {
             elapsedTime += Time.deltaTime;
-            sanityBarCanvasGroup.alpha = Mathf.Lerp(startAlpha, 1f, elapsedTime / fadeOutDuration);
+
+            sanityBarCanvasGroup.alpha =
+                Mathf.Lerp(startAlpha, 1f, elapsedTime / fadeOutDuration);
+
             yield return null;
         }
+
         sanityBarCanvasGroup.alpha = 1f;
         isFadingOut = false;
     }
 
-    public void SetInDarkness(bool inDarkness) => isInDarkness = inDarkness;
-    public void SetLookingAtMonster(bool lookingAtMonster) => isLookingAtMonster = lookingAtMonster;
+    public void SetInDarkness(bool inDarkness)
+    {
+        isInDarkness = inDarkness;
+    }
+
+    public void SetLookingAtMonster(bool lookingAtMonster)
+    {
+        isLookingAtMonster = lookingAtMonster;
+    }
 
     public void ApplyLoudNoiseEffect()
     {
         currentSanity = Mathf.Max(currentSanity - loudNoiseDrainAmount, 0f);
+
         UpdateSanityBar();
         FadeInBar();
     }
 
     public void ChangeSanity(float amount)
     {
-        currentSanity = Mathf.Clamp(currentSanity + amount, 0f, maxSanity);
+        currentSanity =
+            Mathf.Clamp(currentSanity + amount, 0f, maxSanity);
+
         UpdateSanityBar();
         FadeInBar();
     }
@@ -184,12 +240,18 @@ public class SanitySystem : MonoBehaviour
         float sanityPercentage = currentSanity / maxSanity;
         float inverseSanity = 1f - sanityPercentage;
 
-        float shakeFactor = Mathf.Clamp01((inverseSanity - 0.45f) / 0.55f);
+        float shakeFactor =
+            Mathf.Clamp01((inverseSanity - 0.45f) / 0.55f);
+
         float shakePower = shakeFactor * maxShakeIntensity;
 
         if (cameraShake != null)
             cameraShake.shakeIntensity = shakePower;
 
-        sanityPostEffects.UpdateEffects(inverseSanity, maxVignetteIntensity, maxDesaturation);
+        sanityPostEffects.UpdateEffects(
+            inverseSanity,
+            maxVignetteIntensity,
+            maxDesaturation
+        );
     }
 }
