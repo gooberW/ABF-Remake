@@ -3001,13 +3001,14 @@ GameObject:
   m_Component:
   - component: {fileID: 191859056}
   - component: {fileID: 191859057}
+  - component: {fileID: 191859058}
   m_Layer: 0
   m_Name: CutsceneTimeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &191859056
 Transform:
   m_ObjectHideFlags: 0
@@ -3076,6 +3077,21 @@ PlayableDirector:
     m_References:
     - fe71c8fd51c062442a5e26ef70e88022: {fileID: 533828033}
     - b98cde5c3739afc4486e8cac2d04e993: {fileID: 2109357864}
+--- !u!114 &191859058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191859055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8bb8b1ad6791fd44be9922c70846f11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnlyOnce: 1
+  cutsceneDuration: 53
+  autoDisableAfterPlay: 1
 --- !u!1 &192879917
 GameObject:
   m_ObjectHideFlags: 0
@@ -13858,15 +13874,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ff5d2ff367342d42b6781299bacbdd3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3104.508
+      value: -3104.49
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ff5d2ff367342d42b6781299bacbdd3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.198
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ff5d2ff367342d42b6781299bacbdd3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 171.611
+      value: 171.65
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ff5d2ff367342d42b6781299bacbdd3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13907,6 +13923,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4ff5d2ff367342d42b6781299bacbdd3, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4ff5d2ff367342d42b6781299bacbdd3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21943,6 +21963,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -6.3
       objectReference: {fileID: 0}
+    - target: {fileID: 2780446571122414669, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 3027436663761486729, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_SizeDelta.x
       value: 750
@@ -22026,6 +22050,18 @@ PrefabInstance:
     - target: {fileID: 3072611365706143166, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4571218311104178395, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4571218311104178395, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4571218311104178395, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5204556147046121291, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_Color.a
@@ -22941,7 +22977,7 @@ MonoBehaviour:
   triggerTag: 
   taskcollider: {fileID: 752265596}
   spawnDialogue: {fileID: 0}
-  taskObject: {fileID: 0}
+  taskObject: {fileID: 2029751573}
 --- !u!1 &1334979819
 GameObject:
   m_ObjectHideFlags: 0
@@ -32171,6 +32207,10 @@ PrefabInstance:
       propertyPath: sanityBarImage
       value: 
       objectReference: {fileID: 1721520504}
+    - target: {fileID: 1313890661892990441, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
+      propertyPath: CutsceneTimeline
+      value: 
+      objectReference: {fileID: 191859055}
     - target: {fileID: 3049205763859066073, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
       propertyPath: m_Name
       value: Player

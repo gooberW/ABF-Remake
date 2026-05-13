@@ -15,5 +15,5 @@ MonoBehaviour:
   description: Have some fun!
   requiredItemName: 
   requiredTriggerTag: 
-  duration: 120
+  duration: 45
   isCompleted: 1

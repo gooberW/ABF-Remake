@@ -28,6 +28,9 @@ public class SanitySystem : MonoBehaviour
     [SerializeField] private float fadeOutDelay = 2f;
     [SerializeField] private float fadeOutDuration = 1f;
 
+    [Header("Cutscene")]
+    [SerializeField] private GameObject CutsceneTimeline;
+
     private SanityPostEffects sanityPostEffects;
     [SerializeField] private CameraShake cameraShake;
 
@@ -65,7 +68,6 @@ public class SanitySystem : MonoBehaviour
             playerCamera.GetComponent<SanityPostEffects>() ??
             playerCamera.gameObject.AddComponent<SanityPostEffects>();
 
-        //cameraShake = playerCamera.GetComponent<CameraShake>() ?? playerCamera.gameObject.AddComponent<CameraShake>();
     }
 
     private void Update()
@@ -108,7 +110,7 @@ public class SanitySystem : MonoBehaviour
 
             currentSanity = Mathf.Clamp(currentSanity + change, 0f, maxSanity);
 
-            // Reload da cena quando a sanidade chega a 0
+  
             if (currentSanity <= 0f)
             {
                 ReloadCurrentScene();
@@ -122,6 +124,11 @@ public class SanitySystem : MonoBehaviour
             return;
 
         isReloadingScene = true;
+
+        if (CutsceneTimeline != null)
+        {
+            CutsceneTimeline.SetActive(false);
+        }
 
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
