@@ -18,39 +18,24 @@ public class TriggerQTE : MonoBehaviour
     public UnityEvent onDecisionChoice2;
 
     public UnityEvent onDecisionTimeout;
-
     public string decisionQuestion = "Incoming Attack!";
 
-    void OnEnable()
+    void Awake()
     {
         qteManager = FindObjectOfType<QTEManager>();
-        if (qteManager != null)
-        {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null)
-            {
-                Collider triggerCollider = GetComponent<Collider>();
-                if (triggerCollider != null && triggerCollider.bounds.Contains(player.transform.position))
-                {
-                    if (qteType == QTEType.Spam)
-                    {
-                        qteManager.StartSpamQTE(onQTE_Success, onQTE_Failure);
-                    }
-                    else
-                    {
-                        qteManager.StartDecisionQTE(decisionKey1, decisionLabel1, onDecisionChoice1,
-                                                    decisionKey2, decisionLabel2, onDecisionChoice2,
-                                                    onDecisionTimeout, decisionQuestion);
-                    }
-                }
-            }
-        }
-        else
-        {
-            Debug.LogError("TriggerQTE: No QTEManager found in scene!", this);
-        }
     }
 
+    public void StartQTE()
+    {
+        if (qteManager == null) qteManager = FindObjectOfType<QTEManager>();
+
+        if (qteType == QTEType.Spam)
+            qteManager.StartSpamQTE(onQTE_Success, onQTE_Failure);
+        else
+            qteManager.StartDecisionQTE(decisionKey1, decisionLabel1, onDecisionChoice1,
+                                        decisionKey2, decisionLabel2, onDecisionChoice2,
+                                        onDecisionTimeout, decisionQuestion);
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -59,15 +44,11 @@ public class TriggerQTE : MonoBehaviour
             if (qteManager != null)
             {
                 if (qteType == QTEType.Spam)
-                {
                     qteManager.StartSpamQTE(onQTE_Success, onQTE_Failure);
-                }
                 else
-                {
                     qteManager.StartDecisionQTE(decisionKey1, decisionLabel1, onDecisionChoice1,
                                                 decisionKey2, decisionLabel2, onDecisionChoice2,
                                                 onDecisionTimeout, decisionQuestion);
-                }
             }
             else
             {
