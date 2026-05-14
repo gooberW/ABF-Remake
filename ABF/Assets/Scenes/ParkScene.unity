@@ -3626,6 +3626,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 961681670484378121, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 961681670484378121, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 1930139765327525799, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_Name
       value: PlayerUI
@@ -3633,6 +3641,10 @@ PrefabInstance:
     - target: {fileID: 2207957694435225219, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2780446571122414669, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 46.1
       objectReference: {fileID: 0}
     - target: {fileID: 3072611365706143166, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_Pivot.x
@@ -3731,16 +3743,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5204556147046121291, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
-      propertyPath: m_Color.b
+      propertyPath: m_Color.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5204556147046121291, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+      propertyPath: m_Color.b
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5204556147046121291, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5204556147046121291, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6105625587863823844, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_Sprite
