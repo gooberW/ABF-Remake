@@ -2344,7 +2344,6 @@ GameObject:
   - component: {fileID: 718542685}
   - component: {fileID: 718542684}
   - component: {fileID: 718542687}
-  - component: {fileID: 718542688}
   m_Layer: 0
   m_Name: BrotherTrigger
   m_TagString: Untagged
@@ -2421,22 +2420,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerTag: 
   taskcollider: {fileID: 815796463}
-  spawnDialogue: {fileID: 0}
-  taskObject: {fileID: 0}
---- !u!114 &718542688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 718542683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b7981512ffcfeb45b9df9cef0c023ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerTag: 
-  taskcollider: {fileID: 1768466658}
   spawnDialogue: {fileID: 0}
   taskObject: {fileID: 0}
 --- !u!1 &734438233
@@ -3724,6 +3707,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3072611365706143166, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5111121305614084744, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5113373398218046405, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
@@ -5959,6 +5946,34 @@ PrefabInstance:
       propertyPath: dialogue
       value: 
       objectReference: {fileID: 11400000, guid: 714d1a0de77c03247827163e66ebb204, type: 2}
+    - target: {fileID: 1804273879584794020, guid: ddb54bc319c27664d88f2e7c9b75048c, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804273879584794020, guid: ddb54bc319c27664d88f2e7c9b75048c, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804273879584794020, guid: ddb54bc319c27664d88f2e7c9b75048c, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1768466657}
+    - target: {fileID: 1804273879584794020, guid: ddb54bc319c27664d88f2e7c9b75048c, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804273879584794020, guid: ddb54bc319c27664d88f2e7c9b75048c, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Playcutscene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804273879584794020, guid: ddb54bc319c27664d88f2e7c9b75048c, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ChangeScene, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804273879584794020, guid: ddb54bc319c27664d88f2e7c9b75048c, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3114956549777996510, guid: ddb54bc319c27664d88f2e7c9b75048c, type: 3}
       propertyPath: m_Name
       value: DialogueTrigger
@@ -7111,7 +7126,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1768466659}
-  - component: {fileID: 1768466658}
   - component: {fileID: 1768466657}
   m_Layer: 0
   m_Name: ChangeScene
@@ -7134,27 +7148,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeline: {fileID: 1065237276}
   sceneName: MainGamePartTwo
---- !u!65 &1768466658
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768466656}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 38.271988, y: 0.3256424, z: 7.7810764}
-  m_Center: {x: -8.381752, y: -0.3371788, z: -3.3905382}
 --- !u!4 &1768466659
 Transform:
   m_ObjectHideFlags: 0
@@ -7164,7 +7157,7 @@ Transform:
   m_GameObject: {fileID: 1768466656}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.37, y: 0.46, z: 7.23}
+  m_LocalPosition: {x: -4.37, y: 0.46, z: 8.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8666,7 +8659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5160119923333066157, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.256
+      value: -0.137
       objectReference: {fileID: 0}
     - target: {fileID: 5875837251562161973, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
       propertyPath: _PixelationFactor
