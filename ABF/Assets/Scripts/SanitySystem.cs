@@ -25,6 +25,7 @@ public class SanitySystem : MonoBehaviour
 
     [Header("UI Settings")]
     [SerializeField] private Image sanityBarImage;
+    [SerializeField] private CanvasGroup sanityBarHolderCanvasGroup; // <- arrasta o SanityBarHolder aqui
     [SerializeField] private float fadeOutDelay = 2f;
     [SerializeField] private float fadeOutDuration = 1f;
 
@@ -57,9 +58,18 @@ public class SanitySystem : MonoBehaviour
 
         if (sanityBarImage != null)
         {
-            sanityBarCanvasGroup =
-                sanityBarImage.GetComponent<CanvasGroup>() ??
-                sanityBarImage.gameObject.AddComponent<CanvasGroup>();
+            // Usa o CanvasGroup do Holder se atribuído no Inspector,
+            // caso contrário tenta encontrar um CanvasGroup no pai
+            if (sanityBarHolderCanvasGroup != null)
+            {
+                sanityBarCanvasGroup = sanityBarHolderCanvasGroup;
+            }
+            else
+            {
+                sanityBarCanvasGroup =
+                    sanityBarImage.GetComponentInParent<CanvasGroup>() ??
+                    sanityBarImage.transform.parent.gameObject.AddComponent<CanvasGroup>();
+            }
 
             UpdateSanityBar();
         }
@@ -67,7 +77,6 @@ public class SanitySystem : MonoBehaviour
         sanityPostEffects =
             playerCamera.GetComponent<SanityPostEffects>() ??
             playerCamera.gameObject.AddComponent<SanityPostEffects>();
-
     }
 
     private void Update()
@@ -110,7 +119,6 @@ public class SanitySystem : MonoBehaviour
 
             currentSanity = Mathf.Clamp(currentSanity + change, 0f, maxSanity);
 
-  
             if (currentSanity <= 0f)
             {
                 ReloadCurrentScene();

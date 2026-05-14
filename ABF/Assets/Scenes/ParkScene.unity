@@ -3728,7 +3728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5113373398218046405, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0.9411765
       objectReference: {fileID: 0}
     - target: {fileID: 5113373398218046405, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_Color.b
@@ -3764,7 +3764,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: cae1be85bca051541bd77a8f496db620, type: 3}
     - target: {fileID: 6128899400872482098, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0.9411765
       objectReference: {fileID: 0}
     - target: {fileID: 6128899400872482098, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       propertyPath: m_Color.b
@@ -3796,7 +3796,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3072611365706143166, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
       insertIndex: -1
       addedObject: {fileID: 930980061}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8948527642659456530, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1098200530}
   m_SourcePrefab: {fileID: 100100000, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
 --- !u!114 &1098200528 stripped
 MonoBehaviour:
@@ -3809,6 +3812,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1098200529 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8948527642659456530, guid: 12036a8c3cd3dec418793c4e36363824, type: 3}
+  m_PrefabInstance: {fileID: 1098200527}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &1098200530
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098200529}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1107926003 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a2c4c233777ead04baef6866dca68016, type: 3}
@@ -8588,6 +8608,10 @@ PrefabInstance:
       propertyPath: sanityBarImage
       value: 
       objectReference: {fileID: 951267661}
+    - target: {fileID: 1313890661892990441, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
+      propertyPath: sanityBarHolderCanvasGroup
+      value: 
+      objectReference: {fileID: 1098200530}
     - target: {fileID: 2158945687700586185, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
       propertyPath: fakeLightLayers.m_Bits
       value: 2048
