@@ -8664,6 +8664,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5160119923333066157, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.256
+      objectReference: {fileID: 0}
     - target: {fileID: 5875837251562161973, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
       propertyPath: _PixelationFactor
       value: 0.512
@@ -8680,6 +8684,10 @@ PrefabInstance:
       propertyPath: _staminaBar
       value: 
       objectReference: {fileID: 1219082649}
+    - target: {fileID: 8000540271149061715, guid: d9ebee13698da6d46be7651244d6ec6b, type: 3}
+      propertyPath: m_Height
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

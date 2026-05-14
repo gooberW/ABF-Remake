@@ -20979,7 +20979,7 @@ MonoBehaviour:
   openAngle: 90
   openSpeed: 120
   invertDirection: 0
-  isLocked: 0
+  isLocked: 1
   lockedPrompt: Locked
   cam: {fileID: 2007840503}
   doorLayer:
